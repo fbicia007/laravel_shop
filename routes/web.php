@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Entity\Member;
 Route::get('/', function () {
-    //return view('welcome');
-    return Member::all();
+    return view('login');
+    //return Member::all();
 });
+
+Route::get('/login', 'View\MemberController@toLogin');
+Route::get('/register', 'View\MemberController@toRegister');
