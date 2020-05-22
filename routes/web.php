@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Entity\Member;
 Route::get('/', function () {
-    return view('login');
+    return view('home');
     //return Member::all();
 });
 

@@ -50,7 +50,7 @@
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <a href="register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
-                <a href="login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="LOGIN"><i class="fas fa-user"></i></a>
+                <a href="login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
                 <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART"><i class="fas fa-shopping-cart"></i></button>
             </div>
         </div>
