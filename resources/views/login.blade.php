@@ -15,14 +15,26 @@
                         If you do not have an account, you can register here.
                     </a>
                 </h6>
-                <form id="login-form">
+                <form id="login-form" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Email.
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Password.
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="form-check">
@@ -32,7 +44,7 @@
                             </label>
                         </div>
                     </div>
-                    <button type="" class="btn btn-light">Forgot password?</button>
+                    <a href="forgot_pw" class="btn btn-light">Forgot password?</a>
 
                     <button class="btn btn-primary"
                             data-sitekey="reCAPTCHA_site_key"
@@ -53,5 +65,25 @@
         function onSubmit(token) {
             document.getElementById("login-form").submit();
         }
+    </script>
+    <script>
+        // Validate
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 @endsection
