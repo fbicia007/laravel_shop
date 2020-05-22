@@ -21,5 +21,11 @@ class MemberController extends BaseController
         return view('register');
 
     }
+    public function toForgot_pw($value='')
+    {
+
+        return view('forgot_pw');
+
+    }
 
 }
