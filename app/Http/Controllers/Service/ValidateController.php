@@ -12,7 +12,5 @@ use App\Http\Controllers\Controller;
 
 class ValidateController extends Controller
 {
-    public function authorize($ability, $arguments = [])
-    {
-    }
+
 }

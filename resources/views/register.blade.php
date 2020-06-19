@@ -16,7 +16,7 @@
                 </h6>
 
 
-                <form id="register-form" class="needs-validation" novalidate>
+                <form id="register-form" class="needs-validation" oninput='confirm_reg_password.setCustomValidity(confirm_reg_password.value != reg_password.value ? " " : "")' novalidate>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Email address:</label>
@@ -30,7 +30,11 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Password:</label>
-                            <input type="password" class="form-control" id="reg_password" name="reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required>
+                            <input type="password" class="form-control" id="reg_password" name="reg_password"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="confirm_reg_password"
+                                   data-bv-identical-message="The password and its confirm are not the same" placeholder="Password" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -39,13 +43,18 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Password(again):</label>
-                            <input type="password" class="form-control" id="reg_password_again" name="reg_password_again" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password(again)" required>
+                            <label>Enter new password again:</label>
+                            <input type="password" class="form-control" id="confirm_reg_password" name="confirm_reg_password"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="reg_password"
+                                   data-bv-identical-message="The password and its confirm are not the same"
+                                   placeholder="Confirm Password" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                             <div class="invalid-feedback">
-                                Wrong password.
+                                Confirmed password does not match the new password, please enter again
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">

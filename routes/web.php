@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+//use App\Models\MessageResult;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,12 @@ use App\Entity\Member;
 Route::get('/', function () {
     return view('home');
     //return Member::all();
+    /*
+    $error = new MessageResult();
+    $error->status = 0;
+    $error->message = 'status test message';
+    return $error->toJson();
+    */
 });
 
 Route::get('/login', 'View\MemberController@toLogin');
