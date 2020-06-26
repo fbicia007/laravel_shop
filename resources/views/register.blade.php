@@ -16,7 +16,7 @@
                 </h6>
 
 
-                <form id="register-form" class="needs-validation" oninput='confirm_reg_password.setCustomValidity(confirm_reg_password.value != reg_password.value ? " " : "")' novalidate>
+                <form id="register-form" method="post" onsubmit="return false" class="needs-validation" oninput='confirm_reg_password.setCustomValidity(confirm_reg_password.value != reg_password.value ? " " : "")' novalidate>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Email address:</label>
@@ -30,11 +30,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Password:</label>
-                            <input type="password" class="form-control" id="reg_password" name="reg_password"
-                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                   data-bv-identical="true"
-                                   data-bv-identical-field="confirm_reg_password"
-                                   data-bv-identical-message="The password and its confirm are not the same" placeholder="Password" required>
+                            <input type="password" class="form-control" id="reg_password" name="reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -44,12 +40,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Enter new password again:</label>
-                            <input type="password" class="form-control" id="confirm_reg_password" name="confirm_reg_password"
-                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                   data-bv-identical="true"
-                                   data-bv-identical-field="reg_password"
-                                   data-bv-identical-message="The password and its confirm are not the same"
-                                   placeholder="Confirm Password" required>
+                            <input type="password" class="form-control" id="confirm_reg_password" name="confirm_reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm Password" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -121,9 +112,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit form</button>
+                    <button class="btn btn-primary" id="register">Register</button>
                 </form>
-
             </div>
         </div>
     </div>
@@ -146,7 +136,7 @@
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
+                    document.getElementById("register").addEventListener('click', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -156,5 +146,87 @@
                 });
             }, false);
         })();
+
+        //register
+        $(document).ready(function(){
+            $("button#register").click(function(){
+                var email = $('input[name=reg_email]').val();
+                var password = $('input[name=reg_password]').val();
+                var confirm = $('input[name=confirm_reg_password]').val();
+                var firstName = $('input[name=first_name]').val();
+                var lastName = $('input[name=last_name]').val();
+                var city = $('input[name=city]').val();
+                var state = $('input[name=state]').val();
+                var zip = $('input[name=zip]').val();
+
+                if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || city =='' || state =='' || zip ==''){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Infos cannot be empty');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(!$('#invalidCheck').is(':checked')){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Your must agree our terms and conditions.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(email.indexOf('@') == -1 || email.indexOf('.')== -1){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Your email format is incorrect.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(password.length <8 || confirm.length <8) {
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Your password must be 8-20 characters.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(password != confirm) {
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Confirmed password does not match the new password, please enter again.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+
+
+                $.ajax({
+                    url: '/service/register',
+                    dataType: 'json',
+                    type: "POST",
+                    cache: false,
+                    data: {email:email, password:password,confirm:confirm,firstName:firstName,lastName:lastName, city:city, state:state,zip:zip},
+                    success: function (data) {
+                        if(data != null){
+                            $('#myModal').modal('toggle');
+                        }
+                        if(data.status !=0){
+                            //$('#myModal').modal('toggle');
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
+
+            });
+        });
+
+
+
     </script>
 @endsection

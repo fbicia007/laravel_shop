@@ -12,5 +12,8 @@ use App\Http\Controllers\Controller;
 
 class ValidateController extends Controller
 {
+    public function sendEmail(){
+        return 1;
+    }
 
 }

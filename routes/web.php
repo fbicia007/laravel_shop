@@ -29,3 +29,6 @@ Route::get('/', function () {
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
+
+/*services*/
+Route::post('/service/register', 'Service\MemberController@register');
