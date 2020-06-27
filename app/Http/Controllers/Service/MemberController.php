@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Service;
 
 
+use App\Entity\TempEmail;
 use App\Http\Controllers\Controller;
 
 use App\Tool\UUID;
@@ -10,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Models\MessageResult;
 use App\Entity\Member;
 use Illuminate\Support\Facades\Mail;
-use Psy\Command\ListCommand\MethodEnumerator;
 use App\Models\MessageEmail;
 
 class MemberController extends Controller
@@ -84,6 +84,12 @@ class MemberController extends Controller
                                         .'?member_id='.$member->id
                                         .'&code='.$uuid;
 
+             $tempEmail = new TempEmail();
+             $tempEmail->member_id = $member->id;
+             $tempEmail->uuid = $uuid;
+             $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
+             $tempEmail->save();
+
              Mail::send(['html' => 'email_register'], ['message_email'=>$message_email], function ($m) use ($message_email){
                  $m->from('support@mmozone.de', 'MMOZONE online shop');
 
@@ -98,6 +104,57 @@ class MemberController extends Controller
          }
 
 
+
+    }
+    public function login(Request $request)
+    {
+         $email = $request->input('email','');
+         $password = $request->input('password','');
+
+
+         $message_result = new MessageResult();
+
+         if($email ==''){
+             $message_result->status = 1;
+             $message_result->message = 'Please input your email.';
+             return $message_result->toJson();
+         }
+         if($password =='' || strlen($password) < 8){
+             $message_result->status = 2;
+             $message_result->message = 'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.';
+             return $message_result->toJson();
+         }
+
+         $member = Member::where('email', $email)->first();
+
+
+         if(!isset($member->email)){
+
+             $message_result->status = 3;
+             $message_result->message = 'User is not found.!';
+             return $message_result->toJson();
+
+         } else {
+
+             if($member->password != md5('test'.$password)) {
+
+                 $message_result->status = 4;
+                 $message_result->message = 'Your password is wrong, please try again.';
+                 return $message_result->toJson();
+             }
+             else if($member->active == 0) {
+                 $message_result->status = 5;
+                 $message_result->message = 'You account is not active, please active you account.';
+                 return $message_result->toJson();
+
+             } else {
+
+                 $message_result->status = 0;
+                 $message_result->message = 'welcome dear ';
+                 return $message_result->toJson();
+
+             }
+         }
 
 
 

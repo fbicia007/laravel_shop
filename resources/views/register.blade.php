@@ -216,14 +216,16 @@
                             }, 2000);
                             return;
                         }
-                        if(data.status !=0){
-                            $('#errorMessage').modal('show');
-                            $('.modal-body span').html(data.message);
-                            setTimeout(function () {
-                                $('#errorMessage').modal('toggle');
-                            }, 2000);
-                            return;
-                        }
+
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html(data.message);
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+                        return;
+
+
+
 
                     },
                     error: function (xhr, status, error) {

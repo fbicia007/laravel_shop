@@ -15,7 +15,7 @@
                         If you do not have an account, you can register here.
                     </a>
                 </h6>
-                <form id="login-form" class="needs-validation" novalidate>
+                <form id="login-form" method="post" onsubmit="return false" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label>Email address</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
@@ -46,10 +46,7 @@
                     </div>
                     <a href="forgot_pw" class="btn btn-light">Forgot password?</a>
 
-                    <button class="btn btn-primary"
-                            data-sitekey="reCAPTCHA_site_key"
-                            data-callback='onSubmit'
-                            data-action='submit'>Sign in</button>
+                    <button class="btn btn-primary" id="login">Sign in</button>
 
                 </form>
             </div>
@@ -75,7 +72,7 @@
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
+                    document.getElementById("login-form").addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -85,5 +82,72 @@
                 });
             }, false);
         })();
+
+        //login
+        $(document).ready(function(){
+            $("button#login").click(function(){
+                var email = $('input[name=email]').val();
+                var password = $('input[name=password]').val();
+
+
+
+                if(email =='' || password ==''){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Email or password is wrong');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(email.indexOf('@') == -1 || email.indexOf('.')== -1){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Your email format is incorrect.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+                if(password.length <8) {
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Your password must be 8-20 characters.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+
+
+                $.ajax({
+                    url: '/service/login',
+                    dataType: 'json',
+                    type: "POST",
+                    cache: false,
+                    data: {email:email, password:password, _token:"{{csrf_token()}}"},
+                    success: function (data) {
+                        if(data == null){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html('Server error!');
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
+                        }
+
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html(data.message);
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
+
+            });
+        });
     </script>
 @endsection

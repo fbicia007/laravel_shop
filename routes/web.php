@@ -32,3 +32,5 @@ Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 
 /*services*/
 Route::post('/service/register', 'Service\MemberController@register');
+Route::get('/service/validate_email', 'Service\ValidateController@validateEmail');
+Route::post('/service/login', 'Service\MemberController@login');
