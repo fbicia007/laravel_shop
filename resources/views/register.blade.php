@@ -206,13 +206,23 @@
                     dataType: 'json',
                     type: "POST",
                     cache: false,
-                    data: {email:email, password:password,confirm:confirm,firstName:firstName,lastName:lastName, city:city, state:state,zip:zip},
+                    data: {email:email, password:password,confirm:confirm,firstName:firstName,lastName:lastName, city:city, state:state,zip:zip, _token:"{{csrf_token()}}"},
                     success: function (data) {
-                        if(data != null){
-                            $('#myModal').modal('toggle');
+                        if(data == null){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html('Server error!');
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
                         }
                         if(data.status !=0){
-                            //$('#myModal').modal('toggle');
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html(data.message);
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
                         }
 
                     },
