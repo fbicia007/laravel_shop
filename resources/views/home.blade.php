@@ -2,51 +2,38 @@
 
 @section('title','login')
 
+@section('categoryMenu')
+    @foreach($categorys as $category)
+    <a class="dropdown-item" href="cat{{$category->id}}.php">{{$category->name}}</a>
+    @endforeach
+@endsection
+
 @section('content')
 
 <main role="main">
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div id="categoryBanner" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+            <li data-target="#categoryBanner" data-slide-to="0" class="active"></li>
+            <li data-target="#categoryBanner" data-slide-to="1"></li>
+            <li data-target="#categoryBanner" data-slide-to="2"></li>
+            <li data-target="#categoryBanner" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active" onclick="location.href='fifa.php/';">
-                <img src="https://via.placeholder.com/2000x500"  class="d-block w-100" alt="...">
+            @foreach($categorys as $category)
+            <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='cat{{$category->id}}.php/';">
+                <img src="{{$category->banner}}"  class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>FUT 20 COINS</h5>
-                    <p>FIFA 20 Comfort Trade.</p>
+                    <h5>{{$category->name}}</h5>
+                    <p>{{$category->banner_text}}</p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/2000x500" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>POE</h5>
-                    <p>PATH OF EXILE Item and currency</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/2000x500" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>CS GO</h5>
-                    <p>CS go Items & Skins.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/2000x500" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>WOW</h5>
-                    <p>WOW Gold.</p>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#categoryBanner" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#categoryBanner" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
@@ -69,51 +56,28 @@
 
             <div class="row">
 
+                @foreach($categorys as $category)
                 <div class="col text-center">
                     <div class="card shadow">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="...">
+                        <img src="{{$category->preview}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">FUT 20</h5>
-                            <p class="card-text">Buy FUT 20 coins with safe delivery on the best price with Comfort Trade for PS4 and XBOX One.</p>
-                            <a href="fut.php" class="btn btn-primary">See All</a>
+                            <h5 class="card-title">{{$category->name}}</h5>
+                            <p class="card-text">{{$category->info}}</p>
+                            <a href="cat{{$category->id}}.php" class="btn btn-primary">See All</a>
                         </div>
                     </div>
                 </div>
-                <div class="col text-center">
-                    <div class="card shadow">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">POE</h5>
-                            <p class="card-text">Path of Exile currency and item selection with 10 minutes delivery. League selection is available!</p>
-                            <a href="poe.php" class="btn btn-primary">See All</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <div class="card shadow">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">CS go</h5>
-                            <p class="card-text">Buy Counter-Strike: Global Offensive Items & Skins. Safe delivery</p>
-                            <a href="csgo.php" class="btn btn-primary">See All</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <div class="card shadow">
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">WOW</h5>
-                            <p class="card-text">Buy WoW Classic gold and return to Azeroth. Safe delivery awaits in WoW Vanilla.</p>
-                            <a href="wow.php" class="btn btn-primary">See All</a>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
         </div>
     </div>
 </main>
 
+@endsection
+
+@section('footerList')
+    @foreach($categorys as $category)
+    <li><a class="text-muted" href="cat{{$category->id}}.php">{{$category->name}}</a></li>
+    @endforeach
 @endsection

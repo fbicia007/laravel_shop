@@ -32,10 +32,7 @@
                             OnlineGames
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="fut.php">FIFA 20</a>
-                            <a class="dropdown-item" href="poe.php">PATH OF EXILE</a>
-                            <a class="dropdown-item" href="csgo.php">CS Go</a>
-                            <a class="dropdown-item" href="wow.php">WOW</a>
+                            @yield('categoryMenu')
                         </div>
                     </li>
                     <li class="nav-item">
@@ -95,10 +92,7 @@
             <div class="col col-md">
                 <h5>PRODUCT</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">FIFA 20 Coins</a></li>
-                    <li><a class="text-muted" href="#">POE</a></li>
-                    <li><a class="text-muted" href="#">CS GO</a></li>
-                    <li><a class="text-muted" href="#">WOW GOld</a></li>
+                    @yield('footerList')
                 </ul>
             </div>
             <div class="col col-md">

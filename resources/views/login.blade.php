@@ -2,6 +2,18 @@
 
 @section('title','login')
 
+@section('categoryMenu')
+    @foreach($categorys as $category)
+        <a class="dropdown-item" href="cat{{$category->id}}.php">{{$category->name}}</a>
+    @endforeach
+@endsection
+
+@section('footerList')
+    @foreach($categorys as $category)
+        <li><a class="text-muted" href="cat{{$category->id}}.php">{{$category->name}}</a></li>
+    @endforeach
+@endsection
+
 @section('content')
 
     <div class="row justify-content-md-center pt-5 pb-5">
@@ -138,6 +150,8 @@
                         setTimeout(function () {
                             $('#errorMessage').modal('toggle');
                         }, 2000);
+
+                        location.href = "/";
 
                     },
                     error: function (xhr, status, error) {

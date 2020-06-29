@@ -15,22 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Entity\Member;
-Route::get('/', function () {
-    return view('home');
-    //return Member::all();
-    /*
-    $error = new MessageResult();
-    $error->status = 0;
-    $error->message = 'status test message';
-    return $error->toJson();
-    */
-});
+
+Route::get('/','View\HomeController@toHome');
 
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 
 /*services*/
-Route::post('/service/register', 'Service\MemberController@register');
-Route::get('/service/validate_email', 'Service\ValidateController@validateEmail');
-Route::post('/service/login', 'Service\MemberController@login');
+Route::group(['prefix' => 'service'], function (){
+
+    Route::get('validate_email', 'Service\ValidateController@validateEmail');
+    Route::post('register', 'Service\MemberController@register');
+    Route::post('login', 'Service\MemberController@login');
+
+});

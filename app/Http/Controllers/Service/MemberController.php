@@ -103,8 +103,6 @@ class MemberController extends Controller
 
          }
 
-
-
     }
     public function login(Request $request)
     {
@@ -149,8 +147,10 @@ class MemberController extends Controller
 
              } else {
 
+                 $request->session()->put('member', $member);
+
                  $message_result->status = 0;
-                 $message_result->message = 'welcome dear ';
+                 $message_result->message = 'welcome dear '.$member->lastName;
                  return $message_result->toJson();
 
              }

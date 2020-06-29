@@ -2,6 +2,18 @@
 
 @section('title','forgot password')
 
+@section('categoryMenu')
+    @foreach($categorys as $category)
+        <a class="dropdown-item" href="cat{{$category->id}}.php">{{$category->name}}</a>
+    @endforeach
+@endsection
+
+@section('footerList')
+    @foreach($categorys as $category)
+        <li><a class="text-muted" href="cat{{$category->id}}.php">{{$category->name}}</a></li>
+    @endforeach
+@endsection
+
 @section('content')
 
     <div class="row justify-content-md-center pt-5 pb-5">
