@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="/css/all.css" rel="stylesheet"> <!--load all styles -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -17,8 +17,8 @@
     <div class="navbar fixed-top navbar-expand navbar-dark flex-column flex-md-row bg-dark shadow">
         <div class="container">
             <!--<a class="navbar-brand" href="#">GameGoods</a>-->
-            <a href="index.php">
-                <img src="images/logo/logo-transparent.png" style="height: 50px;">
+            <a href="/">
+                <img src="/images/logo/logo-transparent.png" style="height: 50px;">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,8 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <a href="register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
-                <a href="login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
+                <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
+                <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
                 <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART"><i class="fas fa-shopping-cart"></i></button>
             </div>
         </div>
@@ -78,7 +78,7 @@
 
         <div class="row">
             <div class="col-12 col-md">
-                <img class="mb-2" src="images/logo/logo-transparent.png" alt="" width="80">
+                <img class="mb-2" src="/images/logo/logo-transparent.png" alt="" width="80">
                 <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
             </div>
             <div class="col col-md">

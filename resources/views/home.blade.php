@@ -4,7 +4,7 @@
 
 @section('categoryMenu')
     @foreach($categorys as $category)
-    <a class="dropdown-item" href="cat{{$category->id}}.php">{{$category->name}}</a>
+    <a class="dropdown-item" href="category/{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
 
@@ -78,6 +78,6 @@
 
 @section('footerList')
     @foreach($categorys as $category)
-    <li><a class="text-muted" href="cat{{$category->id}}.php">{{$category->name}}</a></li>
+    <li><a class="text-muted" href="category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection
