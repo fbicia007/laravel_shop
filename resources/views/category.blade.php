@@ -23,9 +23,8 @@
         </div>
         <div class="album py-5 bg-light">
             <div class="container" style="margin-top: -48px;">
-                @if($thisCategory[0]->id == 1)
                 <ul class="nav nav- border-top border-bottom" id="pills-tab" role="tablist">
-                    <li class="nav-item" value="0">
+                    <li class="nav-item-content" value="0">
                         <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">
                             <button type="button" class="btn btn-light float-left" style="height: 120px; width:120px;">
                                 <i class="fas fa-check-double"></i>
@@ -33,32 +32,41 @@
                             </button>
                         </a>
                     </li>
-                    <li class="nav-item" value="1">
-                        <a class="nav-link" id="pills-pc-tab" data-toggle="pill" href="#pills-pc" role="tab" aria-controls="pills-pc" aria-selected="false">
-                            <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
-                                <i class="fas fa-desktop"></i>
-                                <div>PC</div>
-                            </button>
-                        </a>
-                    </li>
-                    <li class="nav-item" value="2">
-                        <a class="nav-link" id="pills-ps4-tab" data-toggle="pill" href="#pills-ps4" role="tab" aria-controls="pills-ps4" aria-selected="false">
-                            <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
-                                <i class="fab fa-playstation"></i>
-                                <div>PLAYSTATION 4</div>
-                            </button>
-                        </a>
-                    </li>
-                    <li class="nav-item" value="3">
-                        <a class="nav-link" id="pills-xbox-tab" data-toggle="pill" href="#pills-xbox" role="tab" aria-controls="pills-xbox" aria-selected="false">
-                            <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
-                                <i class="fab fa-xbox"></i>
-                                <div>XBOX ONE</div>
-                            </button>
-                        </a>
-                    </li>
+                    @if(count(explode(",",$thisCategory[0]->platform))>1)
+                    @foreach(explode(",",$thisCategory[0]->platform) as $platform)
+                        @if($platform == 1)
+                            <li class="nav-item-content" value="1">
+                                <a class="nav-link" id="pills-pc-tab" data-toggle="pill" href="#pills-pc" role="tab" aria-controls="pills-pc" aria-selected="false">
+                                    <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
+                                        <i class="fas fa-desktop"></i>
+                                        <div>PC</div>
+                                    </button>
+                                </a>
+                            </li>
+                            @endif
+                            @if($platform == 2)
+                                <li class="nav-item-content" value="2">
+                                    <a class="nav-link" id="pills-ps4-tab" data-toggle="pill" href="#pills-ps4" role="tab" aria-controls="pills-ps4" aria-selected="false">
+                                        <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
+                                            <i class="fab fa-playstation"></i>
+                                            <div>PLAYSTATION 4</div>
+                                        </button>
+                                    </a>
+                                </li>
+                            @endif
+                            @if($platform == 3)
+                                <li class="nav-item-content" value="3">
+                                    <a class="nav-link" id="pills-xbox-tab" data-toggle="pill" href="#pills-xbox" role="tab" aria-controls="pills-xbox" aria-selected="false">
+                                        <button type="button" class="btn btn-light" style="height: 120px; width:120px;">
+                                            <i class="fab fa-xbox"></i>
+                                            <div>XBOX ONE</div>
+                                        </button>
+                                    </a>
+                                </li>
+                            @endif
+                    @endforeach
+                    @endif
                 </ul>
-                @endif
 
                 @if(isset($unCategorys))
                     <div class="form-inline justify-content-start" style="margin-top: 20px; margin-bottom: 20px;">
@@ -113,62 +121,6 @@
                             @endforeach
                         </ul>
 
-                    </div>
-
-
-                    <div class="tab-pane fade" id="pills-pc" role="tabpanel" aria-labelledby="pills-pc-tab">
-                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="pc-result"></label>
-                            <label class="col-6"></label>
-                            <label class="col-2">Sort:</label>
-                            <select id="inputState" class="form-control col-2">
-                                <option selected>Highest Professions Level</option>
-                                <option>Fastest Delivery</option>
-                                <option>Highest Stock Level</option>
-                                <option>Lowest Price</option>
-                            </select>
-                        </div>
-
-                        <ul class="list-group">
-
-
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="pills-ps4" role="tabpanel" aria-labelledby="pills-ps4-tab">
-                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="ps4-result"></label>
-                            <label class="col-6"></label>
-                            <label class="col-2">Sort:</label>
-                            <select id="inputState" class="form-control col-2">
-                                <option selected>Highest Professions Level</option>
-                                <option>Fastest Delivery</option>
-                                <option>Highest Stock Level</option>
-                                <option>Lowest Price</option>
-                            </select>
-                        </div>
-
-                        <ul class="list-group">
-
-
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="pills-xbox" role="tabpanel" aria-labelledby="pills-xbox-tab">
-                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="xbox-result">7 RESULTS</label>
-                            <label class="col-6"></label>
-                            <label class="col-2">Sort:</label>
-                            <select id="inputState" class="form-control col-2">
-                                <option selected>Highest Professions Level</option>
-                                <option>Fastest Delivery</option>
-                                <option>Highest Stock Level</option>
-                                <option>Lowest Price</option>
-                            </select>
-                        </div>
-
-                        <ul class="list-group">
-
-
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -262,7 +214,7 @@
         });
 
         //platform
-        $('.nav-item').click(function (event) {
+        $('.nav-item-content').click(function (event) {
 
             var category_id = {{$thisCategory[0]->id}};
             var platform_id = $(this).attr('value');
