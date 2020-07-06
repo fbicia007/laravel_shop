@@ -15,6 +15,20 @@ class HomeController extends BaseController
         $categorys = Category::whereNull('parent_id')->get();
         return view('home')->with('categorys', $categorys);
     }
+    public function toProduct($product_id){
+
+        $categorys = Category::whereNull('parent_id')->get();
+        $product = Product::where('id',$product_id)->get();
+
+        if(Product::where('id',$product_id)->exists()){
+
+            return view('product')
+                ->with('product', $product)
+                ->with('categorys', $categorys);
+        } else {
+
+        }
+    }
 
     public function toCategory($category_id){
 

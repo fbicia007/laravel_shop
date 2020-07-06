@@ -238,6 +238,9 @@
                         }, 2000);
                         return;
 
+                        if(data.status == 0){
+                            setTimeout(function(){ location.href = "/"; }, 1000);
+                        }
 
 
 

@@ -136,6 +136,7 @@
                     cache: false,
                     data: {email:email, password:password, _token:"{{csrf_token()}}"},
                     success: function (data) {
+
                         if(data == null){
                             $('#errorMessage').modal('show');
                             $('.modal-body span').html('Server error!');
@@ -151,7 +152,11 @@
                             $('#errorMessage').modal('toggle');
                         }, 2000);
 
-                        location.href = "/";
+                        if(data.status == 0){
+
+                            setTimeout(function(){ location.href = "/"; }, 1000);
+                        }
+
 
                     },
                     error: function (xhr, status, error) {

@@ -24,6 +24,7 @@ Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 
 Route::get('/category/{category_id}','View\HomeController@toCategory');
+Route::get('/product/{product_id}','View\HomeController@toProduct');
 
 
 

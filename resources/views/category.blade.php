@@ -80,7 +80,6 @@
                     </div>
                 @endif
 
-
                 <div class="tab-content border-top" id="pills-tabContent">
 
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
@@ -96,31 +95,79 @@
                                 <option>Lowest Price</option>
                             </select>
                         </div>
-                        <ul class="list-group" id="productList">
-                            @foreach($products as $product)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-8 align-self-center"><i class="fas fa-coins" style="color: gold;"></i><span style="color: #ff253a;">
-                                            {{$product->name}}</span> {{$product->summary}}
-                                        @switch($product->platform)
-                                            @case(1)
-                                                PC
-                                                @break
-                                            @case(2)
-                                                PS4
-                                                @break
-                                            @case(3)
-                                                XBOX
-                                                @break
-                                        @endswitch
-                                    </div>
-                                    <div class="col-6 col-md-2 align-self-center">EUR € {{$product->price}}</div>
-                                    <div class="col-md-2"><button type="button" class="btn btn-outline-info">Buy now</button></div>
-                                </div>
-                            </li>
-                            @endforeach
-                        </ul>
 
+                        <div class="form-inline text-center product-group">
+                            @foreach($products as $product)
+                                <div class="col-2 product-list" style="margin-bottom: 40px">
+                                    <a href="/product/{{$product->id}}" style="color: black">
+                                        <img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">
+                                        <div>{{$product->name}}</div>
+                                        <div>{{$product->summary}}</div>
+                                        <div>EUR € {{$product->price}}</div>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-info">Buy now</button>
+                                </div>
+                            @endforeach
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="pills-pc" role="tabpanel" aria-labelledby="pills-pc-tab">
+                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
+                            <label class="col-2" id="pc-result"></label>
+                            <label class="col-6"></label>
+                            <label class="col-2">Sort:</label>
+                            <select id="inputState" class="form-control col-2">
+                                <option selected>Highest Professions Level</option>
+                                <option>Fastest Delivery</option>
+                                <option>Highest Stock Level</option>
+                                <option>Lowest Price</option>
+                            </select>
+                        </div>
+
+                        <ul class="form-inline text-center product-group">
+
+
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="pills-ps4" role="tabpanel" aria-labelledby="pills-ps4-tab">
+                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
+                            <label class="col-2" id="ps4-result"></label>
+                            <label class="col-6"></label>
+                            <label class="col-2">Sort:</label>
+                            <select id="inputState" class="form-control col-2">
+                                <option selected>Highest Professions Level</option>
+                                <option>Fastest Delivery</option>
+                                <option>Highest Stock Level</option>
+                                <option>Lowest Price</option>
+                            </select>
+                        </div>
+
+                        <ul class="form-inline text-center product-group">
+
+
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="pills-xbox" role="tabpanel" aria-labelledby="pills-xbox-tab">
+                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
+                            <label class="col-2" id="xbox-result">7 RESULTS</label>
+                            <label class="col-6"></label>
+                            <label class="col-2">Sort:</label>
+                            <select id="inputState" class="form-control col-2">
+                                <option selected>Highest Professions Level</option>
+                                <option>Fastest Delivery</option>
+                                <option>Highest Stock Level</option>
+                                <option>Lowest Price</option>
+                            </select>
+                        </div>
+
+                        <ul class="form-inline text-center product-group">
+
+
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -187,10 +234,12 @@
                             break
 
                     }
-                    $('.list-group').html('');
+                    //$('.list-group').html('');
+                    $('.product-group').html('');
 
                     for(var i=0; i<data.products.length;i++){
 
+                        /*list
                         var node = '<li class="list-group-item">'+
                             '<div class="row">'+
                             '<div class="col-sm-6 col-md-8 align-self-center"><i class="fas fa-coins" style="color: gold;"></i><span style="color: #ff253a;">'+
@@ -200,6 +249,19 @@
                         '</div>                        </li>';
 
                         $('.list-group').append(node);
+                         */
+
+                    var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
+                            '<a href="/product/'+data.products[i].id+'" style="color: black">'+
+                            '<img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">'+
+                            '<div>'+data.products[i].name+'</div>'+
+                            '<div>'+ data.products[i].summary+'</div>'+
+                            '<div>EUR € '+ data.products[i].price+'</div>'+
+                        '<button type="button" class="btn btn-outline-info">Buy now</button>'+
+                        '</div></a>';
+
+                        $('.product-group').append(node);
+
                     }
 
 
@@ -269,10 +331,11 @@
 
                     }
 
-                    $('.list-group').html('');
+                    //$('.list-group').html('');
+                    $('.product-group').html('');
 
                     for(var i=0; i<data.products.length;i++){
-
+/*list
                         var node = '<li class="list-group-item">'+
                             '<div class="row">'+
                             '<div class="col-sm-6 col-md-8 align-self-center"><i class="fas fa-coins" style="color: gold;"></i><span style="color: #ff253a;">'+
@@ -280,8 +343,18 @@
                         '<div class="col-6 col-md-2 align-self-center">EUR € '+data.products[i].price+'</div>'+
                         '<div class="col-md-2"><button type="button" class="btn btn-outline-info">Buy now</button></div>'+
                         '</div>                        </li>';
+*/
+                        var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
+                            '<a href="/product/'+data.products[i].id+'" style="color: black">'+
+                            '<img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">'+
+                            '<div>'+data.products[i].name+'</div>'+
+                            '<div>'+ data.products[i].summary+'</div>'+
+                            '<div>EUR € '+ data.products[i].price+'</div>'+
+                            '<button type="button" class="btn btn-outline-info">Buy now</button>'+
+                            '</div></a>';
 
-                        $('.list-group').append(node);
+                        //$('.list-group').append(node);
+                        $('.product-group').append(node);
                     }
 
 

@@ -20,8 +20,8 @@
         </ol>
         <div class="carousel-inner">
             @foreach($categorys as $category)
-            <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='cat{{$category->id}}.php/';">
-                <img src="{{$category->banner}}"  class="d-block w-100" alt="...">
+            <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='category/{{$category->id}}';">
+                <img src="/images/banner/{{$category->banner}}"  class="d-block w-100" >
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{$category->name}}</h5>
                     <p>{{$category->banner_text}}</p>
@@ -63,7 +63,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$category->name}}</h5>
                             <p class="card-text">{{$category->info}}</p>
-                            <a href="cat{{$category->id}}.php" class="btn btn-primary">See All</a>
+                            <a href="category/{{$category->id}}" class="btn btn-primary">See All</a>
                         </div>
                     </div>
                 </div>
