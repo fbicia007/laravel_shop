@@ -59,7 +59,7 @@
                 @foreach($categorys as $category)
                 <div class="col text-center">
                     <div class="card shadow">
-                        <img src="{{$category->preview}}" class="card-img-top" alt="...">
+                        <img src="/images/preview/{{$category->preview}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{$category->name}}</h5>
                             <p class="card-text">{{$category->info}}</p>

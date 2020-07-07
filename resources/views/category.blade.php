@@ -105,7 +105,7 @@
                                         <div>{{$product->summary}}</div>
                                         <div>EUR € {{$product->price}}</div>
                                     </a>
-                                    <button type="button" class="btn btn-outline-info">Buy now</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="addCart({{$product->id}});">Buy now</button>
                                 </div>
                             @endforeach
 
@@ -256,9 +256,9 @@
                             '<img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price+'</div>'+
-                        '<button type="button" class="btn btn-outline-info">Buy now</button>'+
-                        '</div></a>';
+                            '<div>EUR € '+ data.products[i].price+'</div></a>'+
+                        '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +';)">Buy now</button>'+
+                        '</div>';
 
                         $('.product-group').append(node);
 
@@ -350,8 +350,8 @@
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div>'+
-                            '<button type="button" class="btn btn-outline-info">Buy now</button>'+
-                            '</div></a>';
+                            '</a>'+
+                            '<button type="button" class="btn btn-outline-info" onclick="addCart(\''+ data.products[i].id +'\');">Buy now</button></div>';
 
                         //$('.list-group').append(node);
                         $('.product-group').append(node);
@@ -369,6 +369,52 @@
             $('#unCategorySelect').get(0).selectedIndex = 0;
 
         });
+
+        function addCart(product_id) {
+
+            $.ajax({
+                url: '/service/add/cart/'+product_id,
+                dataType: 'json',
+                type: "GET",
+                cache: true,
+                success: function (data) {
+                    if(data == null){
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html('Server error!');
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+                        return;
+                    }
+                    if(data.status != 0){
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html(data.message);
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+                        return;
+                    }
+
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html(data.message);
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 1000);
+
+                    var num = $('#cartCount').html();
+
+
+                    if(num == '') num = 0;
+                    $('#cartCount').html(Number(num) + 1);
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        }
 
     </script>
 

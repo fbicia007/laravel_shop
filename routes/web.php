@@ -36,5 +36,6 @@ Route::group(['prefix' => 'service'], function (){
     Route::post('login', 'Service\MemberController@login');
     Route::get('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');
     Route::get('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatfomId');
+    Route::get('add/cart/{product_id}', 'Service\CartController@addCart');
 
 });

@@ -7,6 +7,7 @@
     <link href="/css/all.css" rel="stylesheet"> <!--load all styles -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/myCss.css">
 
     <title>@yield('title')</title>
 </head>
@@ -48,7 +49,11 @@
                 </form>
                 <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
                 <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
-                <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART"><i class="fas fa-shopping-cart"></i></button>
+                <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class='badge badge-warning' id='cartCount'>{{$cartCount}}</span>
+                </button>
+
             </div>
         </div>
     </div>

@@ -15,9 +15,9 @@ class ProductsController extends Controller
     public function getCategoryByCategoryId($category_id)
     {
 
-        $unCategorys = Category::where('parent_id',$category_id)->get();
-
         if(Category::where('parent_id',$category_id)->exists()){
+
+            $unCategorys = Category::where('parent_id',$category_id)->get();
 
             $ids = array();
 
@@ -36,7 +36,7 @@ class ProductsController extends Controller
             $message_result->message = 'Result ready.';
             $message_result->products = $products;
 
-        } else {
+        } else if(Product::where('category_id',$category_id)->exists()){
 
             //with out parent category
             $products = Product::where('category_id',$category_id)->get();
@@ -44,6 +44,10 @@ class ProductsController extends Controller
             $message_result->status = 0;
             $message_result->message = 'Result ready.';
             $message_result->products = $products;
+        } else{
+            $message_result = new MessageResult();
+            $message_result->status = 1;
+            $message_result->message = 'There are not this Game.';
         }
 
         return $message_result->toJson();
