@@ -257,7 +257,7 @@
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div></a>'+
-                        '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +';)">Buy now</button>'+
+                        '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +')">Buy now</button>'+
                         '</div>';
 
                         $('.product-group').append(node);
