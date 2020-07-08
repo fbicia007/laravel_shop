@@ -100,7 +100,7 @@
                             @foreach($products as $product)
                                 <div class="col-2 product-list" style="margin-bottom: 40px">
                                     <a href="/product/{{$product->id}}" style="color: black">
-                                        <img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">
+                                        <img src="/images/preview/{{$product->preview}}" style="width: 100px">
                                         <div>{{$product->name}}</div>
                                         <div>{{$product->summary}}</div>
                                         <div>EUR € {{$product->price}}</div>
@@ -253,7 +253,7 @@
 
                     var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
                             '<a href="/product/'+data.products[i].id+'" style="color: black">'+
-                            '<img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">'+
+                            '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div></a>'+
@@ -346,7 +346,7 @@
 */
                         var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
                             '<a href="/product/'+data.products[i].id+'" style="color: black">'+
-                            '<img src="https://www.mmoga.com/images/games/_ext/1009361/minecraft_medium.png" style="width: 100px">'+
+                            '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div>'+

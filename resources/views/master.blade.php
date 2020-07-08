@@ -49,7 +49,7 @@
                 </form>
                 <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
                 <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
-                <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART">
+                <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART" onclick="toCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span class='badge badge-warning' id='cartCount'>{{$cartCount}}</span>
                 </button>
@@ -135,6 +135,10 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    function toCart() {
+        location.href='/cart';
+    }
 </script>
 
 @yield('my-js')

@@ -25,6 +25,7 @@ Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 
 Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
+Route::get('/cart','View\CartController@toCart');
 
 
 
@@ -37,5 +38,6 @@ Route::group(['prefix' => 'service'], function (){
     Route::get('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');
     Route::get('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatfomId');
     Route::get('add/cart/{product_id}', 'Service\CartController@addCart');
+    Route::get('delete/cart', 'Service\CartController@deleteCart');
 
 });

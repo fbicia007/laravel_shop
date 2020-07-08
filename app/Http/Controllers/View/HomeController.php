@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
 class HomeController extends BaseController
 {
 
-    public function toHome(Request $request, $value=''){
+    public function toHome(Request $request){
 
         //cart
         $cartCount = $this->cartCount($request);

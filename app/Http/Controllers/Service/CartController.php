@@ -42,5 +42,35 @@ class CartController extends Controller
 
     }
 
+    public function deleteCart(Request $request)
+    {
+        $message = new MessageResult();
+
+        $cartItem_id = $request->input('cartItem_id','');
+
+        if($cartItem_id == ''){
+            $message->status = 1;
+            $message->message = 'No Item!';
+            return $message;
+        }
+        $cart = $request->cookie('cart');
+        $cart_array = ($cart!=null ? explode(',',$cart) : array());
+        foreach ($cart_array as $key=>$value) {
+            $index = strpos($value, ':');
+            $product_id = substr($value,0,$index);
+
+            //search product id in cart
+            if($product_id == $cartItem_id){
+                array_splice($cart_array,$key,1);
+                continue;
+            }
+        }
+
+        $message->status = 0;
+        $message->message = 'Item deletet.';
+
+        return response($message->toJson())->withCookie('cart', implode(',',$cart_array));
+    }
+
 
 }
