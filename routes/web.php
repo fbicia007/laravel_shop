@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Entity\Member;
+
 
 Route::get('/','View\HomeController@toHome');
 
@@ -26,6 +26,7 @@ Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
 Route::get('/cart','View\CartController@toCart');
+//Route::get('/cart',['middleware'=>'check.login'],'View\CartController@toCart');
 
 
 
