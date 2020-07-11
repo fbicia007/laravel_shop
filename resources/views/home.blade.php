@@ -44,26 +44,16 @@
 
         <div class="container col-8">
 
-            <h1></h1>
-            <div class="row text-center">
-                <h1 class="col"><i class="fab fa-playstation"></i></h1>
-                <h1 class="col"><i class="fab fa-xbox"></i></h1>
-                <h1 class="col"><i class="fab fa-steam"></i></h1>
-                <h1 class="col"><i class="fab fa-battle-net"></i></h1>
-            </div>
-
-            <h1></h1>
-
             <div class="row">
 
                 @foreach($categorys as $category)
                 <div class="col text-center">
                     <div class="card shadow">
-                        <img src="/images/preview/{{$category->preview}}" class="card-img-top" alt="...">
+                        <a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">
+                            <img src="/images/preview/{{$category->preview}}" class="card-img-top">
+                        </a>
                         <div class="card-body">
-                            <h5 class="card-title">{{$category->name}}</h5>
-                            <p class="card-text">{{$category->info}}</p>
-                            <a href="category/{{$category->id}}" class="btn btn-primary">See All</a>
+                            <h4 class="card-title">{{$category->name}}</h4>
                         </div>
                     </div>
                 </div>

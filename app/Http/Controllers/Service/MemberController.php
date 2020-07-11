@@ -34,9 +34,9 @@ class MemberController extends Controller
              $message_result->message = 'There are not Email';
              return $message_result->toJson();
          }
-         if($password =='' || strlen($password) < 8){
+         if($password =='' || strlen($password) < 8 || !preg_match('@[A-Z]@', $password) || !preg_match('@[a-z]@', $password) || !preg_match('@[0-9]@', $password) || !preg_match('@[^\w]@', $password)){
              $message_result->status = 2;
-             $message_result->message = 'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.';
+             $message_result->message = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
              return $message_result->toJson();
          }
          if($confirm =='' || strlen($password) < 8){

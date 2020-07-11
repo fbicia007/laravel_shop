@@ -99,12 +99,12 @@
                         <div class="form-inline text-center product-group">
                             @foreach($products as $product)
                                 <div class="col-2 product-list" style="margin-bottom: 40px">
-                                    <a href="/product/{{$product->id}}" style="color: black">
+                                    <!--<a href="/product/{{$product->id}}" style="color: black">-->
                                         <img src="/images/preview/{{$product->preview}}" style="width: 100px">
                                         <div>{{$product->name}}</div>
                                         <div>{{$product->summary}}</div>
                                         <div>EUR € {{$product->price}}</div>
-                                    </a>
+                                    <!--</a>-->
                                     <button type="button" class="btn btn-outline-info" onclick="addCart({{$product->id}});">Buy now</button>
                                 </div>
                             @endforeach
@@ -252,11 +252,12 @@
                          */
 
                     var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
-                            '<a href="/product/'+data.products[i].id+'" style="color: black">'+
+                            //'<a href="/product/'+data.products[i].id+'" style="color: black">'+
                             '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price+'</div></a>'+
+                            '<div>EUR € '+ data.products[i].price+'</div>'+
+                            //'</a>'+
                         '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +')">Buy now</button>'+
                         '</div>';
 
@@ -345,12 +346,12 @@
                         '</div>                        </li>';
 */
                         var node = '<div class="col-2 product-list" style="margin-bottom: 40px">'+
-                            '<a href="/product/'+data.products[i].id+'" style="color: black">'+
+                            //'<a href="/product/'+data.products[i].id+'" style="color: black">'+
                             '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div>'+
-                            '</a>'+
+                            //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart(\''+ data.products[i].id +'\');">Buy now</button></div>';
 
                         //$('.list-group').append(node);

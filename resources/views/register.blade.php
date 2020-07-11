@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Password:</label>
-                            <input type="password" class="form-control" id="reg_password" name="reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required>
+                            <input type="password" class="form-control" id="reg_password" name="reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" placeholder="Password" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
