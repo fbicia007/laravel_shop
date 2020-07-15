@@ -58,7 +58,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-info col-md-2 offset-md-10">checkout</button>
+                <button type="button" class="btn btn-info col-md-2 offset-md-10" onclick="checkout()">checkout</button>
             </div>
         </div>
 
@@ -112,6 +112,10 @@
                 }
             });
 
+        }
+
+        function checkout() {
+            location.href='/checkout';
         }
     </script>
 

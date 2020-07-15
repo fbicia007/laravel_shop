@@ -26,7 +26,11 @@ Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
 Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
 Route::get('/cart','View\CartController@toCart');
-//Route::get('/cart',['middleware'=>'check.login'],'View\CartController@toCart');
+
+Route::middleware('check.login')->group(function (){
+
+    Route::get('/checkout', 'View\CheckoutController@checkout');
+});
 
 
 

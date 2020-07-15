@@ -33,11 +33,14 @@ class MemberController extends BaseController
     {
         //cart
         $cartCount = $this->cartCount($request);
+        //return url
+        $return_url = $request->input('return_url');
 
         //end cart
         $categorys = Category::whereNull('parent_id')->get();
         return view('login')
             ->with('categorys', $categorys)
+            ->with('return_url', urldecode($return_url))
             ->with('cartCount', $cartCount);
 
     }

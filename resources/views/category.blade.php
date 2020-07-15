@@ -70,11 +70,11 @@
 
                 @if(isset($unCategorys))
                     <div class="form-inline justify-content-start" style="margin-top: 20px; margin-bottom: 20px;">
-                        <label class="col-2" for="unCategorySelect">Delivery Type</label>
-                        <select class="form-control col-3" id="unCategorySelect">
+                        <label class="col-2" for="unCategorySelect">Delivery Type & Time</label>
+                        <select class="form-control col-5" id="unCategorySelect">
                             <option value="{{$thisCategory[0]->id}}">Select All</option>
                             @foreach($unCategorys as $unCategory)
-                            <option value="{{$unCategory->id}}">{{$unCategory->name}}</option>
+                            <option value="{{$unCategory->id}}">{{$unCategory->name}} will be delivery {{$unCategory->delivery_time}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -84,17 +84,19 @@
 
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
 
-                        <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="result">{{count($products)}} Results</label>
-                            <label class="col-6"></label>
-                            <label class="col-2">Sort:</label>
-                            <select id="inputState" class="form-control col-2">
-                                <option selected>Highest Professions Level</option>
-                                <option>Fastest Delivery</option>
-                                <option>Highest Stock Level</option>
-                                <option>Lowest Price</option>
-                            </select>
-                        </div>
+                       <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
+
+                       <label class="col-12" id="result">{{count($products)}} Results</label>
+                          <!--<label class="col-6"></label>
+                           <label class="col-2">Sort:</label>
+                           <select id="inputState" class="form-control col-2">
+                               <option selected>Highest Professions Level</option>
+                               <option>Fastest Delivery</option>
+                               <option>Highest Stock Level</option>
+                               <option>Lowest Price</option>
+                           </select>-->
+                       </div>
+
 
                         <div class="form-inline text-center product-group">
                             @foreach($products as $product)
@@ -117,15 +119,15 @@
 
                     <div class="tab-pane fade" id="pills-pc" role="tabpanel" aria-labelledby="pills-pc-tab">
                         <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="pc-result"></label>
-                            <label class="col-6"></label>
+                            <label class="col-12" id="pc-result"></label>
+                            <!--<label class="col-6"></label>
                             <label class="col-2">Sort:</label>
                             <select id="inputState" class="form-control col-2">
                                 <option selected>Highest Professions Level</option>
                                 <option>Fastest Delivery</option>
                                 <option>Highest Stock Level</option>
                                 <option>Lowest Price</option>
-                            </select>
+                            </select>-->
                         </div>
 
                         <ul class="form-inline text-center product-group">
@@ -135,15 +137,15 @@
                     </div>
                     <div class="tab-pane fade" id="pills-ps4" role="tabpanel" aria-labelledby="pills-ps4-tab">
                         <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="ps4-result"></label>
-                            <label class="col-6"></label>
+                            <label class="col-12" id="ps4-result"></label>
+                            <!--<label class="col-6"></label>
                             <label class="col-2">Sort:</label>
                             <select id="inputState" class="form-control col-2">
                                 <option selected>Highest Professions Level</option>
                                 <option>Fastest Delivery</option>
                                 <option>Highest Stock Level</option>
                                 <option>Lowest Price</option>
-                            </select>
+                            </select>-->
                         </div>
 
                         <ul class="form-inline text-center product-group">
@@ -153,15 +155,15 @@
                     </div>
                     <div class="tab-pane fade" id="pills-xbox" role="tabpanel" aria-labelledby="pills-xbox-tab">
                         <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
-                            <label class="col-2" id="xbox-result">7 RESULTS</label>
-                            <label class="col-6"></label>
+                            <label class="col-12" id="xbox-result"></label>
+                            <!--<label class="col-6"></label>
                             <label class="col-2">Sort:</label>
                             <select id="inputState" class="form-control col-2">
                                 <option selected>Highest Professions Level</option>
                                 <option>Fastest Delivery</option>
                                 <option>Highest Stock Level</option>
                                 <option>Lowest Price</option>
-                            </select>
+                            </select>-->
                         </div>
 
                         <ul class="form-inline text-center product-group">
