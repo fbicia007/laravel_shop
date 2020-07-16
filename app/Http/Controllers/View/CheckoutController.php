@@ -30,6 +30,8 @@ class CheckoutController extends BaseController
             $cart_item->product_id = substr($value,0,$index);
             $cart_item->count = (int)substr($value,$index+1);
             $cart_item->product = Product::find($cart_item->product_id);
+            $cart_item->category = Category::find($cart_item->product->category_id);
+            $cart_item->special_infos = $cart_item->category->special_info;
 
 
             if($cart_item->product != null){
@@ -44,10 +46,14 @@ class CheckoutController extends BaseController
 
         //end cart
 
+        //member
+        $member = $request->session()->get('member','');
+
         return view('checkout')
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
-            ->with('cart_items', $cart_items);
+            ->with('cart_items', $cart_items)
+            ->with('member', $member);
 
 
     }

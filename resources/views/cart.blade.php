@@ -18,11 +18,16 @@
 
 
     <main role="main">
-        <div class="container">
-            <span>Home / Shopping cart</span>
-        </div>
         <div class="album py-5 bg-light">
-            <div class="container" style="margin-top: -48px;">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-sm"><h6>1 SHOPPING CART</h6></div>
+                    <div class="col-sm"><h6> > </h6></div>
+                    <div class="col-sm text-secondary"><h6>2 ORDER INFORMATION</h6></div>
+                    <div class="col-sm"><h6> > </h6></div>
+                    <div class="col-sm text-secondary"><h6>3 COMPLETE PAYMENT</h6></div>
+                </div>
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -43,7 +48,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$cart_item->product->name}}</h5>
+                                        <h5 class="card-title">{{$cart_item->product->name}} - {{$cart_item->categoryName}}</h5>
                                     </div>
                                 </div>
                             </div>

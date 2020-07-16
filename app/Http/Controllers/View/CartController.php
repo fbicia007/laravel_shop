@@ -30,6 +30,8 @@ class CartController extends BaseController
             $cart_item->product_id = substr($value,0,$index);
             $cart_item->count = (int)substr($value,$index+1);
             $cart_item->product = Product::find($cart_item->product_id);
+            $cart_item->category = Category::find($cart_item->product->category_id);
+            $cart_item->categoryName = $cart_item->category->name;
 
 
             if($cart_item->product != null){
