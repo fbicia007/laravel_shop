@@ -154,7 +154,11 @@
 
                         if(data.status == 0){
 
+                            @if($return_url=='')
+                            setTimeout(function(){ location.href = "/"; }, 1000);
+                            @else
                             setTimeout(function(){ location.href = "{{$return_url}}"; }, 1000);
+                            @endif
                         }
 
 

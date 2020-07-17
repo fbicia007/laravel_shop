@@ -47,7 +47,7 @@
             <div class="row">
 
                 @foreach($categorys as $category)
-                <div class="col text-center">
+                <div class="col-sm text-center">
                     <div class="card shadow">
                         <a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">
                             <img src="/images/preview/{{$category->preview}}" class="card-img-top">

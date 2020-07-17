@@ -15,7 +15,7 @@
 
 
 <header>
-    <div class="navbar fixed-top navbar-expand navbar-dark flex-column flex-md-row bg-dark shadow">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark flex-column flex-md-row bg-dark shadow">
         <div class="container">
             <!--<a class="navbar-brand" href="#">GameGoods</a>-->
             <a href="/">
@@ -48,7 +48,20 @@
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
-                <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
+
+                <div class="btn-group">
+
+                    @if(isset($member->email))
+                    <a href="#" class="btn btn-dark my-2 my-sm-0 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
+                    @else
+                    <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button"  aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
+                    @endif
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">MY ACCOUNT</a>
+                        <a class="dropdown-item" onclick="logout()">SIGN OUT</a>
+
+                    </div>
+                </div>
                 <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART" onclick="toCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span class='badge badge-warning' id='cartCount'>{{$cartCount}}</span>
@@ -56,7 +69,7 @@
 
             </div>
         </div>
-    </div>
+    </nav>
 </header>
 
 <!-- Modal -->
@@ -139,6 +152,48 @@
     function toCart() {
         location.href='/cart';
     }
+
+    function logout() {
+
+        $.ajax({
+            url: '/service/logout',
+            dataType: 'json',
+            type: "POST",
+            cache: false,
+            data: {_token:"{{csrf_token()}}"},
+            success:function(data) {
+                if(data == null){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Server error!');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return;
+                }
+                if(data.status != 0){
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html(data.message);
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return;
+                }
+
+                $('#errorMessage').modal('show');
+                $('.modal-body span').html(data.message);
+                setTimeout(function () {
+                    $('#errorMessage').modal('toggle');
+                }, 1000);
+            },
+                error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        setTimeout(function(){ location.href = "/"; }, 1000);
+    }
+
 </script>
 
 @yield('my-js')

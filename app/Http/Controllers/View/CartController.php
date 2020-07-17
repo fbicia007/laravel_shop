@@ -46,10 +46,13 @@ class CartController extends BaseController
 
         //end cart
 
+        $member = $request->session()->get('member','');
+
         return view('cart')
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
-            ->with('cart_items', $cart_items);
+            ->with('cart_items', $cart_items)
+            ->with('member', $member);
 
 
     }

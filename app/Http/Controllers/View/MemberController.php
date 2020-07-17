@@ -41,6 +41,7 @@ class MemberController extends BaseController
         return view('login')
             ->with('categorys', $categorys)
             ->with('return_url', urldecode($return_url))
+            ->with('member', null)
             ->with('cartCount', $cartCount);
 
     }
@@ -55,6 +56,7 @@ class MemberController extends BaseController
 
         return view('register')
             ->with('categorys', $categorys)
+            ->with('member', null)
             ->with('cartCount', $cartCount);
 
     }
@@ -68,6 +70,7 @@ class MemberController extends BaseController
         $categorys = Category::whereNull('parent_id')->get();
         return view('forgot_pw')
             ->with('categorys', $categorys)
+            ->with('member', null)
             ->with('cartCount', $cartCount);
 
     }

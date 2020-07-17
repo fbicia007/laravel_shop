@@ -10,6 +10,7 @@ use App\Tool\UUID;
 use Illuminate\Http\Request;
 use App\Models\MessageResult;
 use App\Entity\Member;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\MessageEmail;
 
@@ -158,6 +159,18 @@ class MemberController extends Controller
 
 
 
+
+    }
+
+    public function logout(Request $request)
+    {
+
+        $request->session()->invalidate();
+        $message_result = new MessageResult();
+
+        $message_result->status = 0;
+        $message_result->message = 'logout';
+        return $message_result->toJson();
 
     }
 

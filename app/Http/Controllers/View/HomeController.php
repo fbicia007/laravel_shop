@@ -18,10 +18,13 @@ class HomeController extends BaseController
 
         //end cart
 
+        $member = $request->session()->get('member','');
+
         $categorys = Category::whereNull('parent_id')->get();
         return view('home')
             ->with('categorys', $categorys)
-            ->with('cartCount', $cartCount);
+            ->with('cartCount', $cartCount)
+            ->with('member', $member);
     }
 
     private function cartCount(Request $request){
@@ -58,10 +61,13 @@ class HomeController extends BaseController
 
             $thisCategory = Category::where('id', $product[0]->category_id)->get('name');
 
+            $member = $request->session()->get('member','');
+
             return view('product')
                 ->with('product', $product)
                 ->with('categorys', $categorys)
                 ->with('thisCategory', $thisCategory)
+                ->with('member', $member)
                 ->with('cartCount', $cartCount);
         } else {
 
@@ -77,6 +83,8 @@ class HomeController extends BaseController
 
         $categorys = Category::whereNull('parent_id')->get();
 
+
+        $member = $request->session()->get('member','');
 
         if(Category::where('parent_id', $category_id)->exists()){
 
@@ -103,6 +111,7 @@ class HomeController extends BaseController
                         ->with('categorys', $categorys)
                         ->with('products', $products)
                         ->with('unCategorys', $unCategorys)
+                        ->with('member', $member)
                         ->with('cartCount', $cartCount);
         } else {
             $thisCategory = Category::where('id', $category_id)->get();
@@ -112,6 +121,7 @@ class HomeController extends BaseController
                 ->with('thisCategory', $thisCategory)
                 ->with('products', $products)
                 ->with('categorys', $categorys)
+                ->with('member', $member)
                 ->with('cartCount', $cartCount);
         }
 
