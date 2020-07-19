@@ -42,6 +42,37 @@ class CartController extends Controller
 
     }
 
+    public function dashCart(Request $request, $product_id)
+    {
+
+        $cart = $request->cookie('cart');
+
+        $cart_arr = ($cart != null ? explode(',', $cart) :array());
+
+        $count = 1;
+        foreach ($cart_arr as &$value){
+            $index = strpos($value, ':');
+            if(substr($value,0,$index) == $product_id){
+                $count = ((int)substr($value,$index+1)) -1;
+                $value = $product_id.':'.$count;
+                break;
+            }
+        }
+
+        if($count == 1){
+            array_push($cart_arr, $product_id.':'.$count);
+
+        }
+
+        $message = new MessageResult();
+        $message->status = 0;
+        $message->message = 'This item is dash from your cart';
+
+        return response($message->toJson())->withCookie('cart',implode(',',$cart_arr));
+
+
+    }
+
     public function deleteCart(Request $request)
     {
         $message = new MessageResult();

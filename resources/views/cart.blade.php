@@ -30,18 +30,17 @@
 
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Number</th>
-                        <th scope="col"></th>
-                        <th scope="col">Total</th>
-                        <th scope="col"></th>
+                    <tr class="d-flex">
+                        <th class="col-8">Item</th>
+                        <th class="col-2">Number</th>
+                        <th class="col-1">Total</th>
+                        <th class="col-1"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($cart_items as $cart_item)
-                    <tr id="{{$cart_item->product->id}}">
-                        <td class="col">
+                    <tr id="{{$cart_item->product->id}}" class="d-flex">
+                        <td class="col-8 align-middle">
                             <div class="row">
                                 <div class="col-md-2 align-middle">
                                     <img src="/images/preview/{{$cart_item->product->preview}}" class="card-img" style="width: 130px;">
@@ -53,10 +52,16 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="col align-middle">{{$cart_item->count}}</td>
-                        <td class="col align-middle">€ </td>
-                        <td class="col align-middle">{{$cart_item->product->price * $cart_item->count}}</td>
-                        <td class="col align-middle">
+                        <td class="col-2 align-middle">
+                            <div class="row">
+                                <button class="btn btn-outline-info" onclick="dashItem('{{$cart_item->product->id}}')">-</button>
+                                <input id="item{{$cart_item->product->id}}" type="text" class="col-sm form-control" value="{{$cart_item->count}}">
+                                <button class="btn btn-outline-info" onclick="addItem('{{$cart_item->product->id}}')">+</button>
+                            </div>
+                        </td>
+                        <span class="d-none" id="priceOne{{$cart_item->product->id}}">{{$cart_item->product->price}}</span>
+                        <td class="align-middle col-1" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}}€</td>
+                        <td class="align-middle col-1">
                             <button type="button" onclick="onDelete({{$cart_item->product->id}})" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                     </tr>
@@ -121,6 +126,108 @@
 
         function checkout() {
             location.href='/checkout';
+        }
+        function addItem(id) {
+            var num = +$('#item'+id).val()+1;
+            var priceOne = $('#priceOne'+id).text();
+            $('#item'+id).val(num);
+            $('#priceSum'+id).text(priceOne * num +'€');
+
+            $.ajax({
+                url: '/service/add/cart/'+id,
+                dataType: 'json',
+                type: "GET",
+                cache: true,
+                success: function (data) {
+                    if(data == null){
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html('Server error!');
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+                        return;
+                    }
+                    if(data.status != 0){
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html(data.message);
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 2000);
+                        return;
+                    }
+
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html(data.message);
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 1000);
+
+                    var num = $('#cartCount').html();
+
+
+                    if(num == '') num = 0;
+                    $('#cartCount').html(Number(num) + 1);
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+
+        }
+        function dashItem(id) {
+            var num = +$('#item'+id).val()-1;
+            if(num >= 0){
+                var priceOne = $('#priceOne'+id).text();
+                $('#item'+id).val(num);
+                $('#priceSum'+id).text(priceOne * num +'€');
+                $.ajax({
+                    url: '/service/dash/cart/'+id,
+                    dataType: 'json',
+                    type: "GET",
+                    cache: true,
+                    success: function (data) {
+                        if(data == null){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html('Server error!');
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
+                        }
+                        if(data.status != 0){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html(data.message);
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
+                        }
+
+                        $('#errorMessage').modal('show');
+                        $('.modal-body span').html(data.message);
+                        setTimeout(function () {
+                            $('#errorMessage').modal('toggle');
+                        }, 1000);
+
+                        var num = $('#cartCount').html();
+
+
+                        if(num == '') num = 0;
+                        $('#cartCount').html(Number(num) + 1);
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
+            }
+
+
         }
     </script>
 

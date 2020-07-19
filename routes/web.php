@@ -44,6 +44,7 @@ Route::group(['prefix' => 'service'], function (){
     Route::get('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');
     Route::get('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatfomId');
     Route::get('add/cart/{product_id}', 'Service\CartController@addCart');
+    Route::get('dash/cart/{product_id}', 'Service\CartController@dashCart');
     Route::get('delete/cart', 'Service\CartController@deleteCart');
 
 });
