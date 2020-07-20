@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                     @foreach($cart_items as $cart_item)
-                    <tr id="{{$cart_item->product->id}}" class="d-flex">
+                    <tr id="{{$cart_item->product->id}}" class="d-flex items">
                         <td class="col-8 align-middle">
                             <div class="row">
                                 <div class="col-md-2 align-middle">
@@ -125,7 +125,13 @@
         }
 
         function checkout() {
-            location.href='/checkout';
+            var product_ids_arr = [];
+            $('.d-flex.items').each(function () {
+                product_ids_arr.push(this.id);
+
+            })
+
+           location.href='/checkout/' + product_ids_arr;
         }
         function addItem(id) {
             var num = +$('#item'+id).val()+1;

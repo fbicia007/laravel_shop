@@ -20,6 +20,8 @@ class CartController extends BaseController
         $cart = $request->cookie('cart');
         $cart_arr = ($cart != null ? explode(',', $cart) :array());
 
+        $member = $request->session()->get('member','');
+
         foreach ($cart_arr as $key => $value){
 
             $index = strpos($value, ':');
@@ -46,7 +48,22 @@ class CartController extends BaseController
 
         //end cart
 
-        $member = $request->session()->get('member','');
+
+        if($member != ''){
+
+
+            /*offline cart
+            //$cart_items = $this->syncCart($member->id, $cart_arr);
+            //return response()->view('cart',['cart_items' => $cart_items])->withCookie('cart', null);
+            end offline cart */
+
+            return view('cart')
+                ->with('categorys', $categorys)
+                ->with('cartCount', $cartCount)
+                ->with('cart_items', $cart_items)
+                ->with('member', $member);
+
+        }
 
         return view('cart')
             ->with('categorys', $categorys)
@@ -55,6 +72,52 @@ class CartController extends BaseController
             ->with('member', $member);
 
 
+    }
+
+    private function syncCart($member_id, $cart_arr){
+
+        $cart_items = CartItem::where('member_id',$member_id)->get();
+
+        $cart_items_arr = array();
+
+        foreach ($cart_arr as $value){
+            $index = strpos($value, ':');
+            $product_id = substr($value,0,$index);
+            $count = (int)substr($value,$index+1);
+
+            //looking for product_id in DB
+            $exist = false;
+            foreach ($cart_items as $temp){
+
+                if($temp->product_id == $product_id){
+                    if($temp->count < $count){
+                        $temp->count = $count;
+                        $temp->save();
+                    }
+                    $exist = true;
+                    break;
+                }
+            }
+            //Product_id not in DB
+            if($exist == false){
+                $cart_item = new CartItem();
+                $cart_item->member_id = $member_id;
+                $cart_item->product_id = $product_id;
+                $cart_item->count = $count;
+                $cart_item->save();
+                array_push($cart_items_arr,$cart_item);
+
+            }
+
+        }
+
+        //product infos for each item
+        foreach ($cart_items as $cart_item){
+            $cart_item->product = Product::find($cart_item->product_id);
+            array_push($cart_items_arr,$cart_item);
+        }
+
+        return $cart_items_arr;
     }
 
     private function cartCount(Request $request){
