@@ -20,6 +20,8 @@ class CheckoutController extends BaseController
         $cart = $request->cookie('cart');
         $cart_arr = ($cart != null ? explode(',', $cart) :array());
 
+        $special_infos = array();
+
         foreach ($cart_arr as $key => $value){
 
             $index = strpos($value, ':');
@@ -31,12 +33,15 @@ class CheckoutController extends BaseController
             $cart_item->count = (int)substr($value,$index+1);
             $cart_item->product = Product::find($cart_item->product_id);
             $cart_item->category = Category::find($cart_item->product->category_id);
-            $cart_item->special_infos = $cart_item->category->special_info;
+            //$cart_item->special_infos = $cart_item->category->special_info;
 
 
             if($cart_item->product != null){
                 array_push($cart_items, $cart_item);
             }
+
+                array_push($special_infos,$cart_item->category->special_info);
+
         }
 
         $categorys = Category::whereNull('parent_id')->get();
@@ -53,6 +58,8 @@ class CheckoutController extends BaseController
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
+            ->with('speicial_infos', array_unique($special_infos,SORT_REGULAR))
+            //->with('speicial_infos', $special_infos)
             ->with('member', $member);
 
 

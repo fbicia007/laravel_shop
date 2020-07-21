@@ -20,7 +20,7 @@
     <main role="main">
         <div class="album py-5 bg-light">
             <div class="container">
-                <div class="row text-center">
+                <div class="row text-center" style="margin-bottom: 20px;">
                     <div class="col-sm text-secondary"><h6>1 SHOPPING CART</h6></div>
                     <div class="col-sm"><h6> > </h6></div>
                     <div class="col-sm"><h6>2 ORDER INFORMATION</h6></div>
@@ -28,18 +28,69 @@
                     <div class="col-sm text-secondary"><h6>3 COMPLETE PAYMENT</h6></div>
                 </div>
 
-                @foreach($cart_items as $cart_item)
-                    @if($cart_item->special_infos != null)
-                        @foreach(explode(",",$cart_item->special_infos) as $special_info)
-                            <div class="container">
-                                <div class="form-group">
-                                    <label>{{$special_info}}</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                @endforeach
+                <div class="row">
+                    <div class="card col-sm-8">
+                        <div class="card-header">
+                            Shipping Information
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Please tell us your game information</h5>
+                            <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
+                            @foreach($speicial_infos as $speicial_info)
+                                @if($speicial_info != null)
+                                    @foreach(explode(",",$speicial_info) as $special_info)
+                                        <div class="container">
+                                            <div class="form-group">
+                                                <label>{{$special_info}}</label>
+                                                <input type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="card col-sm-4">
+                        <div class="card-header">
+                            Order Summary
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tbody>
+                                @foreach($cart_items as $cart_item)
+                                    <tr id="{{$cart_item->product->id}}" class="items">
+                                        <td class="align-middle">
+                                            <div class="media">
+                                                <img src="/images/preview/{{$cart_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
+                                                <div class="media-body">
+                                                    <p class="mt-0">{{$cart_item->product->name}} - {{$cart_item->category->name}}</p>
+                                                    <p class="font-weight-lighter">€{{$cart_item->product->price}} x {{$cart_item->count}}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}} €</td>
+                                    </tr>
+                                @endforeach
+                                <tr id="sum">
+                                    <td class="align-middle">
+                                        Total:
+                                    </td>
+                                    <td class="align-middle" id="totalprice">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="btn btn-light">
+                                <h5 class="card-title">PayPal</h5>
+                                <p class="card-text">You will be redirected to PayPal after placing order.</p>
+                                <img src="/images/logo/PayPal-Logo.png" class="rounded mx-auto d-block" width="100px">
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
         </div>
@@ -52,7 +103,17 @@
 @section('my-js')
 
     <script>
+        function sumColumn(index) {
+            var total = 0;
+            $("td:nth-child(" + index + ")").each(function() {
+                total += parseFloat($(this).text()) || 0;
+            });
+            return total;
+        }
 
+        $(function() {
+            $("#totalprice").html(sumColumn(2)+'€');
+        });
     </script>
 
 @endsection

@@ -60,15 +60,23 @@
                             </div>
                         </td>
                         <span class="d-none" id="priceOne{{$cart_item->product->id}}">{{$cart_item->product->price}}</span>
-                        <td class="align-middle col-1" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}}€</td>
+                        <td class="align-middle col-1" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}} €</td>
                         <td class="align-middle col-1">
                             <button type="button" onclick="onDelete({{$cart_item->product->id}})" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                     @endforeach
+                    <tr id="sum" class="d-flex">
+                        <td class="col-11 align-middle">
+                            Summe ({{count($cart_items)}} Items)
+                        </td>
+                        <td class="align-middle col-1" id="totalprice">
+
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-info col-md-2 offset-md-10" onclick="checkout()">checkout</button>
+                <button type="button" class="btn btn-info col-md-2 offset-md-10" onclick="checkout()">Check Out</button>
             </div>
         </div>
 
@@ -80,6 +88,19 @@
 @section('my-js')
 
     <script>
+
+        function sumColumn(index) {
+            var total = 0;
+            $("td:nth-child(" + index + ")").each(function() {
+                total += parseFloat($(this).text()) || 0;
+            });
+            return total;
+        }
+
+        $(function() {
+            $("#totalprice").html(sumColumn(3)+'€');
+        });
+
         function onDelete(cartItem_id) {
 
             $.ajax({
@@ -133,6 +154,7 @@
 
            location.href='/checkout/' + product_ids_arr;
         }
+
         function addItem(id) {
             var num = +$('#item'+id).val()+1;
             var priceOne = $('#priceOne'+id).text();
@@ -173,6 +195,7 @@
 
                     if(num == '') num = 0;
                     $('#cartCount').html(Number(num) + 1);
+                    $("#totalprice").html(sumColumn(3)+'€');
 
                 },
                 error: function (xhr, status, error) {
@@ -222,7 +245,8 @@
 
 
                         if(num == '') num = 0;
-                        $('#cartCount').html(Number(num) + 1);
+                        $('#cartCount').html(Number(num) - 1);
+                        $("#totalprice").html(sumColumn(3)+'€');
 
                     },
                     error: function (xhr, status, error) {
