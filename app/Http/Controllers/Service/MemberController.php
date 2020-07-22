@@ -19,6 +19,7 @@ class MemberController extends Controller
 
     public function register(Request $request)
     {
+         $domain = $request->getHost();
          $email = $request->input('email','');
          $password = $request->input('password','');
          $confirm = $request->input('confirm','');
@@ -81,7 +82,7 @@ class MemberController extends Controller
              $message_email->subject = 'Please active your Email';
              $message_email->content = 'Dear '.$lastName.':<br/>Thank you to registiert MMOZONE Game Onlineshop <br/> Your username is "'
                                         .$email.'"<br/>Please click the Link to active your Account. The Link will in 24 Hours working'
-                                        .'<br/>http://test.gamesgood.de/service/validate_email'
+                                        .'<br/>http://'.$domain.'/service/validate_email'
                                         .'?member_id='.$member->id
                                         .'&code='.$uuid;
 
