@@ -29,7 +29,8 @@ Route::get('/cart','View\CartController@toCart');
 
 Route::middleware('check.login')->group(function (){
 
-    Route::get('/checkout/{product_ids}', 'View\CheckoutController@checkout');
+    Route::get('/checkout', 'View\CheckoutController@checkout');
+    Route::get('/overview', 'View\OverviewController@overview');
 });
 
 

@@ -13,7 +13,7 @@ use Illuminate\Routing\Controller as BaseController;
 class CheckoutController extends BaseController
 {
 
-    public function checkout(Request $request, $product_ids)
+    public function checkout(Request $request)
     {
         $cart_items = array();
 

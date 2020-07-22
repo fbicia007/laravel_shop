@@ -152,7 +152,16 @@
 
             })
 
-           location.href='/checkout/' + product_ids_arr;
+            if(product_ids_arr.length > 0){
+                location.href='/checkout';
+            }
+
+            $('#errorMessage').modal('show');
+            $('.modal-body span').html('You have nothing');
+            setTimeout(function () {
+                $('#errorMessage').modal('toggle');
+            }, 1000);
+
         }
 
         function addItem(id) {

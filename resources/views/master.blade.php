@@ -47,7 +47,9 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
+                    @if(!isset($member->email))
+                    <a href="/register" class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="Sign Up"><i class="fas fa-user-plus"></i></a>
+                    @endif
 
                 <div class="btn-group">
 
@@ -57,7 +59,7 @@
                     <a href="/login" class="btn btn-dark my-2 my-sm-0" type="button"  aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-user"></i></a>
                     @endif
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">MY ACCOUNT</a>
+                        <a class="dropdown-item" href="/overview">MY ACCOUNT</a>
                         <a class="dropdown-item" onclick="logout()">SIGN OUT</a>
 
                     </div>
