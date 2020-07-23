@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}} €</td>
+                                        <td class="align-middle">{{$cart_item->product->price * $cart_item->count}} €</td>
                                     </tr>
                                 @endforeach
                                 <tr id="sum">
@@ -77,11 +77,12 @@
                                         Total:
                                     </td>
                                     <td class="align-middle" id="totalprice">
+                                        {{$total_price}}
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="btn btn-light">
+                            <a onclick="paypal()" class="btn btn-light">
                                 <h5 class="card-title">PayPal</h5>
                                 <p class="card-text">You will be redirected to PayPal after placing order.</p>
                                 <img src="/images/logo/PayPal-Logo.png" class="rounded mx-auto d-block" width="100px">
@@ -103,17 +104,17 @@
 @section('my-js')
 
     <script>
-        function sumColumn(index) {
-            var total = 0;
-            $("td:nth-child(" + index + ")").each(function() {
-                total += parseFloat($(this).text()) || 0;
-            });
-            return total;
-        }
 
-        $(function() {
-            $("#totalprice").html(sumColumn(2)+'€');
-        });
+
+        function paypal() {
+            var paypal = 0;
+
+            if(paypal == 0){
+                location.href ='/order_list';
+            }else{
+                console.log('buok');
+            }
+        }
     </script>
 
 @endsection

@@ -6,6 +6,8 @@ namespace App\Http\Controllers\View;
 
 use App\Entity\CartItem;
 use App\Entity\Category;
+use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Entity\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -15,12 +17,19 @@ class CheckoutController extends BaseController
 
     public function checkout(Request $request)
     {
+        $member = $request->session()->get('member','');
+        $order = new Order();
+        $order->member_id = $member->id;
+        $order->save();
         $cart_items = array();
 
         $cart = $request->cookie('cart');
         $cart_arr = ($cart != null ? explode(',', $cart) :array());
 
         $special_infos = array();
+
+        $total_price = 0;
+        $name ='';
 
         foreach ($cart_arr as $key => $value){
 
@@ -37,12 +46,54 @@ class CheckoutController extends BaseController
 
 
             if($cart_item->product != null){
-                array_push($cart_items, $cart_item);
-            }
+                $total_price += $cart_item->product->price * $cart_item->count;
 
+                $name .= $cart_item->product->name;
+
+                array_push($cart_items, $cart_item);
                 array_push($special_infos,$cart_item->category->special_info);
 
+                $order_item = new OrderItem();
+                $order_item->order_id = $order->id;
+                $order_item->product_id = $cart_item->product_id;
+                $order_item->count = $cart_item->count;
+                $order_item->pdt_snapshot = json_encode($cart_item->product);
+                $order_item->save();
+            }
+
         }
+
+
+        $order->name = $name;
+        $order->total_price = $total_price;
+        $order->infos = json_encode(array_unique($special_infos,SORT_REGULAR));
+        $order->order_no = 'M'.time().$order->id;
+        $order->save();
+
+        $categorys = Category::whereNull('parent_id')->get();
+
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+
+        //member
+
+
+        return view('checkout')
+            ->with('categorys', $categorys)
+            ->with('cartCount', $cartCount)
+            ->with('cart_items', $cart_items)
+            ->with('total_price', $total_price)
+            ->with('speicial_infos', array_unique($special_infos,SORT_REGULAR))
+            //->with('speicial_infos', $special_infos)
+            ->with('member', $member);
+
+
+    }
+
+    public function toOrderList(Request $request)
+    {
 
         $categorys = Category::whereNull('parent_id')->get();
 
@@ -54,12 +105,23 @@ class CheckoutController extends BaseController
         //member
         $member = $request->session()->get('member','');
 
-        return view('checkout')
+        $orders = Order::where('member_id',$member->id)->get();
+        foreach ($orders as $order){
+
+            $order_items = OrderItem::where('order_id',$order->id)->get();
+            $order->order_items = $order_items;
+            foreach ($order_items as $order_item) {
+
+                $order_item->product = Product::find($order_item->product_id);
+
+            }
+
+        }
+
+        return view('order_list')
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
-            ->with('cart_items', $cart_items)
-            ->with('speicial_infos', array_unique($special_infos,SORT_REGULAR))
-            //->with('speicial_infos', $special_infos)
+            ->with('orders', $orders)
             ->with('member', $member);
 
 
@@ -87,3 +149,4 @@ class CheckoutController extends BaseController
 
 
 }
+

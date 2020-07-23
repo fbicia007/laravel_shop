@@ -31,6 +31,7 @@ Route::middleware('check.login')->group(function (){
 
     Route::get('/checkout', 'View\CheckoutController@checkout');
     Route::get('/overview', 'View\OverviewController@overview');
+    Route::get('/order_list', 'View\CheckoutController@toOrderList');
 });
 
 

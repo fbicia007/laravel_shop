@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\View;
 
 
-
-use App\Entity\CartItem;
 use App\Entity\Category;
-use App\Entity\Product;
+use App\Entity\Order;
+use App\Entity\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -25,12 +24,20 @@ class OverviewController extends BaseController
 
         //member
         $member = $request->session()->get('member','');
-        $orders = CartItem::where('member_id',$member->id)->get();
+        $orders = Order::where('member_id',$member->id)->get();
+
+        foreach ($orders as $order){
+            $order_items = OrderItem::where('order_id',$order->id)->get();
+            $order->order_items = $order_items;
+            foreach ($order_items as $order_item){
+                $order_item->product = json_decode($order_item->pdt_snapshot);
+            }
+        }
 
         return view('overview')
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
-            ->with('orders', $orders->groupBy('order_id'))
+            ->with('orders', $orders)
             ->with('member', $member);
 
 
