@@ -36,6 +36,27 @@ Route::middleware('check.login')->group(function (){
 
 
 
+/*admin*/
+Route::group(['prefix' => 'admin'], function (){
+
+    Route::get('index', 'Admin\View\IndexController@index');
+    Route::get('category', 'Admin\View\IndexController@toCategory');
+    Route::get('product', 'Admin\View\IndexController@toProduct');
+    Route::get('news', 'Admin\View\IndexController@toNews');
+    Route::get('member', 'Admin\View\IndexController@toMember');
+    Route::get('admin', 'Admin\View\IndexController@toAdmin');
+    Route::get('order', 'Admin\View\IndexController@toOrder');
+    Route::get('bill', 'Admin\View\IndexController@toBill');
+    Route::get('log', 'Admin\View\IndexController@toLog');
+    Route::get('login', 'Admin\View\IndexController@toLogin');
+
+    Route::group(['prefix' => 'service'], function (){
+        Route::post('login', 'Admin\Service\IndexController@login');
+        Route::get('category/add', 'Admin\Service\IndexController@addCategory');
+    });
+
+});
+
 /*services*/
 Route::group(['prefix' => 'service'], function (){
 

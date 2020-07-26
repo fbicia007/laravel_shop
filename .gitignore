@@ -21,3 +21,4 @@ yarn-error.log
 *.ipr
 *.iws
 .DS_Store
+/public/src/

@@ -11,10 +11,10 @@ use App\Entity\OrderItem;
 use App\Entity\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Cookie;
 
 class CheckoutController extends BaseController
 {
-
     public function checkout(Request $request)
     {
         $member = $request->session()->get('member','');
@@ -98,7 +98,7 @@ class CheckoutController extends BaseController
         $categorys = Category::whereNull('parent_id')->get();
 
         //cart
-        $cartCount = $this->cartCount($request);
+        $cartCount = null;
 
         //end cart
 
@@ -118,11 +118,16 @@ class CheckoutController extends BaseController
 
         }
 
+
+        $cookie = Cookie::queue(\Cookie::forget('cart'));;
+
+
         return view('order_list')
             ->with('categorys', $categorys)
             ->with('cartCount', $cartCount)
             ->with('orders', $orders)
-            ->with('member', $member);
+            ->with('member', $member)
+            ->withCookie($cookie);
 
 
     }

@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/myCss.css">
 
-    <title>@yield('title')</title>
+    <title>MMOZONE Gaming Shop</title>
+    <meta name="keywords" content="MMOZONE Gaming Shop">
+    <meta name="description" content="MMZONE Gaming Shop, FIFA20,FIFA21,FIFAFut">
 </head>
 <body style="margin-top: 66px">
 
@@ -64,10 +66,17 @@
 
                     </div>
                 </div>
+                @if($cartCount != null)
                 <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART" onclick="toCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span class='badge badge-warning' id='cartCount'>{{$cartCount}}</span>
                 </button>
+                @else
+                <button class="btn btn-dark my-2 my-sm-0" type="button" data-toggle="tooltip" data-placement="bottom" title="MY CART" onclick="toCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class='badge badge-warning' id='cartCount'></span>
+                </button>
+                    @endif
 
             </div>
         </div>
