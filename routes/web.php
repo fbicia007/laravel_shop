@@ -40,7 +40,8 @@ Route::middleware('check.login')->group(function (){
 Route::group(['prefix' => 'admin'], function (){
 
     Route::get('index', 'Admin\View\IndexController@index');
-    Route::get('category', 'Admin\View\IndexController@toCategory');
+    Route::get('category', 'Admin\View\CategoryController@toCategory');
+    Route::get('category_add', 'Admin\View\CategoryController@toCategoryAdd');
     Route::get('product', 'Admin\View\IndexController@toProduct');
     Route::get('news', 'Admin\View\IndexController@toNews');
     Route::get('member', 'Admin\View\IndexController@toMember');
@@ -52,7 +53,7 @@ Route::group(['prefix' => 'admin'], function (){
 
     Route::group(['prefix' => 'service'], function (){
         Route::post('login', 'Admin\Service\IndexController@login');
-        Route::get('category/add', 'Admin\Service\IndexController@addCategory');
+
     });
 
 });

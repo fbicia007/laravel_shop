@@ -12,10 +12,6 @@ class IndexController extends BaseController
 
         return view('admin.index');
     }
-    public function addCategory(){
-
-        return view('admin.category_add');
-    }
     public function toProduct(){
 
         return view('admin.product');

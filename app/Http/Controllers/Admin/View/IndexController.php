@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\View;
 
 
+use App\Entity\Category;
 use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController
@@ -11,10 +12,6 @@ class IndexController extends BaseController
     public function index(){
 
         return view('admin.index');
-    }
-    public function toCategory(){
-
-        return view('admin.category');
     }
     public function toProduct(){
 

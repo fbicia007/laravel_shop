@@ -14,10 +14,10 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="/admin/static/h-ui/css/H-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/static/h-ui.admin/css/H-ui.login.css" />
     <link rel="stylesheet" type="text/css" href="/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="/admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="/admin/static/h-ui.admin/css/style.css" />
-    <link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
     <!--[if IE 6]>
     <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -37,5 +37,17 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/admin/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript" src="/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+
+
+<script type="text/javascript" src="/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/admin/lib/webuploader/0.1.5/webuploader.min.js"></script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+@yield('my-js')
 </body>
 </html>
