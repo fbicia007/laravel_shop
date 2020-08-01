@@ -88,7 +88,7 @@ class HomeController extends BaseController
 
         if(Category::where('parent_id', $category_id)->exists()){
 
-            $thisCategory = Category::where('id', $category_id)->get();
+            $thisCategory = Category::find($category_id);
 
             $unCategorys = Category::where('parent_id', $category_id)->get();
 
@@ -107,12 +107,12 @@ class HomeController extends BaseController
 
 
             return view('category')
-                        ->with('thisCategory', $thisCategory)
-                        ->with('categorys', $categorys)
-                        ->with('products', $products)
-                        ->with('unCategorys', $unCategorys)
-                        ->with('member', $member)
-                        ->with('cartCount', $cartCount);
+                ->with('thisCategory', $thisCategory)
+                ->with('categorys', $categorys)
+                ->with('products', $products)
+                ->with('unCategorys', $unCategorys)
+                ->with('member', $member)
+                ->with('cartCount', $cartCount);
         } else {
             $thisCategory = Category::where('id', $category_id)->get();
 

@@ -173,6 +173,7 @@
                 var state = $('input[name=state]').val();
                 var zip = $('input[name=zip]').val();
 
+
                 if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || city =='' || state =='' || zip ==''){
                     $('#errorMessage').modal('show');
                     $('.modal-body span').html('Infos cannot be empty');
@@ -215,6 +216,7 @@
                 }
 
 
+                document.getElementById("register").disabled = true;
                 $.ajax({
                     url: '/service/register',
                     dataType: 'json',
@@ -236,12 +238,13 @@
                         setTimeout(function () {
                             $('#errorMessage').modal('toggle');
                         }, 2000);
-                        return;
+                        document.getElementById("register").disabled = false;
 
                         if(data.status == 0){
                             setTimeout(function(){ location.href = "/"; }, 1000);
                         }
 
+                        return;
 
 
                     },

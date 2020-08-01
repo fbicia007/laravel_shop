@@ -100,7 +100,7 @@ class MemberController extends Controller
              });
 
              $message_result->status = 0;
-             $message_result->message = 'Register success!';
+             $message_result->message = 'Register success! Please check you Email to active your account!';
              return $message_result->toJson();
 
          }
@@ -144,7 +144,7 @@ class MemberController extends Controller
              }
              else if($member->active == 0) {
                  $message_result->status = 5;
-                 $message_result->message = 'You account is not active, please active you account.';
+                 $message_result->message = 'You account is not active, please use the Link in your Email to active you account.';
                  return $message_result->toJson();
 
              } else {
