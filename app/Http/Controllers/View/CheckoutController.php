@@ -70,7 +70,7 @@ class CheckoutController extends BaseController
         $order->order_no = 'M'.time().$order->id;
         $order->save();
 
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
         //cart
         $cartCount = $this->cartCount($request);
@@ -81,7 +81,7 @@ class CheckoutController extends BaseController
 
 
         return view('checkout')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
             ->with('total_price', $total_price)
@@ -95,7 +95,7 @@ class CheckoutController extends BaseController
     public function toOrderList(Request $request)
     {
 
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
         //cart
         $cartCount = null;
@@ -123,7 +123,7 @@ class CheckoutController extends BaseController
 
 
         return view('order_list')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('orders', $orders)
             ->with('member', $member)

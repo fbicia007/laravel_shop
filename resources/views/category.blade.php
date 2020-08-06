@@ -3,19 +3,18 @@
 @section('title','category')
 
 @section('categoryMenu')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <a class="dropdown-item" href="{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
 
 @section('footerList')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <li><a class="text-muted" href="{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection
 
 @section('content')
-
 
     <main role="main">
         <div class="container">
@@ -24,14 +23,7 @@
         <div class="album py-5 bg-light">
             <div class="container" style="margin-top: -48px;">
                 <ul class="nav nav- border-top border-bottom" id="pills-tab" role="tablist">
-                    <li class="nav-item-content" value="0">
-                        <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">
-                            <button type="button" class="btn btn-light float-left" style="height: 120px; width:120px;">
-                                <i class="fas fa-check-double"></i>
-                                <div>Select All</div>
-                            </button>
-                        </a>
-                    </li>
+
                     @if(count(explode(",",$thisCategory->platform))>1)
                         @foreach(explode(",",$thisCategory->platform) as $platform)
                             @if($platform == 1)
@@ -65,6 +57,15 @@
                                     </li>
                             @endif
                         @endforeach
+                    @else
+                        <li class="nav-item-content" value="0">
+                            <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">
+                                <button type="button" class="btn btn-light float-left" style="height: 120px; width:120px;">
+                                    <i class="fas fa-check-double"></i>
+                                    <div>Select All</div>
+                                </button>
+                            </a>
+                        </li>
                     @endif
                 </ul>
 

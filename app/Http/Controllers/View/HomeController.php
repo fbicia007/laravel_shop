@@ -20,9 +20,9 @@ class HomeController extends BaseController
 
         $member = $request->session()->get('member','');
 
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
         return view('home')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('member', $member);
     }
@@ -52,7 +52,7 @@ class HomeController extends BaseController
         $cartCount = $this->cartCount($request);
 
         //end cart
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
 
         if(Product::where('id',$product_id)->exists()){
@@ -65,7 +65,7 @@ class HomeController extends BaseController
 
             return view('product')
                 ->with('product', $product)
-                ->with('categorys', $categorys)
+                ->with('categories', $categories)
                 ->with('thisCategory', $thisCategory)
                 ->with('member', $member)
                 ->with('cartCount', $cartCount);
@@ -81,7 +81,7 @@ class HomeController extends BaseController
 
         //end cart
 
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
 
         $member = $request->session()->get('member','');
@@ -108,19 +108,21 @@ class HomeController extends BaseController
 
             return view('category')
                 ->with('thisCategory', $thisCategory)
-                ->with('categorys', $categorys)
+                ->with('categories', $categories)
                 ->with('products', $products)
                 ->with('unCategorys', $unCategorys)
                 ->with('member', $member)
                 ->with('cartCount', $cartCount);
         } else {
-            $thisCategory = Category::where('id', $category_id)->get();
+            $thisCategory = Category::find($category_id);
 
             $products = Product::where('category_id',$category_id)->get();
+
+
             return view('category')
                 ->with('thisCategory', $thisCategory)
                 ->with('products', $products)
-                ->with('categorys', $categorys)
+                ->with('categories', $categories)
                 ->with('member', $member)
                 ->with('cartCount', $cartCount);
         }

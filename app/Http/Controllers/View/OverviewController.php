@@ -15,7 +15,7 @@ class OverviewController extends BaseController
     public function overview(Request $request)
     {
         //for category menu
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
         //end category menu
 
         //cart count
@@ -35,7 +35,7 @@ class OverviewController extends BaseController
         }
 
         return view('overview')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('orders', $orders)
             ->with('member', $member);

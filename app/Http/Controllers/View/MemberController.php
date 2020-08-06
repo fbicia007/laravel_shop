@@ -37,9 +37,9 @@ class MemberController extends BaseController
         $return_url = $request->input('return_url');
 
         //end cart
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
         return view('login')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('return_url', urldecode($return_url))
             ->with('member', null)
             ->with('cartCount', $cartCount);
@@ -52,10 +52,10 @@ class MemberController extends BaseController
         $cartCount = $this->cartCount($request);
 
         //end cart
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
         return view('register')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('member', null)
             ->with('cartCount', $cartCount);
 
@@ -67,9 +67,9 @@ class MemberController extends BaseController
         $cartCount = $this->cartCount($request);
 
         //end cart
-        $categorys = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
         return view('forgot_pw')
-            ->with('categorys', $categorys)
+            ->with('categories', $categories)
             ->with('member', null)
             ->with('cartCount', $cartCount);
 

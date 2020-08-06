@@ -3,13 +3,13 @@
 @section('title','category')
 
 @section('categoryMenu')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <a class="dropdown-item" href="/category/{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
 
 @section('footerList')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <li><a class="text-muted" href="/category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection

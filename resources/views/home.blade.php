@@ -3,7 +3,7 @@
 @section('title','login')
 
 @section('categoryMenu')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
     <a class="dropdown-item" href="category/{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
@@ -19,7 +19,7 @@
             <li data-target="#categoryBanner" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
-            @foreach($categorys as $category)
+            @foreach($categories as $category)
             <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='category/{{$category->id}}';">
                 <img src="/images/banner/{{$category->banner}}"  class="d-block w-100" >
                 <div class="carousel-caption d-none d-md-block">
@@ -46,7 +46,7 @@
 
             <div class="row">
 
-                @foreach($categorys as $category)
+                @foreach($categories as $category)
                 <div class="col-sm text-center">
                     <div class="card shadow">
                         <a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">
@@ -67,7 +67,7 @@
 @endsection
 
 @section('footerList')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
     <li><a class="text-muted" href="category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection

@@ -3,13 +3,13 @@
 @section('title','category')
 
 @section('categoryMenu')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <a class="dropdown-item" href="/category/{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
 
 @section('footerList')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <li><a class="text-muted" href="/category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection
@@ -36,18 +36,20 @@
                         <div class="card-body">
                             <h5 class="card-title">Please tell us your game information</h5>
                             <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
-                            @foreach($speicial_infos as $speicial_info)
-                                @if($speicial_info != null)
-                                    @foreach(explode(",",$speicial_info) as $special_info)
-                                        <div class="container">
-                                            <div class="form-group">
-                                                <label>{{$special_info}}</label>
-                                                <input type="text" class="form-control" required>
+                            <form id="speicial_infos">
+                                @foreach($speicial_infos as $speicial_info)
+                                    @if($speicial_info != null)
+                                        @foreach(explode(",",$speicial_info) as $special_info)
+                                            <div class="container">
+                                                <div class="form-group">
+                                                    <label>{{$special_info}} *</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            @endforeach
+                                        @endforeach
+                                    @endif
+                                @endforeach
+
                         </div>
                     </div>
 
@@ -82,11 +84,11 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a onclick="paypal()" class="btn btn-light">
+                            <button onclick="paypal()" type="submit" class="btn btn-light">
                                 <h5 class="card-title">PayPal</h5>
                                 <p class="card-text">You will be redirected to PayPal after placing order.</p>
                                 <img src="/images/logo/PayPal-Logo.png" class="rounded mx-auto d-block" width="100px">
-                            </a>
+                            </button></form>
                         </div>
                     </div>
 
@@ -107,6 +109,7 @@
 
 
         function paypal() {
+
             var paypal = 0;
 
             if(paypal == 0){

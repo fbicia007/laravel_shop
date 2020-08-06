@@ -3,13 +3,13 @@
 @section('title','category')
 
 @section('categoryMenu')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <a class="dropdown-item" href="/category/{{$category->id}}">{{$category->name}}</a>
     @endforeach
 @endsection
 
 @section('footerList')
-    @foreach($categorys as $category)
+    @foreach($categories as $category)
         <li><a class="text-muted" href="/category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
 @endsection
@@ -98,7 +98,7 @@
         }
 
         $(function() {
-            $("#totalprice").html(sumColumn(3)+'€');
+            $("#totalprice").html(sumColumn(3).toFixed(2)+'€');
         });
 
         function onDelete(cartItem_id) {
@@ -168,7 +168,7 @@
             var num = +$('#item'+id).val()+1;
             var priceOne = $('#priceOne'+id).text();
             $('#item'+id).val(num);
-            $('#priceSum'+id).text(priceOne * num +'€');
+            $('#priceSum'+id).text((priceOne * num).toFixed(2) +'€');
 
             $.ajax({
                 url: '/service/add/cart/'+id,
@@ -192,19 +192,19 @@
                         }, 2000);
                         return;
                     }
-
+/*
                     $('#errorMessage').modal('show');
                     $('.modal-body span').html(data.message);
                     setTimeout(function () {
                         $('#errorMessage').modal('toggle');
                     }, 1000);
-
+*/
                     var num = $('#cartCount').html();
 
 
                     if(num == '') num = 0;
                     $('#cartCount').html(Number(num) + 1);
-                    $("#totalprice").html(sumColumn(3)+'€');
+                    $("#totalprice").html(sumColumn(3).toFixed(2)+'€');
 
                 },
                 error: function (xhr, status, error) {
@@ -220,7 +220,7 @@
             if(num >= 0){
                 var priceOne = $('#priceOne'+id).text();
                 $('#item'+id).val(num);
-                $('#priceSum'+id).text(priceOne * num +'€');
+                $('#priceSum'+id).text((priceOne * num).toFixed(2) +'€');
                 $.ajax({
                     url: '/service/dash/cart/'+id,
                     dataType: 'json',
@@ -243,19 +243,19 @@
                             }, 2000);
                             return;
                         }
-
+/*
                         $('#errorMessage').modal('show');
                         $('.modal-body span').html(data.message);
                         setTimeout(function () {
                             $('#errorMessage').modal('toggle');
                         }, 1000);
-
+*/
                         var num = $('#cartCount').html();
 
 
                         if(num == '') num = 0;
                         $('#cartCount').html(Number(num) - 1);
-                        $("#totalprice").html(sumColumn(3)+'€');
+                        $("#totalprice").html(sumColumn(3).toFixed(2)+'€');
 
                     },
                     error: function (xhr, status, error) {
