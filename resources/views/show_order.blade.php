@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="row">
-                    @foreach($orders as $order)
+
                     <div class="card col-sm-12">
                         <div class="card-header">
                             Order number: {{$order->order_no}}
@@ -37,11 +37,11 @@
                         <div class="card-body">
                             <table class="table">
                                 <tbody>
-                                @foreach($orders as $order)
+                                @foreach($products as $product)
                                     <tr id="" class="items">
                                         <td class="align-middle">
                                             <div class="media">
-                                                <img src="/images/preview/" class="align-self-center mr-3" style="width: 64px;">
+                                                <img src="/images/preview/{{ json_decode($product->pdt_snapshot)->preview }}" class="align-self-center mr-3" style="width: 64px;">
                                                 <div class="media-body">
                                                     <p class="mt-0"></p>
                                                     <p class="font-weight-lighter"></p>
@@ -56,14 +56,13 @@
                                         Total:
                                     </td>
                                     <td class="align-middle" id="totalprice">
-
+                                        {{$order->total_price}} €
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    @endforeach
 
 
                 </div>
@@ -80,16 +79,6 @@
 
     <script>
 
-
-        function paypal() {
-            var paypal = 0;
-
-            if(paypal != 0){
-                console.log('ok');
-            }else{
-                console.log('buok');
-            }
-        }
     </script>
 
 @endsection

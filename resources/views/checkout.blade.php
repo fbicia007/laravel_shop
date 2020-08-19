@@ -16,7 +16,6 @@
 
 @section('content')
 
-
     <main role="main">
         <div class="album py-5 bg-light">
             <div class="container">
@@ -28,6 +27,9 @@
                     <div class="col-sm text-secondary"><h6>3 COMPLETE PAYMENT</h6></div>
                 </div>
 
+                <form id="pay-form" action="/pay" method="post" class="needs-validation" >
+
+                    {{csrf_field()}}
                 <div class="row">
                     <div class="card col-sm-8">
                         <div class="card-header">
@@ -36,19 +38,19 @@
                         <div class="card-body">
                             <h5 class="card-title">Please tell us your game information</h5>
                             <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
-                            <form id="speicial_infos">
                                 @foreach($speicial_infos as $speicial_info)
                                     @if($speicial_info != null)
                                         @foreach(explode(",",$speicial_info) as $special_info)
                                             <div class="container">
                                                 <div class="form-group">
                                                     <label>{{$special_info}} *</label>
-                                                    <input type="text" class="form-control" required>
+                                                    <input type="text" class="form-control" name="{{$special_info}}" required>
                                                 </div>
                                             </div>
                                         @endforeach
                                     @endif
                                 @endforeach
+                            <input type="text" name="order_id" value="{{$order_id}}" hidden>
 
                         </div>
                     </div>
@@ -84,17 +86,17 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <button onclick="paypal()" type="submit" class="btn btn-light">
+                            <button type="submit" id="paypalPay" class="btn btn-light">
                                 <h5 class="card-title">PayPal</h5>
                                 <p class="card-text">You will be redirected to PayPal after placing order.</p>
                                 <img src="/images/logo/PayPal-Logo.png" class="rounded mx-auto d-block" width="100px">
-                            </button></form>
+                            </button>
                         </div>
                     </div>
 
 
                 </div>
-
+                </form>
             </div>
         </div>
 
@@ -106,18 +108,24 @@
 @section('my-js')
 
     <script>
-
-
-        function paypal() {
-
-            var paypal = 0;
-
-            if(paypal == 0){
-                location.href ='/order_list';
-            }else{
-                console.log('buok');
-            }
-        }
+        // Validate
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    document.getElementById("paypalPay").addEventListener('click', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 
 @endsection

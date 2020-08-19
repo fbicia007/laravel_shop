@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Service;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\MessageResult;
 use Illuminate\Http\Request;

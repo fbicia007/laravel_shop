@@ -26,6 +26,7 @@ class CheckoutController extends BaseController
         $cart = $request->cookie('cart');
         $cart_arr = ($cart != null ? explode(',', $cart) :array());
 
+
         $special_infos = array();
 
         $total_price = 0;
@@ -85,6 +86,7 @@ class CheckoutController extends BaseController
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
             ->with('total_price', $total_price)
+            ->with('order_id', $order->id)
             ->with('speicial_infos', array_unique($special_infos,SORT_REGULAR))
             //->with('speicial_infos', $special_infos)
             ->with('member', $member);
@@ -92,42 +94,36 @@ class CheckoutController extends BaseController
 
     }
 
-    public function toOrderList(Request $request)
+    public function toOrderSuccess(Request $request,$order_id)
     {
 
+        //return $request;
         $categories = Category::whereNull('parent_id')->get();
 
         //cart
         $cartCount = null;
-
         //end cart
 
-        //member
-        $member = $request->session()->get('member','');
+        $order = Order::find($order_id);
 
-        $orders = Order::where('member_id',$member->id)->get();
-        foreach ($orders as $order){
+        $products = OrderItem::where('order_id',$order_id)->get();
 
-            $order_items = OrderItem::where('order_id',$order->id)->get();
-            $order->order_items = $order_items;
-            foreach ($order_items as $order_item) {
+        //$product_test = json_decode('{"id":1,"name":"100K","summary":"Safe FUT 20 Coins blitz send to your account","price":"9.17","preview":"fut.jpeg","category_id":8,"platform":1,"created_at":"2020-06-30T20:31:22.000000Z","updated_at":null}');
+        $product_test = ('{"id":13,"name":"Chaos Orb","summary":"Standard Server","price":"0.80","preview":"","category_id":12,"platform":1,"created_at":"2020-07-05T20:28:33.000000Z","updated_at":null}');
 
-                $order_item->product = Product::find($order_item->product_id);
-
-            }
-
-        }
+        //return $order;
 
 
-        $cookie = Cookie::queue(\Cookie::forget('cart'));;
+
+        //$cookie = Cookie::queue(\Cookie::forget('cart'));
 
 
-        return view('order_list')
+        return view('show_order')
             ->with('categories', $categories)
             ->with('cartCount', $cartCount)
-            ->with('orders', $orders)
-            ->with('member', $member)
-            ->withCookie($cookie);
+            ->with('products', $products)
+            ->with('order', $order);
+            //->withCookie($cookie);
 
 
     }
@@ -149,6 +145,28 @@ class CheckoutController extends BaseController
         return $count;
 
         //end cart
+    }
+
+    public function afterPay(Request $request)
+    {
+
+        //email
+        //显示订单信息
+        $input = $request->except('_token');
+
+        $order_id = $request->order_id;
+
+        $order = Order::find($order_id);
+
+        $order->status = 0;//pay success
+        $order->special_info = json_encode($input);
+        $order->save();
+
+        //return $order;
+
+        return redirect('/order/success/'.$order_id);
+
+
     }
 
 
