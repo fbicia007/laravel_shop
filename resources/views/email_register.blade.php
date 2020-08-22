@@ -8,6 +8,5 @@
 </div>
 
 
-<div>Your MMOZONE Team</div>
 </body>
 </html>

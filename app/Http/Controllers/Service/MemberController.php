@@ -10,7 +10,6 @@ use App\Tool\UUID;
 use Illuminate\Http\Request;
 use App\Models\MessageResult;
 use App\Entity\Member;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\MessageEmail;
 

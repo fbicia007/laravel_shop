@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/','View\HomeController@toHome');
-
+/*
+Route::get('/test', function () {
+    return view('email_order');
+});
+*/
 
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');

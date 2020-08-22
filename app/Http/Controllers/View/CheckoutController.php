@@ -9,9 +9,11 @@ use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Entity\Product;
+use App\Models\MessageEmail;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends BaseController
 {
@@ -106,24 +108,37 @@ class CheckoutController extends BaseController
 
         $order = Order::find($order_id);
 
+        $order_no = $order->order_no;
+
+
         $products = OrderItem::where('order_id',$order_id)->get();
 
-        //$product_test = json_decode('{"id":1,"name":"100K","summary":"Safe FUT 20 Coins blitz send to your account","price":"9.17","preview":"fut.jpeg","category_id":8,"platform":1,"created_at":"2020-06-30T20:31:22.000000Z","updated_at":null}');
-        $product_test = ('{"id":13,"name":"Chaos Orb","summary":"Standard Server","price":"0.80","preview":"","category_id":12,"platform":1,"created_at":"2020-07-05T20:28:33.000000Z","updated_at":null}');
-
-        //return $order;
+        $cookie = Cookie::queue(\Cookie::forget('cart'));
 
 
+        //send order to member
+        $member = $request->session()->get('member');
+        $email = $member->email;
+        $message_email = new MessageEmail();
+        $message_email->order = $order;
+        $message_email->products = $products;
+        $message_email->to = $email;
+        $message_email->subject = 'Your MMOZONE Games order info:'.$order_no;
+        $message_email->member = $member;
 
-        //$cookie = Cookie::queue(\Cookie::forget('cart'));
+        Mail::send(['html' => 'email_order'], ['message_email'=>$message_email], function ($m) use ($message_email){
+            $m->from('support@mmozone.de', 'MMOZONE online shop');
 
+            $m->to($message_email->to, 'dear user')
+                ->subject($message_email->subject);
+        });
 
         return view('show_order')
             ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('products', $products)
-            ->with('order', $order);
-            //->withCookie($cookie);
+            ->with('order', $order)
+            ->withCookie($cookie);
 
 
     }

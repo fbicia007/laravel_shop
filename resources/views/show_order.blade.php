@@ -31,6 +31,9 @@
                 <div class="row">
 
                     <div class="card col-sm-12">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thank your.</h5>
+                        </div>
                         <div class="card-header">
                             Order number: {{$order->order_no}}
                         </div>
@@ -43,8 +46,8 @@
                                             <div class="media">
                                                 <img src="/images/preview/{{ json_decode($product->pdt_snapshot)->preview }}" class="align-self-center mr-3" style="width: 64px;">
                                                 <div class="media-body">
-                                                    <p class="mt-0"></p>
-                                                    <p class="font-weight-lighter"></p>
+                                                    <p class="mt-0">{{ json_decode($product->pdt_snapshot)->name }}</p>
+                                                    <p class="font-weight-lighter">{{ json_decode($product->pdt_snapshot)->price }} € x {{$product->count}}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -61,6 +64,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <a type="button" class="btn btn-primary btn-lg" href="/">continue</a>
                         </div>
                     </div>
 
