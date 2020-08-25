@@ -36,7 +36,7 @@
                     </div>
 
                     <a class="btn btn-secondary" href="/login">Cancel</a>
-                    <button class="btn btn-primary" data-action='submit' id="send_email">Send Email</button>
+                    <button class="btn btn-primary" id="send_email">Send Email</button>
 
                 </div>
             </div>
@@ -69,6 +69,9 @@
                     }, 2000);
                     return false;
                 }
+
+                document.getElementById("send_email").disabled = true;
+
                 $.ajax({
                     url: '/service/forgot_password',
                     dataType: 'json',
