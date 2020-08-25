@@ -340,5 +340,60 @@ class MemberController extends Controller
 
     }
 
+    public function forgot_password(Request $request)
+    {
+        $email = $request->email;
+        $message_result = new MessageResult();
+
+        if($email ==''){
+            $message_result->status = 1;
+            $message_result->message = 'There are not Email';
+            return $message_result->toJson();
+        }
+        $member = Member::where('email', $email)->first();
+
+        if(!isset($member->email)){
+            $message_result->status = 2;
+            $message_result->message = 'This Email does not exist!';
+            return $message_result->toJson();
+        } else {
+
+            $domain = $request->getHost();
+            $uuid = UUID::create();
+
+            $message_email = new MessageEmail();
+            $message_email->to = $email;
+            $message_email->subject = 'Reset your password';
+            $message_email->content = 'Dear '.$member->lastName.':<br/>You can use this link reset your password. If noe you ask for it, please ignore this mail.<br/>'
+                .'<br/>http://'.$domain.'/change_pw'
+                .'?member_id='.$member->id
+                .'&code='.$uuid;
+
+            $tempEmail = TempEmail::where('member_id',$member->id)->first();
+            if(isset($tempEmail)){
+                $tempEmail->delete();
+            }
+
+
+            $tempEmail = new TempEmail();
+            $tempEmail->member_id = $member->id;
+            $tempEmail->uuid = $uuid;
+            $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
+            $tempEmail->save();
+
+            Mail::send(['html' => 'email_register'], ['message_email'=>$message_email], function ($m) use ($message_email){
+                $m->from('support@mmozone.de', 'MMOZONE online shop');
+
+                $m->to($message_email->to, 'dear user')
+                    ->subject($message_email->subject);
+            });
+
+            $message_result->status = 0;
+            $message_result->message = 'An email with instructions to create a new password has been sent to '.$email.' if it is associated with an MMOZONE Games account. Your existing password has not been changed.';
+            return $message_result->toJson();
+
+        }
+    }
+
 
 }

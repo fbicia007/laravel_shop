@@ -26,6 +26,7 @@ Route::get('/test', function () {
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/forgot_pw', 'View\MemberController@toForgot_pw');
+Route::get('/change_pw', 'View\MemberController@toChange_pw');
 
 Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
@@ -44,10 +45,12 @@ Route::group(['prefix' => 'service'], function (){
 
     Route::get('validate_email', 'Service\ValidateController@validateEmail');
     Route::get('change_email', 'Service\ValidateController@changeEmail');
+    Route::post('change_password', 'Service\ValidateController@changePassword');
     Route::post('register', 'Service\MemberController@register');
     Route::post('edit_member', 'Service\MemberController@edit');
     Route::post('login', 'Service\MemberController@login');
     Route::post('logout', 'Service\MemberController@logout');
+    Route::post('forgot_password', 'Service\MemberController@forgot_password');
     Route::get('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');
     Route::get('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatfomId');
     Route::get('add/cart/{product_id}', 'Service\CartController@addCart');

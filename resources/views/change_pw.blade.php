@@ -20,23 +20,19 @@
 
         <div class="card">
             <div class="card-header text-center">
-                Forgot Password
+                Change your password
             </div>
             <div class="card-body">
                 <div id="forgot_pw-form">
                     <div class="form-group">
-                        <label>Forgotten your password? Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it.</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please provide a valid Email.
-                        </div>
+                        <label for="new_password" class="col-form-label">New Password:</label>
+                        <input type="password" class="form-control" id="new_password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="confirm_password" placeholder="re-enter new password">
                     </div>
 
-                    <a class="btn btn-secondary" href="/login">Cancel</a>
-                    <button class="btn btn-primary" data-action='submit' id="send_email">Send Email</button>
+                    <button class="btn btn-primary col-12" data-action='submit' id="save">Save</button>
 
                 </div>
             </div>
@@ -49,32 +45,57 @@
 @section('my-js')
     <script>
 
-        $(document).ready(function(){
-            $("button#send_email").click(function(){
-                var email = $('#email').val();
+        function getQueryString(name) {
+            let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            let r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
+            };
+            return null;
+        }
 
-                if(email ==''){
+        var code = getQueryString("code");
+        var member_id =  getQueryString("member_id");
+
+        $(document).ready(function(){
+            $("button#save").click(function(){
+
+                var password = $('#new_password').val();
+                var confirm = $('#confirm_password').val();
+
+                if(password =='' || confirm ==''){
                     $('#errorMessage').modal('show');
-                    $('.modal-body span').html('Email is empty');
+                    $('.modal-body span').html('Inputs cannot be empty');
                     setTimeout(function () {
                         $('#errorMessage').modal('toggle');
                     }, 2000);
                     return false;
                 }
-                if(email.indexOf('@') == -1 || email.indexOf('.')== -1){
+                if(password.length <8 || confirm.length <8) {
                     $('#errorMessage').modal('show');
-                    $('.modal-body span').html('Your email format is incorrect.');
+                    $('.modal-body span').html('Your password must be 8-20 characters.');
                     setTimeout(function () {
                         $('#errorMessage').modal('toggle');
                     }, 2000);
                     return false;
                 }
+                if(password != confirm) {
+                    $('#errorMessage').modal('show');
+                    $('.modal-body span').html('Confirmed password does not match the new password, please enter again.');
+                    setTimeout(function () {
+                        $('#errorMessage').modal('toggle');
+                    }, 2000);
+                    return false;
+                }
+
+                document.getElementById("save").disabled = true;
+
                 $.ajax({
-                    url: '/service/forgot_password',
+                    url: '/service/change_password',
                     dataType: 'json',
                     type: "POST",
                     cache: false,
-                    data: {email:email, _token:"{{csrf_token()}}"},
+                    data: {password:password,member_id:member_id,code:code, _token:"{{csrf_token()}}"},
                     success: function (data) {
 
                         if(data == null){

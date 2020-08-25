@@ -246,14 +246,14 @@
                         <form>
                             <div class="form-group">
                                 <label for="current_password" class="col-form-label">Current Password:</label>
-                                <input type="text" class="form-control" id="current_password">
+                                <input type="password" class="form-control" id="current_password">
                             </div>
                             <div class="form-group">
                                 <label for="new_password" class="col-form-label">New Password:</label>
-                                <input type="text" class="form-control" id="new_password">
+                                <input type="password" class="form-control" id="new_password">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="confirm_password" placeholder="re-enter new password">
+                                <input type="password" class="form-control" id="confirm_password" placeholder="re-enter new password">
                             </div>
                         </form>
                     </div>

@@ -74,5 +74,19 @@ class MemberController extends BaseController
             ->with('cartCount', $cartCount);
 
     }
+    public function toChange_pw(Request $request)
+    {
+
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+        $categories = Category::whereNull('parent_id')->get();
+        return view('change_pw')
+            ->with('categories', $categories)
+            ->with('member', null)
+            ->with('cartCount', $cartCount);
+
+    }
 
 }
