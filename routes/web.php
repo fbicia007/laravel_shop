@@ -43,7 +43,9 @@ Route::middleware('check.login')->group(function (){
 Route::group(['prefix' => 'service'], function (){
 
     Route::get('validate_email', 'Service\ValidateController@validateEmail');
+    Route::get('change_email', 'Service\ValidateController@changeEmail');
     Route::post('register', 'Service\MemberController@register');
+    Route::post('edit_member', 'Service\MemberController@edit');
     Route::post('login', 'Service\MemberController@login');
     Route::post('logout', 'Service\MemberController@logout');
     Route::get('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');

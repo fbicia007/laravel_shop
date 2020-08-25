@@ -33,7 +33,7 @@
                 <form id="register-form" method="post" onsubmit="return false" class="needs-validation" oninput='confirm_reg_password.setCustomValidity(confirm_reg_password.value != reg_password.value ? " " : "")' novalidate>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
-                            <label>Email address:</label>
+                            <label>Email address*</label>
                             <input type="email" class="form-control" id="reg_email" name="reg_email" placeholder="email@example.com" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Password:</label>
+                            <label>Password*</label>
                             <input type="password" class="form-control" id="reg_password" name="reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" placeholder="Password" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Enter new password again:</label>
+                            <label>Enter new password again*</label>
                             <input type="password" class="form-control" id="confirm_reg_password" name="confirm_reg_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm Password" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="first_name">First name</label>
+                            <label for="first_name">First name*</label>
                             <input type="text" class="form-control" id="first_name" name="first_name" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -73,8 +73,18 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="last_name">Last name</label>
+                            <label for="last_name">Last name*</label>
                             <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid Text.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="last_name">Street & No.*</label>
+                            <input type="text" class="form-control" id="street" name="street" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -85,7 +95,17 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
-                            <label for="city">City</label>
+                            <label for="city">Phone*</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="city">City*</label>
                             <input type="text" class="form-control" id="city" name="city" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -95,23 +115,23 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" name="state" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please provide a valid State.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="zip">Zip</label>
+                            <label for="zip">Zip*</label>
                             <input type="text" class="form-control" id="zip" name="zip" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                             <div class="invalid-feedback">
                                 Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="state">Country*</label>
+                            <input type="text" class="form-control" id="state" name="state" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid State.
                             </div>
                         </div>
                     </div>
@@ -169,12 +189,14 @@
                 var confirm = $('input[name=confirm_reg_password]').val();
                 var firstName = $('input[name=first_name]').val();
                 var lastName = $('input[name=last_name]').val();
+                var street = $('input[name=street]').val();
+                var phone = $('input[name=phone]').val();
                 var city = $('input[name=city]').val();
                 var state = $('input[name=state]').val();
                 var zip = $('input[name=zip]').val();
 
 
-                if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || city =='' || state =='' || zip ==''){
+                if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || street =='' || phone =='' || city =='' || state =='' || zip ==''){
                     $('#errorMessage').modal('show');
                     $('.modal-body span').html('Infos cannot be empty');
                     setTimeout(function () {
@@ -222,7 +244,7 @@
                     dataType: 'json',
                     type: "POST",
                     cache: false,
-                    data: {email:email, password:password,confirm:confirm,firstName:firstName,lastName:lastName, city:city, state:state,zip:zip, _token:"{{csrf_token()}}"},
+                    data: {email:email, password:password,confirm:confirm,firstName:firstName,lastName:lastName, street:street, phone:phone, city:city, state:state,zip:zip, _token:"{{csrf_token()}}"},
                     success: function (data) {
                         if(data == null){
                             $('#errorMessage').modal('show');

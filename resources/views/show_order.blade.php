@@ -64,7 +64,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a type="button" class="btn btn-primary btn-lg" href="/">continue</a>
+                            <a type="button" class="btn btn-primary btn-lg btn-block" href="/">continue</a>
                         </div>
                     </div>
 

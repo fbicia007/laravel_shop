@@ -4,6 +4,7 @@ namespace App\Http\Controllers\View;
 
 
 use App\Entity\Category;
+use App\Entity\Member;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class OverviewController extends BaseController
         //end cart count
 
         //member
-        $member = $request->session()->get('member','');
+        $member_tmp = $request->session()->get('member','');
+        $member = Member::find($member_tmp->id);
         $orders = Order::where('member_id',$member->id)->get();
 
         foreach ($orders as $order){

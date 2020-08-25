@@ -24,6 +24,8 @@ class MemberController extends Controller
          $confirm = $request->input('confirm','');
          $firstName = $request->input('firstName','');
          $lastName = $request->input('lastName','');
+         $street = $request->input('street','');
+         $phone = $request->input('phone','');
          $city = $request->input('city','');
          $state = $request->input('state','');
          $zip = $request->input('zip','');
@@ -45,7 +47,7 @@ class MemberController extends Controller
              $message_result->message = 'Confirmed password does not match the new password, please enter again';
              return $message_result->toJson();
          }
-         if($firstName =='' || $lastName=='' || $city=='' || $state == '' || $zip ==''){
+         if($firstName =='' || $lastName=='' || $phone=='' || $street == '' || $city=='' || $state == '' || $zip ==''){
              $message_result->status = 4;
              $message_result->message = 'Please give all infos.';
              return $message_result->toJson();
@@ -69,6 +71,8 @@ class MemberController extends Controller
              $member->password = md5('test' . $password);
              $member->firstName = $firstName;
              $member->lastName = $lastName;
+             $member->street = $street;
+             $member->phone = $phone;
              $member->city = $city;
              $member->state = $state;
              $member->zip = $zip;
@@ -79,7 +83,7 @@ class MemberController extends Controller
              $message_email = new MessageEmail();
              $message_email->to = $email;
              $message_email->subject = 'Please active your Email';
-             $message_email->content = 'Dear '.$lastName.':<br/>Thank you to registiert MMOZONE Game Onlineshop <br/> Your username is "'
+             $message_email->content = 'Dear '.$lastName.':<br/>Thank you to registiert MMOZONE Games Onlineshop <br/> Your username is "'
                                         .$email.'"<br/>Please click the Link to active your Account. The Link will in 24 Hours working'
                                         .'<br/>http://'.$domain.'/service/validate_email'
                                         .'?member_id='.$member->id
@@ -103,6 +107,168 @@ class MemberController extends Controller
              return $message_result->toJson();
 
          }
+
+    }
+
+    public function edit(Request $request)
+    {
+        $domain = $request->getHost();
+        $count_type = $request->input('count_type','');
+        $member_id = $request->input('member_id','');
+
+        $member = Member::find($member_id);
+
+        $firstName = $request->input('firstName','');
+        $lastName = $request->input('lastName','');
+        $phone = $request->input('new_phone','');
+        $street = $request->input('street','');
+        $city = $request->input('city','');
+        $state = $request->input('state','');
+        $zip = $request->input('zip','');
+        $email = $request->input('email','');
+        $current_password = $request->input('current_password','');
+        $new_password = $request->input('new_password','');
+        $confirm = $request->input('confirm','');
+
+
+
+        $message_result = new MessageResult();
+
+        switch ($count_type){
+
+            case 'for_name':
+                if($firstName =='' || $lastName==''){
+                    $message_result->status = 4;
+                    $message_result->message = 'Please give all infos.';
+                    return $message_result->toJson();
+                }
+                $member->lastName = $lastName;
+                $member->firstName = $firstName;
+                $member->save();
+
+                $message_result->status = 0;
+                $message_result->message = 'You Name will be changed! ';
+                return $message_result->toJson();
+
+                break;
+            case 'for_phone':
+                if($phone==''){
+                    $message_result->status = 4;
+                    $message_result->message = 'Please give all infos.';
+                    return $message_result->toJson();
+                }
+                $member->phone = $phone;
+                $member->save();
+
+                $message_result->status = 0;
+                $message_result->message = 'Your phone number will be changed!';
+                return $message_result->toJson();
+                break;
+            case 'for_address':
+                if($street == '' || $city=='' || $state == '' || $zip ==''){
+                    $message_result->status = 4;
+                    $message_result->message = 'Please give all infos.';
+                    return $message_result->toJson();
+                }
+                $member->street = $street;
+                $member->zip = $zip;
+                $member->state = $state;
+                $member->city = $city;
+                $member->save();
+
+                $message_result->status = 0;
+                $message_result->message = 'Your address will be changed!';
+                return $message_result->toJson();
+                break;
+            case 'for_account':
+                if($email ==''){
+                    $message_result->status = 4;
+                    $message_result->message = 'Please input your email.';
+                    return $message_result->toJson();
+                }
+
+                $tempEmail = Member::where('email', $email)->first();
+
+                if(isset($tempEmail->email)){
+                    $message_result->status = 6;
+                    $message_result->message = 'This email has been registiert!';
+                    return $message_result->toJson();
+                } else {
+
+                    $member->change_email = $email;
+
+                    $member->save();
+
+                    $uuid = UUID::create();
+
+                    $message_email = new MessageEmail();
+                    $message_email->to = $email;
+                    $message_email->subject = 'Please active your Email';
+                    $message_email->content = 'Dear '.$member->lastName.':<br/>You change your email address, if not your, please ignor this email. <br/> Your new username is "'
+                        .$email.'"<br/>Please click the Link to active your Account. The Link will in 24 Hours working'
+                        .'<br/>http://'.$domain.'/service/change_email'
+                        .'?member_id='.$member->id
+                        .'&code='.$uuid;
+
+                    $tempEmail = new TempEmail();
+                    $tempEmail->member_id = $member->id;
+                    $tempEmail->uuid = $uuid;
+                    $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
+                    $tempEmail->save();
+
+                    Mail::send(['html' => 'email_register'], ['message_email'=>$message_email], function ($m) use ($message_email){
+                        $m->from('support@mmozone.de', 'MMOZONE online shop');
+
+                        $m->to($message_email->to, 'dear user')
+                            ->subject($message_email->subject);
+                    });
+
+                    $message_result->status = 0;
+                    $message_result->message = 'Your account-ID (email address) will be changed,Please check you Email to active your action!';
+                    return $message_result->toJson();
+
+                }
+
+                break;
+            case 'for_password':
+                $old_password = $member->password;
+
+                if(md5('test' . $current_password)!=$old_password){
+                    $message_result->status = 6;
+                    $message_result->message = 'Your current password is wrong';
+                    return $message_result->toJson();
+                }
+                if(strlen($new_password) < 8 || !preg_match('@[A-Z]@', $new_password) || !preg_match('@[a-z]@', $new_password) || !preg_match('@[0-9]@', $new_password) || !preg_match('@[^\w]@', $new_password)){
+                    $message_result->status = 2;
+                    $message_result->message = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+                    return $message_result->toJson();
+                }
+                if($confirm =='' || strlen($new_password) < 8){
+                    $message_result->status = 3;
+                    $message_result->message = 'Confirmed password does not match the new password, please enter again';
+                    return $message_result->toJson();
+                }
+                if($new_password != $confirm){
+                    $message_result->status = 5;
+                    $message_result->message = 'Confirmed password is wrong';
+                    return $message_result->toJson();
+                }
+                $member->password = md5('test' . $new_password);
+                $member->save();
+
+                $message_result->status = 0;
+                $message_result->message = 'Your password will be changed!';
+                return $message_result->toJson();
+
+                break;
+
+        }
+
+
+
+
+
+
 
     }
     public function login(Request $request)
