@@ -47,6 +47,7 @@
             <dd>
                 <ul>
                     <li><a data-href="/admin/category" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+                    <li><a data-href="/admin/unCategory" data-title="分类管理" href="javascript:void(0)">次级分类管理</a></li>
                     <li><a data-href="/admin/product" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
                 </ul>
             </dd>
@@ -80,6 +81,7 @@
             <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
+                    <li><a data-href="/admin/setup" data-title="系统设置" href="javascript:void(0)">系统设置</a></li>
                     <li><a data-href="/admin/log" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
                 </ul>
             </dd>

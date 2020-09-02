@@ -4,7 +4,7 @@
     <div>
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
         <div class="page-container">
-            <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="category_add('添加类别','/admin/category_add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加类别</a></span> <span class="r">共有数据：<strong>{{count($categories)}}</strong> 条</span> </div>
+            <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="category_add('添加类别','/admin/category_add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加类别</a></span> <span class="r">共有数据：<strong>{{count($unCategories)}}</strong> 条</span> </div>
             <div class="mt-20">
                 <table class="table table-border table-bordered table-bg table-hover table-sort">
                     <thead>
@@ -13,6 +13,7 @@
                         <th width="100">名称</th>
                         <th width="40">编号</th>
                         <th width="60">缩略图</th>
+                        <th width="40">父类别</th>
                         <th>详细说明</th>
                         <th width="60">广告banner</th>
                         <th width="60">banner广告语</th>
@@ -24,12 +25,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $category)
+                    @foreach($unCategories as $category)
                     <tr class="text-c va-m">
                         <td>{{$category->id}}</td>
                         <td>{{$category->name}}</td>
                         <td>{{$category->category_no}}</td>
                         <td>@if($category->preview != null) <img src="/images/preview/{{$category->preview}}" width="100">@endif</td>
+                        <td>@if($category->parent != null) {{$category->parent->name}} @endif</td>
                         <td>{{$category->info}}</td>
                         <td>@if($category->banner != null)<img src="/images/banner/{{$category->banner}}" width="100">@endif</td>
                         <td>{{$category->banner_text}}</td>

@@ -12,15 +12,22 @@ class CategoryController extends BaseController
 
     public function toCategory(){
 
-        $categories = Category::all();
+        $categories = Category::where('parent_id',null)->get();
 
-        foreach ($categories as $category){
-            if($category->parent_id != null && $category->parent_id !=''){
-                $category->parent = Category::find($category->parent_id);
+        return view('admin.category')->with('categories',$categories);
+    }
+    public function toUnCategory(){
+
+        $unCategories = Category::whereNotNull('parent_id')->get();
+
+        foreach ($unCategories as $unCategory){
+            if($unCategory->parent_id != null && $unCategory->parent_id !=''){
+                $unCategory->parent = Category::find($unCategory->parent_id);
             }
         }
 
-        return view('admin.category')->with('categories',$categories);
+
+        return view('admin.unCategory')->with('unCategories',$unCategories);
     }
 
     public function toCategoryAdd(){

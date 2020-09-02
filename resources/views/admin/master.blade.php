@@ -48,6 +48,8 @@
 <script type="text/javascript" src="/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
 <script type="text/javascript" src="/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 
+
+
 @yield('my-js')
 </body>
 </html>
