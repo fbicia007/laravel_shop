@@ -35,10 +35,10 @@
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         <dl id="menu-article">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe616;</i> 优惠内容管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="/admin/news" data-title="新闻管理" href="javascript:void(0)">新闻管理</a></li>
+                    <li><a data-href="/admin/coupon" data-title="新闻管理" href="javascript:void(0)">优惠列表</a></li>
                 </ul>
             </dd>
         </dl>
@@ -53,10 +53,10 @@
             </dd>
         </dl>
         <dl id="menu-member">
-            <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="/admin/member" data-title="会员列表" href="javascript:;">会员列表</a></li>
+                    <li><a data-href="/admin/member" data-title="会员列表" href="javascript:;">用户列表</a></li>
                 </ul>
             </dd>
         </dl>
@@ -94,7 +94,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="我的桌面" data-href="welcome.html">我的桌面</span>
+                    <span title="MMOZONE Games 后台管理" data-href="/admin/welcome">MMOZONE Games 后台管理</span>
                     <em></em></li>
             </ul>
         </div>
@@ -103,7 +103,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="/admin/welcome"></iframe>
         </div>
     </div>
 </section>

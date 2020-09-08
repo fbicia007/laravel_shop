@@ -19,7 +19,7 @@ class MemberController extends BaseController
 
         $members = Member::where('super',1)->get();
 
-        return view('admin.member')->with('members',$members);
+        return view('admin.admin')->with('members',$members);
     }
 
 

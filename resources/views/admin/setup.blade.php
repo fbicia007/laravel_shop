@@ -13,7 +13,6 @@
             <div id="tab-system" class="HuiTab">
                 <div class="tabBar cl">
                     <span>基本设置</span>
-                    <span>安全设置</span>
                     <span>邮件设置</span>
                     <span>网站LOGO</span>
                 </div>
@@ -57,12 +56,11 @@
                             <span class="c-red">*</span>
                             客服Email：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" id="website-email" placeholder="客服Email" value="{{$setup->shop_name}}" class="input-text">
+                            <input type="text" id="website-email" placeholder="客服Email" value="{{$setup->service_mail}}" class="input-text">
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">
-                            <span class="c-red">*</span>
                             微信：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <input type="text" id="website-wechat" placeholder="微信号" value="{{$setup->wechat}}" class="input-text">
@@ -70,7 +68,6 @@
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">
-                            <span class="c-red">*</span>
                             Skype：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <input type="text" id="website-skype" placeholder="Skype" value="{{$setup->skype}}" class="input-text">
@@ -78,7 +75,6 @@
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">
-                            <span class="c-red">*</span>
                             QQ：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <input type="text" id="website-qq" placeholder="qq" value="{{$setup->qq}}" class="input-text">
@@ -98,66 +94,71 @@
                             <textarea class="textarea"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="tabCon">
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">允许访问后台的IP列表：</label>
-                        <div class="formControls col-xs-8 col-sm-9">
-                            <textarea class="textarea" name="" id=""></textarea>
-                        </div>
-                    </div>
-                    <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">后台登录失败最大次数：</label>
-                        <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" class="input-text" value="5" id="" name="" >
+                        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                            <button onClick="save_setup();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存修改内容</button>
                         </div>
                     </div>
                 </div>
                 <div class="tabCon">
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">邮件发送模式：</label>
+                        <label class="form-label col-xs-4 col-sm-2">发件人称呼：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text"  class="input-text" value="" id="" name="">
+                            <input type="text"  class="input-text" value="{{$email_setting->sender_name}}" id="" name="">
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">SMTP服务器：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" id="" value="" class="input-text">
+                            <input type="text" id="" value="{{$email_setting->smtp_server}}" class="input-text">
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">SMTP 端口：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" class="input-text" value="25" id="" name="" >
+                            <input type="text" class="input-text" value="{{$email_setting->smtp_port}}" id="" name="" >
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">邮箱帐号：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" class="input-text" value="5" id="emailName" name="emailName" >
+                            <input type="text" class="input-text" value="{{$email_setting->account}}" id="emailName" name="emailName" >
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">邮箱密码：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="password" id="email-password" value="" class="input-text">
+                            <input type="password" id="email-password" value="{{$email_setting->password}}" class="input-text">
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">收件邮箱地址：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <input type="text" id="email-address" value="" class="input-text">
+                            <input type="text" id="email-address" value="{{$email_setting->email}}" class="input-text">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                            <button onClick="save_mail_setting();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存修改内容</button>
                         </div>
                     </div>
                 </div>
                 <div class="tabCon">
-                </div>
-            </div>
-            <div class="row cl">
-                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                    <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2">Logo预览：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <img src="{{$setup->shop_logo}}" class="img-responsive" alt="响应式图片">
+                            <span class="btn-upload">
+                              <a href="javascript:void();" class="btn btn-primary radius btn-upload"><i class="Hui-iconfont">&#xe642;</i> 选择logo文件</a>
+                              <input type="file" multiple name="file_0" class="input-file">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                            <button onClick="save_logo();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存修改内容</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

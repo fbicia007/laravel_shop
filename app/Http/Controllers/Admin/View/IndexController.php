@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\View;
 
 
 use App\Entity\Category;
+use App\Entity\Member;
 use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController
@@ -14,14 +15,12 @@ class IndexController extends BaseController
         return view('admin.index');
     }
 
-    public function toNews(){
+    public function toWelcome(){
 
-        return view('admin.news');
+        $admin = Member::find(1);
+        return view('admin.welcome')->with('admin',$admin);
     }
-    public function toAdmin(){
 
-        return view('admin.admin');
-    }
     public function toLog(){
 
         return view('admin.log');

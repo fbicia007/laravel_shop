@@ -64,11 +64,12 @@ Route::group(['prefix' => 'service'], function (){
 Route::group(['prefix' => 'admin'], function (){
 
     Route::get('index', 'Admin\View\IndexController@index');
+    Route::get('welcome', 'Admin\View\IndexController@toWelcome');
     Route::get('category', 'Admin\View\CategoryController@toCategory');
     Route::get('unCategory', 'Admin\View\CategoryController@toUnCategory');
     Route::get('category_add', 'Admin\View\CategoryController@toCategoryAdd');
     Route::get('product', 'Admin\View\ProductController@toProduct');
-    Route::get('news', 'Admin\View\IndexController@toNews');
+    Route::get('coupon', 'Admin\View\CouponController@toCoupon');
     Route::get('member', 'Admin\View\MemberController@toMember');
     Route::get('admin', 'Admin\View\MemberController@toAdmin');
     Route::get('order', 'Admin\View\OrderController@toOrder');
