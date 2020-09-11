@@ -4,7 +4,7 @@
     <div>
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
         <div class="page-container">
-            <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="category_add('添加类别','/admin/category_add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加类别</a></span> <span class="r">共有数据：<strong>{{count($unCategories)}}</strong> 条</span> </div>
+            <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="category_add('添加类别','/admin/unCategory_add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加次级类别</a></span> <span class="r">共有数据：<strong>{{count($unCategories)}}</strong> 条</span> </div>
             <div class="mt-20">
                 <table class="table table-border table-bordered table-bg table-hover table-sort">
                     <thead>
@@ -30,18 +30,18 @@
                         <td>@if($category->parent != null) {{$category->parent->name}} @endif</td>
                         <td>{{$category->info}}</td>
                         <td>
-                            @foreach(explode(",",$category->platform) as $platform)
+                            @foreach(explode("|",$category->platform) as $platform)
                                 @switch($platform)
                                     @case(1)
-                                    PC
-                                    @break
-
-                                    @case(2)
                                     PS4
                                     @break
 
-                                    @default
+                                    @case(2)
                                     XBOX
+                                    @break
+
+                                    @default
+                                    PC
                                 @endswitch
                             @endforeach
                         </td>

@@ -32,18 +32,18 @@
                         <td>@if($category->banner != null)<img src="{{$category->banner}}" width="100">@endif</td>
                         <td>{{$category->banner_text}}</td>
                         <td>
-                            @foreach(explode(",",$category->platform) as $platform)
+                            @foreach(explode("|", $category->platform) as $platform)
                                 @switch($platform)
                                     @case(1)
-                                    PC
-                                    @break
-
-                                    @case(2)
                                     PS4
                                     @break
 
-                                    @default
+                                    @case(2)
                                     XBOX
+                                    @break
+
+                                    @default
+                                    PC
                                 @endswitch
                             @endforeach
                         </td>
@@ -62,18 +62,18 @@
                         </td>
                         <td class="td-manage">
                             @if($category->status != '0')
-                            <a style="text-decoration:none" onClick="category_stop(this,'10001')" href="javascript:;" title="下架">
+                            <a style="text-decoration:none" onClick="category_stop(this,{{$category->id}})" href="javascript:;" title="下架">
                                 <i class="Hui-iconfont">&#xe6de;</i>
                             </a>
                             @else
-                            <a style="text-decoration:none" onclick="category_start(this,id)" href="javascript:;" title="发布">
+                            <a style="text-decoration:none" onclick="category_start(this,{{$category->id}})" href="javascript:;" title="发布">
                                 <i class="Hui-iconfont"></i>
                             </a>
                             @endif
-                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品编辑','product-add.html','10001')" href="javascript:;" title="编辑">
+                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品编辑','product-add.html',{{$category->id}})" href="javascript:;" title="编辑">
                                 <i class="Hui-iconfont">&#xe6df;</i>
                             </a>
-                            <a style="text-decoration:none" class="ml-5" onClick="category_del(this,'10001')" href="javascript:;" title="删除">
+                            <a style="text-decoration:none" class="ml-5" onClick="category_del(this,{{$category->id}})" href="javascript:;" title="删除">
                                 <i class="Hui-iconfont">&#xe6e2;</i>
                             </a>
                         </td>
@@ -141,6 +141,23 @@
         /*产品-下架*/
         function category_stop(obj,id){
             layer.confirm('确认要下架吗？',function(index){
+                alert(id);
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/service/category/change/status',
+                    dataType: 'json',
+                    data: {
+                        category_id: id,
+                        _token: "{{csrf_token()}}"
+                    },
+                    success: function(data){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                    },
+                    error:function(data) {
+                        console.log(data.msg);
+                    },
+                });
                 $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="category_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">未激活</span>');
                 $(obj).remove();

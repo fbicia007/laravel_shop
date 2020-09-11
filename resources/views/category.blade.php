@@ -24,8 +24,8 @@
             <div class="container" style="margin-top: -48px;">
                 <ul class="nav nav- border-top border-bottom" id="pills-tab" role="tablist">
 
-                    @if(count(explode(",",$thisCategory->platform))>1)
-                        @foreach(explode(",",$thisCategory->platform) as $platform)
+                    @if(count(explode("|",$thisCategory->platform))>1)
+                        @foreach(explode("|",$thisCategory->platform) as $platform)
                             @if($platform == 1)
                                 <li class="nav-item-content" value="1">
                                     <a class="nav-link" id="pills-ps4-tab" data-toggle="pill" href="#pills-ps4" role="tab" aria-controls="pills-ps4" aria-selected="false">
@@ -103,7 +103,7 @@
                             @foreach($products as $product)
                                 <div class="col-sm-2 product-list" style="margin-bottom: 40px">
                                 <!--<a href="/product/{{$product->id}}" style="color: black">-->
-                                    <img src="/images/preview/{{$product->preview}}" style="width: 100px">
+                                    <img src="{{$product->preview}}" style="width: 100px">
                                     <div>{{$product->name}}</div>
                                     <div>{{$product->summary}}</div>
                                     <div>EUR € {{$product->price}}</div>
@@ -245,7 +245,7 @@
                          */
                         var node = '<div class="col-sm-2 product-list" style="margin-bottom: 40px">'+
                             //'<a href="/product/'+data.products[i].id+'" style="color: black">'+
-                            '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
+                            '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div>'+
@@ -324,7 +324,7 @@
                         */
                         var node = '<div class="col-sm-2 product-list" style="margin-bottom: 40px">'+
                             //'<a href="/product/'+data.products[i].id+'" style="color: black">'+
-                            '<img src="/images/preview/'+data.products[i].preview+'" style="width: 100px">'+
+                            '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div>EUR € '+ data.products[i].price+'</div>'+

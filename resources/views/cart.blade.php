@@ -43,7 +43,7 @@
                         <td class="col-8 align-middle">
                             <div class="row">
                                 <div class="col-md-2 align-middle">
-                                    <img src="/images/preview/{{$cart_item->product->preview}}" class="card-img" style="width: 130px;">
+                                    <img src="{{$cart_item->product->preview}}" class="card-img" style="width: 130px;">
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">

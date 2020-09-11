@@ -40,7 +40,7 @@
                             <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
                                 @foreach($speicial_infos as $speicial_info)
                                     @if($speicial_info != null)
-                                        @foreach(explode(",",$speicial_info) as $special_info)
+                                        @foreach(explode("|",$speicial_info) as $special_info)
                                             <div class="container">
                                                 <div class="form-group">
                                                     <label>{{$special_info}} *</label>
@@ -66,7 +66,7 @@
                                     <tr id="{{$cart_item->product->id}}" class="items">
                                         <td class="align-middle">
                                             <div class="media">
-                                                <img src="/images/preview/{{$cart_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
+                                                <img src="{{$cart_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
                                                 <div class="media-body">
                                                     <p class="mt-0">{{$cart_item->product->name}} - {{$cart_item->category->name}}</p>
                                                     <p class="font-weight-lighter">€{{$cart_item->product->price}} x {{$cart_item->count}}</p>

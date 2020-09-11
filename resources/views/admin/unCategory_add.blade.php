@@ -26,25 +26,6 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">Banner：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <div class="uploader-thum-container">
-                        <img id="banner_id" src="http://placehold.jp/99ccff/003366/400x100.png?text=1200x300" class="img-responsive" style="width: 400px" alt="响应式图片">
-                        <span class="btn-upload">
-                          <button class="btn btn-primary radius btn-upload"><i class="Hui-iconfont">&#xe642;</i> 选择图片</button>
-                          <input type="file" name="file" id="banner_input" class="input-file" onchange="return uploadImageToServer('banner_input','banner','banner_id')">
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">
-                    Banner 文字描述：</label>
-                <div class="formControls col-xs-6 col-sm-6">
-                    <input type="text" class="input-text" value="" placeholder="" name="banner_text">
-                </div>
-            </div>
-            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
                     发货时间：</label>
                 <div class="formControls col-xs-6 col-sm-6">
@@ -52,23 +33,15 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">
-                    <span class="c-red">*</span>
-                    游戏平台：</label>
-                <div class="formControls col-xs-6 col-sm-6 required">
-                    <div class="check-box required">
-                        <input type="checkbox" name="platform[]" value="1">
-                        <label for="checkbox-1">PS4</label>
-                    </div>
-                    <div class="check-box">
-                        <input type="checkbox" name="platform[]" value="2">
-                        <label for="checkbox-2">XBOX</label>
-                    </div>
-                    <div class="check-box">
-                        <input type="checkbox" name="platform[]" value="3">
-                        <label for="checkbox-3">PC</label>
-                    </div>
-                </div>
+                <label class="form-label col-xs-4 col-sm-2">父类：</label>
+                <div class="formControls col-xs-6 col-sm-6"> <span class="select-box">
+				<select name="parent_id" class="select">
+					<option value="">无</option>
+                    @foreach($categories as $category)
+					<option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+				</select>
+				</span> </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
@@ -107,9 +80,6 @@
                     preview:{
                         required:true,
                     },
-                    'platform[]':{
-                        required:true,
-                    },
                     info:{
                         required:true,
                     },
@@ -126,7 +96,6 @@
                         data: {
                             //preview: $('#preview_id').attr('src'),
                             preview: ($('#preview_id').attr('src')!='http://placehold.jp/99ccff/003366/150x150.png?text=%E7%BC%A9%E7%95%A5%E5%9B%BE%E5%A4%A7%E5%B0%8F%E5%B0%BA%E5%AF%B8%E4%B8%BA%E6%AD%A3%E6%96%B9%E5%BD%A2%EF%BC%8C%E6%96%87%E4%BB%B6%E8%A6%81%E5%B0%8F%E4%BA%8E1%E5%85%86'?$('#preview_id').attr('src'):''),
-                            banner: ($('#banner_id').attr('src')!='http://placehold.jp/99ccff/003366/400x100.png?text=1200x300'?$('#banner_id').attr('src'):''),
                             _token: "{{csrf_token()}}"
                         },
                         success: function (data){

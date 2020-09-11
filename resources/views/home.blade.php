@@ -20,13 +20,15 @@
         </ol>
         <div class="carousel-inner">
             @foreach($categories as $category)
+                @if($category->banner != null)
             <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='category/{{$category->id}}';">
-                <img src="/images/banner/{{$category->banner}}"  class="d-block w-100" >
+                <img src="{{$category->banner}}"  class="d-block w-100" >
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{$category->name}}</h5>
                     <p>{{$category->banner_text}}</p>
                 </div>
             </div>
+                @endif
             @endforeach
         </div>
         <a class="carousel-control-prev" href="#categoryBanner" role="button" data-slide="prev">
@@ -50,7 +52,7 @@
                 <div class="col-sm text-center">
                     <div class="card shadow">
                         <a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">
-                            <img src="/images/preview/{{$category->preview}}" class="card-img-top">
+                            <img src="{{$category->preview}}" class="card-img-top">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">{{$category->name}}</h4>

@@ -23,6 +23,7 @@ class CategoryController extends BaseController
         foreach ($unCategories as $unCategory){
             if($unCategory->parent_id != null && $unCategory->parent_id !=''){
                 $unCategory->parent = Category::find($unCategory->parent_id);
+                $unCategory->platform = $unCategory->parent->platform;
             }
         }
 
@@ -36,6 +37,13 @@ class CategoryController extends BaseController
 
 
         return view('admin.category_add')->with('categories',$categories);
+    }
+    public function toUnCategoryAdd(){
+
+        $categories = Category::whereNotNull('parent_id')->get();
+
+
+        return view('admin.unCategory_add')->with('categories',$categories);
     }
 
 

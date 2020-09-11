@@ -67,8 +67,9 @@ Route::group(['prefix' => 'admin'], function (){
     Route::get('index', 'Admin\View\IndexController@index');
     Route::get('welcome', 'Admin\View\IndexController@toWelcome');
     Route::get('category', 'Admin\View\CategoryController@toCategory');
-    Route::get('unCategory', 'Admin\View\CategoryController@toUnCategory');
     Route::get('category_add', 'Admin\View\CategoryController@toCategoryAdd');
+    Route::get('unCategory', 'Admin\View\CategoryController@toUnCategory');
+    Route::get('unCategory_add', 'Admin\View\CategoryController@toUnCategoryAdd');
     Route::get('product', 'Admin\View\ProductController@toProduct');
     Route::get('coupon', 'Admin\View\CouponController@toCoupon');
     Route::get('member', 'Admin\View\MemberController@toMember');
@@ -82,6 +83,9 @@ Route::group(['prefix' => 'admin'], function (){
     Route::group(['prefix' => 'service'], function (){
         Route::post('login', 'Admin\Service\IndexController@login');
         Route::post('category/add', 'Admin\Service\CategoryController@categoryAdd');
+        Route::post('category/del', 'Admin\Service\CategoryController@categoryDel');
+        Route::post('category/edit', 'Admin\Service\CategoryController@categoryEdit');
+        Route::post('category/change/status', 'Admin\Service\CategoryController@changeCategoryStatus');
 
     });
 
