@@ -56,6 +56,7 @@ Route::group(['prefix' => 'service'], function (){
     Route::get('add/cart/{product_id}', 'Service\CartController@addCart');
     Route::get('dash/cart/{product_id}', 'Service\CartController@dashCart');
     Route::get('delete/cart', 'Service\CartController@deleteCart');
+    Route::post('upload/{type}', 'Service\UploadController@uploadFile');
 
 });
 
@@ -80,6 +81,7 @@ Route::group(['prefix' => 'admin'], function (){
 
     Route::group(['prefix' => 'service'], function (){
         Route::post('login', 'Admin\Service\IndexController@login');
+        Route::post('category/add', 'Admin\Service\CategoryController@categoryAdd');
 
     });
 

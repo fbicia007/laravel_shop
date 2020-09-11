@@ -11,12 +11,9 @@
                     <tr class="text-c">
                         <th width="40">ID</th>
                         <th width="100">名称</th>
-                        <th width="40">编号</th>
                         <th width="60">缩略图</th>
                         <th width="40">父类别</th>
                         <th>详细说明</th>
-                        <th width="60">广告banner</th>
-                        <th width="60">banner广告语</th>
                         <th width="60">游戏平台</th>
                         <th width="60">特殊输入内容</th>
                         <th width="60">发货周期</th>
@@ -29,12 +26,9 @@
                     <tr class="text-c va-m">
                         <td>{{$category->id}}</td>
                         <td>{{$category->name}}</td>
-                        <td>{{$category->category_no}}</td>
-                        <td>@if($category->preview != null) <img src="/images/preview/{{$category->preview}}" width="100">@endif</td>
+                        <td>@if($category->preview != null) <img src="{{$category->preview}}" width="100">@endif</td>
                         <td>@if($category->parent != null) {{$category->parent->name}} @endif</td>
                         <td>{{$category->info}}</td>
-                        <td>@if($category->banner != null)<img src="/images/banner/{{$category->banner}}" width="100">@endif</td>
-                        <td>{{$category->banner_text}}</td>
                         <td>
                             @foreach(explode(",",$category->platform) as $platform)
                                 @switch($platform)
