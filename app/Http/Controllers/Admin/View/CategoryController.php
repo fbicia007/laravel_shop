@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\View;
 
 
 use App\Entity\Category;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class CategoryController extends BaseController
@@ -33,14 +34,25 @@ class CategoryController extends BaseController
 
     public function toCategoryAdd(){
 
-        $categories = Category::whereNull('parent_id')->get();
+        return view('admin.category_add');
+    }
+    public function toCategoryEdit(Request $request){
 
+        $category_id = $request->category_id;
+        $category = Category::find($category_id);
+        if($category->parent_id != null){
 
-        return view('admin.category_add')->with('categories',$categories);
+            $parent_categories = Category::whereNull('parent_id')->get();
+
+            return view('admin.category_edit')->with('category',$category)->with('parent_categories',$parent_categories);
+        } else {
+            $category->platform = explode('|',$category->platform);
+            return view('admin.category_edit')->with('category',$category);
+        }
     }
     public function toUnCategoryAdd(){
 
-        $categories = Category::whereNotNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
 
         return view('admin.unCategory_add')->with('categories',$categories);

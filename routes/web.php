@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin'], function (){
     Route::get('category_add', 'Admin\View\CategoryController@toCategoryAdd');
     Route::get('unCategory', 'Admin\View\CategoryController@toUnCategory');
     Route::get('unCategory_add', 'Admin\View\CategoryController@toUnCategoryAdd');
+    Route::get('category_edit/{category_id}', 'Admin\View\CategoryController@toCategoryEdit');
     Route::get('product', 'Admin\View\ProductController@toProduct');
     Route::get('coupon', 'Admin\View\CouponController@toCoupon');
     Route::get('member', 'Admin\View\MemberController@toMember');
@@ -83,8 +84,8 @@ Route::group(['prefix' => 'admin'], function (){
     Route::group(['prefix' => 'service'], function (){
         Route::post('login', 'Admin\Service\IndexController@login');
         Route::post('category/add', 'Admin\Service\CategoryController@categoryAdd');
-        Route::post('category/del', 'Admin\Service\CategoryController@categoryDel');
-        Route::post('category/edit', 'Admin\Service\CategoryController@categoryEdit');
+        Route::post('category/del/{category_id}', 'Admin\Service\CategoryController@categoryDel');
+        Route::post('category/edit/{category_id}', 'Admin\Service\CategoryController@categoryEdit');
         Route::post('category/change/status', 'Admin\Service\CategoryController@changeCategoryStatus');
 
     });

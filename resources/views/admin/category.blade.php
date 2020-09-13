@@ -70,10 +70,10 @@
                                 <i class="Hui-iconfont"></i>
                             </a>
                             @endif
-                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品编辑','product-add.html',{{$category->id}})" href="javascript:;" title="编辑">
+                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品编辑','/admin/category_edit/{{$category->id}}')" href="javascript:;" title="编辑">
                                 <i class="Hui-iconfont">&#xe6df;</i>
                             </a>
-                            <a style="text-decoration:none" class="ml-5" onClick="category_del(this,{{$category->id}})" href="javascript:;" title="删除">
+                            <a style="text-decoration:none" class="ml-5" onClick="category_del(this,'/admin/service/category/del/{{$category->id}}')" href="javascript:;" title="删除">
                                 <i class="Hui-iconfont">&#xe6e2;</i>
                             </a>
                         </td>
@@ -141,7 +141,6 @@
         /*产品-下架*/
         function category_stop(obj,id){
             layer.confirm('确认要下架吗？',function(index){
-                alert(id);
                 $.ajax({
                     type: 'POST',
                     url: '/admin/service/category/change/status',
@@ -155,7 +154,7 @@
                         layer.msg('已删除!',{icon:1,time:1000});
                     },
                     error:function(data) {
-                        console.log(data.msg);
+                        console.log(data.message);
                     },
                 });
                 $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="category_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
@@ -168,6 +167,18 @@
         /*产品-发布*/
         function category_start(obj,id){
             layer.confirm('确认要发布吗？',function(index){
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/service/category/change/status',
+                    dataType: 'json',
+                    data: {
+                        category_id: id,
+                        _token: "{{csrf_token()}}"
+                    },
+                    error:function(data) {
+                        console.log(data.message);
+                    },
+                });
                 $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="category_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
                 $(obj).remove();
@@ -178,7 +189,7 @@
 
 
         /*产品-编辑*/
-        function category_edit(title,url,id){
+        function category_edit(title,url){
             var index = layer.open({
                 type: 2,
                 title: title,
@@ -188,18 +199,21 @@
         }
 
         /*产品-删除*/
-        function category_del(obj,id){
+        function category_del(obj,url){
             layer.confirm('确认要删除吗？',function(index){
                 $.ajax({
                     type: 'POST',
-                    url: '',
+                    url: url,
                     dataType: 'json',
+                    data: {
+                        _token: "{{csrf_token()}}"
+                    },
                     success: function(data){
                         $(obj).parents("tr").remove();
                         layer.msg('已删除!',{icon:1,time:1000});
                     },
                     error:function(data) {
-                        console.log(data.msg);
+                        console.log(data.message);
                     },
                 });
             });
