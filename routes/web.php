@@ -77,8 +77,13 @@ Route::group(['prefix' => 'admin'], function (){
     Route::get('product_add', 'Admin\View\ProductController@toProductAdd');
     Route::get('product_edit/{product_id}', 'Admin\View\ProductController@toProductEdit');
 
-    Route::get('coupon', 'Admin\View\CouponController@toCoupon');
     Route::get('member', 'Admin\View\MemberController@toMember');
+    Route::get('member_add', 'Admin\View\MemberController@toMemberAdd');
+    Route::get('member_edit/{member_id}', 'Admin\View\MemberController@toMemberEdit');
+    Route::get('member_change_password/{member_id}', 'Admin\View\MemberController@toMemberChangePassword');
+
+    Route::get('coupon', 'Admin\View\CouponController@toCoupon');
+
     Route::get('admin', 'Admin\View\MemberController@toAdmin');
     Route::get('order', 'Admin\View\OrderController@toOrder');
     Route::get('bill', 'Admin\View\BillController@toBill');
@@ -98,6 +103,12 @@ Route::group(['prefix' => 'admin'], function (){
         Route::post('product/del/{product_id}', 'Admin\Service\ProductController@productDel');
         Route::post('product/edit/{product_id}', 'Admin\Service\ProductController@productEdit');
         Route::post('product/change/status', 'Admin\Service\ProductController@changeProductStatus');
+
+        Route::post('member/add', 'Admin\Service\MemberController@memberAdd');
+        Route::post('member/del/{member_id}', 'Admin\Service\MemberController@memberDel');
+        Route::post('member/edit/{member_id}', 'Admin\Service\MemberController@memberEdit');
+        Route::post('member/change/status', 'Admin\Service\MemberController@changeMemberStatus');
+        Route::post('member/change/password/{member_id}', 'Admin\Service\MemberController@changeMemberPassword');
 
     });
 
