@@ -1,6 +1,5 @@
 @extends('admin.master')
 @section('content')
-
     <div>
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
         <div class="page-container">
@@ -70,7 +69,7 @@
                                 <i class="Hui-iconfont"></i>
                             </a>
                             @endif
-                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品编辑','/admin/category_edit/{{$category->id}}')" href="javascript:;" title="编辑">
+                            <a style="text-decoration:none" class="ml-5" onClick="category_edit('分类编辑','/admin/category_edit/{{$category->id}}')" href="javascript:;" title="编辑">
                                 <i class="Hui-iconfont">&#xe6df;</i>
                             </a>
                             <a style="text-decoration:none" class="ml-5" onClick="category_del(this,'/admin/service/category/del/{{$category->id}}')" href="javascript:;" title="删除">
@@ -88,44 +87,16 @@
 @endsection
 @section('my-js')
     <!--请在下方写此页面业务相关的脚本-->
-    <script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
     <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
     <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
     <script type="text/javascript">
-        var setting = {
-            view: {
-                dblClickExpand: false,
-                showLine: false,
-                selectedMulti: false
-            },
-            data: {
-                simpleData: {
-                    enable:true,
-                    idKey: "id",
-                    pIdKey: "pId",
-                    rootPId: ""
-                }
-            },
-            callback: {
-                beforeClick: function(treeId, treeNode) {
-                    var zTree = $.fn.zTree.getZTreeObj("tree");
-                    if (treeNode.isParent) {
-                        zTree.expandNode(treeNode);
-                        return false;
-                    } else {
-                        //demoIframe.attr("src",treeNode.file + ".html");
-                        return true;
-                    }
-                }
-            }
-        };
 
         $('.table-sort').dataTable({
             "aaSorting": [[ 1, "desc" ]],//默认第几个排序
             "bStateSave": true,//状态保存
             "aoColumnDefs": [
-                {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
+                {"orderable":false,"aTargets":[7]}// 制定列不参与排序
             ]
         });
         /*类别-添加*/
