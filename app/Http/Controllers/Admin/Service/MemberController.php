@@ -121,6 +121,7 @@ class MemberController extends BaseController
         $state = $request->input('state', '');
         $zip = $request->input('zip', '');
         $phone = $request->input('phone', '');
+        $active = $request->input('active', '');
 
         $member = Member::find($member_id);
 
@@ -131,6 +132,7 @@ class MemberController extends BaseController
         $member->state = $state;
         $member->zip = $zip;
         $member->phone = $phone;
+        $member->active = $active;
         $member->save();
 
         $m3_result = new MessageResult();

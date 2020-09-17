@@ -86,7 +86,7 @@
                                             <h5 class="card-header text-muted font-weight-light">
                                                 <div class="row">
                                                     <span class="col-sm-10">Order Number: {{$order->order_no}}</span>
-                                                    @if($order->status == 1)<span class="col-sm-2 text-danger"> Unpaid </span>
+                                                    @if($order->status == 0)<span class="col-sm-2 text-danger"> Unpaid </span>
                                                     @else
                                                         <span class="col-sm-2 text-success">Paid</span>
                                                     @endif

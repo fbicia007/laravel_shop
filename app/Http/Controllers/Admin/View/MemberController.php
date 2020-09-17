@@ -35,18 +35,6 @@ class MemberController extends BaseController
         return view('admin.member_change_pw')->with('member',$member);
     }
 
-    public function toAdmin(){
-
-        $members = Member::where('super',1)->get();
-
-        return view('admin.admin')->with('members',$members);
-    }
-
-
-
-
-
-
 
 
 }

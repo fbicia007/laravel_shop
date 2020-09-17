@@ -173,7 +173,7 @@ class CheckoutController extends BaseController
 
         $order = Order::find($order_id);
 
-        $order->status = 0;//pay success
+        $order->status = 1;//pay success
         $order->special_info = json_encode($input);
         $order->save();
 

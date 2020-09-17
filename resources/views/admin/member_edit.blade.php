@@ -67,6 +67,13 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">
+                    邮箱认证状态：</label>
+                <div class="formControls col-xs-6 col-sm-6">
+                    <input type="text" class="input-text" value="{{$member->active}}" placeholder="" name="active">
+                </div>
+            </div>
+            <div class="row cl">
                 <div class="col-9 col-offset-2">
                     <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
                 </div>

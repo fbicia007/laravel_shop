@@ -312,6 +312,12 @@ class MemberController extends Controller
                  $message_result->message = 'You account is not active, please use the Link in your Email to active you account.';
                  return $message_result->toJson();
 
+             }
+             else if($member->status == 0) {
+                 $message_result->status = 6;
+                 $message_result->message = 'You account is locked, please contact our service.';
+                 return $message_result->toJson();
+
              } else {
 
                  $request->session()->put('member', $member);

@@ -84,8 +84,9 @@ Route::group(['prefix' => 'admin'], function (){
 
     Route::get('coupon', 'Admin\View\CouponController@toCoupon');
 
-    Route::get('admin', 'Admin\View\MemberController@toAdmin');
     Route::get('order', 'Admin\View\OrderController@toOrder');
+    Route::get('order_details/{order_id}', 'Admin\View\OrderController@toOrderDetails');
+
     Route::get('bill', 'Admin\View\BillController@toBill');
     Route::get('log', 'Admin\View\IndexController@toLog');
     Route::get('setup', 'Admin\View\SetupController@toSetup');
@@ -109,6 +110,9 @@ Route::group(['prefix' => 'admin'], function (){
         Route::post('member/edit/{member_id}', 'Admin\Service\MemberController@memberEdit');
         Route::post('member/change/status', 'Admin\Service\MemberController@changeMemberStatus');
         Route::post('member/change/password/{member_id}', 'Admin\Service\MemberController@changeMemberPassword');
+
+        Route::post('order/shipped', 'Admin\Service\OrderController@changeOrderStatus');
+        Route::post('order/del', 'Admin\Service\OrderController@delOrder');
 
     });
 
