@@ -81,7 +81,7 @@ class HomeController extends BaseController
 
         //end cart
 
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->where('status','<>',0)->get();
 
 
         $member = $request->session()->get('member','');
@@ -90,7 +90,7 @@ class HomeController extends BaseController
 
             $thisCategory = Category::find($category_id);
 
-            $unCategorys = Category::where('parent_id', $category_id)->get();
+            $unCategorys = Category::where('parent_id', $category_id)->where('status','<>',0)->get();
 
             $ids = array();
 

@@ -71,7 +71,7 @@
 
                 @if(isset($unCategorys))
                     <div class="form-inline justify-content-start" style="margin-top: 20px; margin-bottom: 20px;">
-                        <label class="col-2" for="unCategorySelect">Delivery Type & Time</label>
+                        <label class="col-2" for="unCategorySelect">Delivery Type</label>
                         <select class="form-control col-5" id="unCategorySelect">
                             <option value="{{$thisCategory->id}}">Select All</option>
                             @foreach($unCategorys as $unCategory)
