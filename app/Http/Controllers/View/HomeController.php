@@ -20,7 +20,7 @@ class HomeController extends BaseController
 
         $member = $request->session()->get('member','');
 
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->where('status','<>',0)->get();
         return view('home')
             ->with('categories', $categories)
             ->with('cartCount', $cartCount)
