@@ -44,7 +44,7 @@
                                     <tr id="" class="items">
                                         <td class="align-middle">
                                             <div class="media">
-                                                <img src="/images/preview/{{ json_decode($product->pdt_snapshot)->preview }}" class="align-self-center mr-3" style="width: 64px;">
+                                                <img src="{{ json_decode($product->pdt_snapshot)->preview }}" class="align-self-center mr-3" style="width: 64px;">
                                                 <div class="media-body">
                                                     <p class="mt-0">{{ json_decode($product->pdt_snapshot)->name }}</p>
                                                     <p class="font-weight-lighter">{{ json_decode($product->pdt_snapshot)->price }} € x {{$product->count}}</p>

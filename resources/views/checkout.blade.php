@@ -51,7 +51,7 @@
                                     @endif
                                 @endforeach
                             <input type="text" name="order_id" value="{{$order_id}}" hidden>
-
+                            <div id="paypal-button-container"></div>
                         </div>
                     </div>
 
@@ -81,15 +81,14 @@
                                         Total:
                                     </td>
                                     <td class="align-middle" id="totalprice">
-                                        {{$total_price}}
+                                        {{$total_price}} €
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <button type="submit" id="paypalPay" class="btn btn-light">
-                                <h5 class="card-title">PayPal</h5>
-                                <p class="card-text">You will be redirected to PayPal after placing order.</p>
-                                <img src="/images/logo/PayPal-Logo.png" class="rounded mx-auto d-block" width="100px">
+                            <button type="submit" id="afterPay" class="btn btn-success" disabled>
+                                <h5 class="card-title">Finish</h5>
+                                <p class="card-text">After your pay click here to show the bill.</p>
                             </button>
                         </div>
                     </div>
@@ -117,7 +116,7 @@
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
-                    document.getElementById("paypalPay").addEventListener('click', function(event) {
+                    document.getElementById("afterPay").addEventListener('click', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -127,6 +126,32 @@
                 });
             }, false);
         })();
+    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AUAXCQ0WrQqoKL83IENCwBxWL6AWGPxIPsHmz3MNKiFRyk5pkGil1lO9gyc1EG3_IrnYwdW1rM0G0aNR&currency=EUR"></script>
+
+    <script>
+        paypal.Buttons({
+
+            createOrder: function(data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '{{$total_price}}'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function(details) {
+                    // This function shows a transaction success message to your buyer.
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    document.getElementById("afterPay").removeAttribute("disabled");
+                });
+            }
+        }).render('#paypal-button-container');
+        //This function displays Smart Payment Buttons on your web page.
     </script>
 
 @endsection

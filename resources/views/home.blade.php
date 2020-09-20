@@ -65,11 +65,13 @@
         </div>
     </div>
 </main>
-
 @endsection
 
 @section('footerList')
     @foreach($categories as $category)
     <li><a class="text-muted" href="category/{{$category->id}}">{{$category->name}}</a></li>
     @endforeach
+@endsection
+@section('my-js')
+
 @endsection
