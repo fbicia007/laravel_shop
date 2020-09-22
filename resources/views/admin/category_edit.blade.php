@@ -78,6 +78,13 @@
                     <input type="text" class="input-text" value="{{$category->delivery_time}}" placeholder="" name="delivery_time">
                 </div>
             </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">
+                    发利润率：</label>
+                <div class="formControls col-xs-6 col-sm-6">
+                    <input type="text" class="input-text" value="{{$category->margin}}" placeholder="" name="margin">
+                </div>
+            </div>
             @if($category->platform != null)
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">

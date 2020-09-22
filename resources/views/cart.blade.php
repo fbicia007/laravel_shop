@@ -59,8 +59,8 @@
                                 <button class="btn btn-outline-info" onclick="addItem('{{$cart_item->product->id}}')">+</button>
                             </div>
                         </td>
-                        <span class="d-none" id="priceOne{{$cart_item->product->id}}">{{$cart_item->product->price}}</span>
-                        <td class="align-middle col-1" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->count}} €</td>
+                        <span class="d-none" id="priceOne{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->priceMargin}}</span>
+                        <td class="align-middle col-1" id="priceSum{{$cart_item->product->id}}">{{$cart_item->product->price * $cart_item->priceMargin * $cart_item->count}} €</td>
                         <td class="align-middle col-1">
                             <button type="button" onclick="onDelete({{$cart_item->product->id}})" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
@@ -153,14 +153,46 @@
             })
 
             if(product_ids_arr.length > 0){
-                location.href='/checkout';
-            }
+                //location.href='/checkout';
+                $.ajax({
+                    url: '/service/cart/checkout',
+                    dataType: 'json',
+                    type: "POST",
+                    cache: true,
+                    data: { _token:"{{csrf_token()}}"},
+                    success: function (data) {
+                        if(data == null){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html('Server error!');
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
+                        }
+                        if(data.status != 0){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html(data.message);
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            return;
+                        }
+                        location.href='/checkout';
 
-            $('#errorMessage').modal('show');
-            $('.modal-body span').html('You have nothing');
-            setTimeout(function () {
-                $('#errorMessage').modal('toggle');
-            }, 1000);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
+            }else {
+                $('#errorMessage').modal('show');
+                $('.modal-body span').html('You have nothing');
+                setTimeout(function () {
+                    $('#errorMessage').modal('toggle');
+                }, 1000);
+            }
 
         }
 
@@ -173,8 +205,9 @@
             $.ajax({
                 url: '/service/add/cart/'+id,
                 dataType: 'json',
-                type: "GET",
+                type: "POST",
                 cache: true,
+                data: { _token:"{{csrf_token()}}"},
                 success: function (data) {
                     if(data == null){
                         $('#errorMessage').modal('show');
@@ -224,8 +257,9 @@
                 $.ajax({
                     url: '/service/dash/cart/'+id,
                     dataType: 'json',
-                    type: "GET",
+                    type: "POST",
                     cache: true,
+                    data: { _token:"{{csrf_token()}}"},
                     success: function (data) {
                         if(data == null){
                             $('#errorMessage').modal('show');

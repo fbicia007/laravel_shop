@@ -97,12 +97,12 @@
                                                     @foreach($order->order_items as $order_item)
                                                         <div class="row border-bottom">
                                                             <div class="media col-sm-10">
-                                                                <img src="/images/preview/{{$order_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
+                                                                <img src="{{$order_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
                                                                 <div class="media-body">
                                                                     <p class="mt-0">{{$order_item->product->name}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="align-middle col-sm-2">€{{$order_item->product->price}} x {{$order_item->count}}</div>
+                                                            <div class="align-middle col-sm-2">€{{$order_item->product->price * $order_item->product->margin}} x {{$order_item->count}}</div>
                                                         </div>
                                                     @endforeach
                                                 </p>

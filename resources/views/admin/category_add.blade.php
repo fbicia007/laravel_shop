@@ -53,6 +53,13 @@
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
+                    利润率：</label>
+                <div class="formControls col-xs-6 col-sm-6">
+                    <input type="text" class="input-text" value="" placeholder="比如：默认是1就是原价，1.1就是进价+10%" name="margin">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">
                     <span class="c-red">*</span>
                     游戏平台：</label>
                 <div class="formControls col-xs-6 col-sm-6 required">

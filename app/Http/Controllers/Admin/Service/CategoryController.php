@@ -20,6 +20,7 @@ class CategoryController extends BaseController
         $banner = $request->input('banner', '');
         $banner_text = $request->input('banner_text', '');
         $delivery_time = $request->input('delivery_time', '');
+        $margin = $request->input('margin', '');
         $platform = $request->input('platform', '');
         $info = $request->input('info', '');
         $special_info = $request->input('special_info', '');
@@ -30,6 +31,7 @@ class CategoryController extends BaseController
         $category->banner = $banner;
         $category->banner_text = $banner_text;
         $category->delivery_time = $delivery_time;
+        $category->margin = $margin;
         if($platform !=''){
             $category->platform = implode('|',$platform);
         }
@@ -86,6 +88,7 @@ class CategoryController extends BaseController
         $banner = $request->input('banner', '');
         $banner_text = $request->input('banner_text', '');
         $delivery_time = $request->input('delivery_time', '');
+        $margin = $request->input('margin', '');
         $platform = $request->input('platform', '');
         $info = $request->input('info', '');
         $special_info = $request->input('special_info', '');
@@ -96,6 +99,7 @@ class CategoryController extends BaseController
         $category->banner = $banner;
         $category->banner_text = $banner_text;
         $category->delivery_time = $delivery_time;
+        $category->margin = $margin;
         if($platform !=''){
             $category->platform = implode('|',$platform);
         }

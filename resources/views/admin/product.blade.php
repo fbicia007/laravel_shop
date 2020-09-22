@@ -13,7 +13,8 @@
                         <th width="100">产品名称</th>
                         <th>描述</th>
                         <th>所属分类</th>
-                        <th width="100">单价</th>
+                        <th width="100">进货单价</th>
+                        <th width="70">利润率</th>
                         <th width="60">发布状态</th>
                         <th width="100">操作</th>
                     </tr>
@@ -27,6 +28,7 @@
                             <td class="text-l">{{$product->summary}}</td>
                             <td class="text-l">{{json_decode($product->category)->name}}</td>
                             <td><span class="price">{{$product->price}}</span> €</td>
+                            <td>{{json_decode($product->category)->margin}}</td>
                             <td class="td-status">@if($product->status != '0')
                                     <span class="label label-success radius">
                                     已发布

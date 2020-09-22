@@ -29,7 +29,7 @@
                     @foreach($message_email->products as $product)
                     <tr>
                         <td>{{ json_decode($product->pdt_snapshot)->name }}</td>
-                        <td>{{ $product->count }} x € {{ json_decode($product->pdt_snapshot)->price }}</td>
+                        <td>{{ $product->count }} x € {{ json_decode($product->pdt_snapshot)->price * json_decode($product->pdt_snapshot)->margin }}</td>
                     </tr>
                     @endforeach
                     </tbody>

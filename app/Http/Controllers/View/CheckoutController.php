@@ -20,58 +20,8 @@ class CheckoutController extends BaseController
     public function checkout(Request $request)
     {
         $member = $request->session()->get('member','');
-        $order = new Order();
-        $order->member_id = $member->id;
-        $order->save();
-        $cart_items = array();
-
-        $cart = $request->cookie('cart');
-        $cart_arr = ($cart != null ? explode(',', $cart) :array());
-
-
-        $special_infos = array();
-
-        $total_price = 0;
-        $name ='';
-
-        foreach ($cart_arr as $key => $value){
-
-            $index = strpos($value, ':');
-
-
-            $cart_item = new CartItem();
-            $cart_item->id = $key;
-            $cart_item->product_id = substr($value,0,$index);
-            $cart_item->count = (int)substr($value,$index+1);
-            $cart_item->product = Product::find($cart_item->product_id);
-            $cart_item->category = Category::find($cart_item->product->category_id);
-            //$cart_item->special_infos = $cart_item->category->special_info;
-
-
-            if($cart_item->product != null){
-                $total_price += $cart_item->product->price * $cart_item->count;
-
-                $name .= $cart_item->product->name;
-
-                array_push($cart_items, $cart_item);
-                array_push($special_infos,$cart_item->category->special_info);
-
-                $order_item = new OrderItem();
-                $order_item->order_id = $order->id;
-                $order_item->product_id = $cart_item->product_id;
-                $order_item->count = $cart_item->count;
-                $order_item->pdt_snapshot = json_encode($cart_item->product);
-                $order_item->save();
-            }
-
-        }
-
-
-        $order->name = $name;
-        $order->total_price = $total_price;
-        $order->infos = json_encode(array_unique($special_infos,SORT_REGULAR));
-        $order->order_no = 'M'.time().$order->id;
-        $order->save();
+        $order = Order::where('member_id',$member->id)->latest('updated_at')->first();
+        $cart_items = OrderItem::where('order_id',$order->id)->get();
 
         $categories = Category::whereNull('parent_id')->get();
 
@@ -87,9 +37,9 @@ class CheckoutController extends BaseController
             ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
-            ->with('total_price', $total_price)
+            ->with('total_price', $order->total_price)
             ->with('order_id', $order->id)
-            ->with('speicial_infos', array_unique($special_infos,SORT_REGULAR))
+            ->with('speicial_infos', $order->infos)
             //->with('speicial_infos', $special_infos)
             ->with('member', $member);
 
@@ -114,7 +64,6 @@ class CheckoutController extends BaseController
         $products = OrderItem::where('order_id',$order_id)->get();
 
         $cookie = Cookie::queue(\Cookie::forget('cart'));
-
 
         //send order to member
         $member = $request->session()->get('member');

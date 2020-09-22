@@ -17,6 +17,7 @@
                         <th width="60">游戏平台</th>
                         <th width="60">特殊输入内容</th>
                         <th width="60">发货周期</th>
+                        <th width="60">利润率</th>
                         <th width="60">状态</th>
                         <th width="100">操作</th>
                     </tr>
@@ -47,6 +48,7 @@
                         </td>
                         <td>{{$category->special_info}}</td>
                         <td>{{$category->delivery_time}}</td>
+                        <td>{{$category->margin}}</td>
                         <td class="td-status">
                             @if($category->status != '0')
                             <span class="label label-success radius">

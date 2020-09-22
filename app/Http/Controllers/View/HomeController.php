@@ -103,8 +103,7 @@ class HomeController extends BaseController
 
             }
 
-            $products = Product::whereIn('category_id',$ids)->get();
-
+            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
 
             return view('category')
                 ->with('thisCategory', $thisCategory)

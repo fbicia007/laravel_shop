@@ -34,6 +34,7 @@ class CartController extends BaseController
             $cart_item->product = Product::find($cart_item->product_id);
             $cart_item->category = Category::find($cart_item->product->category_id);
             $cart_item->categoryName = $cart_item->category->name;
+            $cart_item->priceMargin = $cart_item->category->margin;
 
 
             if($cart_item->product != null){

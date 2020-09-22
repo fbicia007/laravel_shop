@@ -106,7 +106,8 @@
                                     <img src="{{$product->preview}}" style="width: 100px">
                                     <div>{{$product->name}}</div>
                                     <div>{{$product->summary}}</div>
-                                    <div>EUR € {{$product->price}}</div>
+                                    <div>EUR € {{$product->price * $product->margin}}</div>
+
                                     <!--</a>-->
                                     <button type="button" class="btn btn-outline-info" onclick="addCart({{$product->id}});">Buy now</button>
                                 </div>
@@ -196,8 +197,9 @@
             $.ajax({
                 url: url,
                 dataType: 'json',
-                type: "GET",
+                type: "POST",
                 cache: false,
+                data: { _token:"{{csrf_token()}}"},
                 success: function (data) {
                     if(data == null){
                         $('#errorMessage').modal('show');
@@ -248,7 +250,7 @@
                             '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price+'</div>'+
+                            '<div>EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
                             //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +')">Buy now</button>'+
                             '</div>';
@@ -274,8 +276,9 @@
             $.ajax({
                 url: url,
                 dataType: 'json',
-                type: "GET",
+                type: "POST",
                 cache: false,
+                data: { _token:"{{csrf_token()}}"},
                 success: function (data) {
                     if(data == null){
                         $('#errorMessage').modal('show');
@@ -327,7 +330,7 @@
                             '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price+'</div>'+
+                            '<div>EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
                             //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart(\''+ data.products[i].id +'\');">Buy now</button></div>';
                         //$('.list-group').append(node);
@@ -346,8 +349,9 @@
             $.ajax({
                 url: '/service/add/cart/'+product_id,
                 dataType: 'json',
-                type: "GET",
+                type: "POST",
                 cache: true,
+                data: { _token:"{{csrf_token()}}"},
                 success: function (data) {
                     if(data == null){
                         $('#errorMessage').modal('show');

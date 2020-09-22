@@ -29,7 +29,7 @@ class ProductsController extends Controller
             }
 
             //with parent category
-            $products = Product::whereIn('category_id',$ids)->get();
+            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
 
             $message_result = new MessageResult();
             $message_result->status = 0;
@@ -39,7 +39,7 @@ class ProductsController extends Controller
         } else if(Product::where('category_id',$category_id)->exists()){
 
             //with out parent category
-            $products = Product::where('category_id',$category_id)->get();
+            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
             $message_result = new MessageResult();
             $message_result->status = 0;
             $message_result->message = 'Result ready.';
@@ -71,7 +71,7 @@ class ProductsController extends Controller
             }
 
             //with parent category
-            $products = Product::whereIn('category_id',$ids)->where('platform',$platform_id)->get();
+            $products = Product::whereIn('category_id',$ids)->where('platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
 
             $message_result = new MessageResult();
             $message_result->status = 0;
@@ -81,7 +81,7 @@ class ProductsController extends Controller
         } else {
 
             //with out parent category
-            $products = Product::where('category_id',$category_id)->where('platform',$platform_id)->get();
+            $products = Product::where('category_id',$category_id)->where('platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
             $message_result = new MessageResult();
             $message_result->status = 0;
             $message_result->message = 'Result ready.';

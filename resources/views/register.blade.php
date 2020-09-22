@@ -49,7 +49,7 @@
                                 Looks good!
                             </div>
                             <div class="invalid-feedback">
-                                Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+                                Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -63,8 +63,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="first_name">First name*</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <label for="first_name">First name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -73,8 +73,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="last_name">Last name*</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <label for="last_name">Last name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" >
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -83,8 +83,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="last_name">Street & No.*</label>
-                            <input type="text" class="form-control" id="street" name="street" required>
+                            <label for="last_name">Street & No.</label>
+                            <input type="text" class="form-control" id="street" name="street">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -95,8 +95,8 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
-                            <label for="city">Phone*</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <label for="city">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -105,8 +105,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="city">City*</label>
-                            <input type="text" class="form-control" id="city" name="city" required>
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -115,8 +115,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="zip">Zip*</label>
-                            <input type="text" class="form-control" id="zip" name="zip" required>
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" id="zip" name="zip">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -125,8 +125,8 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="state">Country*</label>
-                            <input type="text" class="form-control" id="state" name="state" required>
+                            <label for="state">Country</label>
+                            <input type="text" class="form-control" id="state" name="state">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -196,7 +196,8 @@
                 var zip = $('input[name=zip]').val();
 
 
-                if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || street =='' || phone =='' || city =='' || state =='' || zip ==''){
+                //if(email =='' || password =='' || confirm =='' || firstName =='' || lastName =='' || street =='' || phone =='' || city =='' || state =='' || zip ==''){
+                if(email =='' || password =='' || confirm ==''){
                     $('#errorMessage').modal('show');
                     $('.modal-body span').html('Infos cannot be empty');
                     setTimeout(function () {

@@ -47,11 +47,13 @@ class MemberController extends Controller
              $message_result->message = 'Confirmed password does not match the new password, please enter again';
              return $message_result->toJson();
          }
+         /*
          if($firstName =='' || $lastName=='' || $phone=='' || $street == '' || $city=='' || $state == '' || $zip ==''){
              $message_result->status = 4;
              $message_result->message = 'Please give all infos.';
              return $message_result->toJson();
          }
+         */
          if($password != $confirm){
              $message_result->status = 5;
              $message_result->message = 'Confirmed password is wrong';
@@ -286,7 +288,7 @@ class MemberController extends Controller
          }
          if($password =='' || strlen($password) < 8){
              $message_result->status = 2;
-             $message_result->message = 'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.';
+             $message_result->message = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
              return $message_result->toJson();
          }
 

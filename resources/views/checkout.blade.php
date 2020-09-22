@@ -38,18 +38,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Please tell us your game information</h5>
                             <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
-                                @foreach($speicial_infos as $speicial_info)
-                                    @if($speicial_info != null)
-                                        @foreach(explode("|",$speicial_info) as $special_info)
-                                            <div class="container">
-                                                <div class="form-group">
-                                                    <label>{{$special_info}} *</label>
-                                                    <input type="text" class="form-control" name="{{$special_info}}" required>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                @endforeach
+                            {{$speicial_infos}}
+
                             <input type="text" name="order_id" value="{{$order_id}}" hidden>
                             <div id="paypal-button-container"></div>
                         </div>
@@ -63,17 +53,17 @@
                             <table class="table">
                                 <tbody>
                                 @foreach($cart_items as $cart_item)
-                                    <tr id="{{$cart_item->product->id}}" class="items">
+                                    <tr id="{{json_decode($cart_item->pdt_snapshot)->id}}" class="items">
                                         <td class="align-middle">
                                             <div class="media">
-                                                <img src="{{$cart_item->product->preview}}" class="align-self-center mr-3" style="width: 64px;">
+                                                <img src="{{json_decode($cart_item->pdt_snapshot)->preview}}" class="align-self-center mr-3" style="width: 64px;">
                                                 <div class="media-body">
-                                                    <p class="mt-0">{{$cart_item->product->name}} - {{$cart_item->category->name}}</p>
-                                                    <p class="font-weight-lighter">€{{$cart_item->product->price}} x {{$cart_item->count}}</p>
+                                                    <p class="mt-0">{{json_decode($cart_item->pdt_snapshot)->name}}</p>
+                                                    <p class="font-weight-lighter">€{{json_decode($cart_item->pdt_snapshot)->price * json_decode($cart_item->pdt_snapshot)->margin}} x {{$cart_item->count}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">{{$cart_item->product->price * $cart_item->count}} €</td>
+                                        <td class="align-middle">{{json_decode($cart_item->pdt_snapshot)->price * json_decode($cart_item->pdt_snapshot)->margin * $cart_item->count}} €</td>
                                     </tr>
                                 @endforeach
                                 <tr id="sum">
