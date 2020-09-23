@@ -39,7 +39,7 @@ class CheckoutController extends BaseController
             ->with('cart_items', $cart_items)
             ->with('total_price', $order->total_price)
             ->with('order_id', $order->id)
-            ->with('speicial_infos', $order->infos)
+            ->with('special_infos', $order->infos)
             //->with('speicial_infos', $special_infos)
             ->with('member', $member);
 

@@ -169,6 +169,14 @@
                             }, 2000);
                             return;
                         }
+                        if(data.status != 0 && data.status == 1){
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html(data.message);
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 2000);
+                            location.href='/login';
+                        }
                         if(data.status != 0){
                             $('#errorMessage').modal('show');
                             $('.modal-body span').html(data.message);

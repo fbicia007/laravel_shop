@@ -111,7 +111,18 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        $message = new MessageResult();
+
         $member = $request->session()->get('member','');
+
+        //not login
+        if($member == ''){
+            $message->status = 1;
+            $message->message = 'please login.';
+
+            return response($message->toJson());
+        }
+
         $order = new Order();
         $order->member_id = $member->id;
         $order->save();
@@ -121,7 +132,7 @@ class CartController extends Controller
         $cart_arr = ($cart != null ? explode(',', $cart) :array());
 
 
-        $special_infos = array();
+        //$special_infos = array();
 
         $total_price = 0;
         $name ='';
@@ -147,7 +158,8 @@ class CartController extends Controller
                 $name .= $cart_item->product->name;
 
                 array_push($cart_items, $cart_item);
-                array_push($special_infos,$cart_item->category->special_info);
+                //array_push($special_infos,$cart_item->category->special_info);
+                $special_infos = $cart_item->category->special_info.',';
 
                 $order_item = new OrderItem();
                 $order_item->order_id = $order->id;
@@ -162,11 +174,12 @@ class CartController extends Controller
 
         $order->name = $name;
         $order->total_price = $total_price;
-        $order->infos = json_encode(array_unique($special_infos,SORT_REGULAR));
+        //$order->infos = json_encode(array_unique($special_infos,SORT_REGULAR));
+        $order->infos = $special_infos;
         $order->order_no = 'M'.time().$order->id;
         $order->save();
 
-        $message = new MessageResult();
+
         $message->status = 0;
         $message->message = 'Item deletet.';
 

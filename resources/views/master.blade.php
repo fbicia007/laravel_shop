@@ -38,9 +38,11 @@
                             @yield('categoryMenu')
                         </div>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sell to us</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="#">FAQ</a>
                     </li>
@@ -115,7 +117,7 @@
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">News</a></li>
                     <li><a class="text-muted" href="#">About Us</a></li>
-                    <li><a class="text-muted" href="#">Sell to Us</a></li>
+                    <!--<li><a class="text-muted" href="#">Sell to Us</a></li>-->
                 </ul>
             </div>
             <div class="col col-md">

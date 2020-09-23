@@ -38,7 +38,17 @@
                         <div class="card-body">
                             <h5 class="card-title">Please tell us your game information</h5>
                             <p class="card-text">If you see this infos, that's means our deliver service must use them.</p>
-                            {{$speicial_infos}}
+                            @foreach(explode(",", $special_infos) as $special_info)
+                                @if($special_info != '')
+                                    <div class="container">
+                                        <div class="form-group">
+                                            <label>{{$special_info}} *</label>
+                                            <input type="text" class="form-control" name="{{$special_info}}" required>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+
 
                             <input type="text" name="order_id" value="{{$order_id}}" hidden>
                             <div id="paypal-button-container"></div>
