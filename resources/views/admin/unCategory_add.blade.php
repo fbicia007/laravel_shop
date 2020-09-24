@@ -11,7 +11,7 @@
                     <input type="text" class="input-text" value="" placeholder="" name="name">
                 </div>
             </div>
-            <div class="row cl">
+            <!--<div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
                     <span class="c-red">*</span>
                     缩略图：</label>
@@ -24,7 +24,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
                     发货时间：</label>
@@ -102,7 +102,7 @@
                         dataType: 'json',
                         data: {
                             //preview: $('#preview_id').attr('src'),
-                            preview: ($('#preview_id').attr('src')!='http://placehold.jp/99ccff/003366/150x150.png?text=%E7%BC%A9%E7%95%A5%E5%9B%BE%E5%A4%A7%E5%B0%8F%E5%B0%BA%E5%AF%B8%E4%B8%BA%E6%AD%A3%E6%96%B9%E5%BD%A2%EF%BC%8C%E6%96%87%E4%BB%B6%E8%A6%81%E5%B0%8F%E4%BA%8E1%E5%85%86'?$('#preview_id').attr('src'):''),
+                            //preview: ($('#preview_id').attr('src')!='http://placehold.jp/99ccff/003366/150x150.png?text=%E7%BC%A9%E7%95%A5%E5%9B%BE%E5%A4%A7%E5%B0%8F%E5%B0%BA%E5%AF%B8%E4%B8%BA%E6%AD%A3%E6%96%B9%E5%BD%A2%EF%BC%8C%E6%96%87%E4%BB%B6%E8%A6%81%E5%B0%8F%E4%BA%8E1%E5%85%86'?$('#preview_id').attr('src'):''),
                             _token: "{{csrf_token()}}"
                         },
                         success: function (data){

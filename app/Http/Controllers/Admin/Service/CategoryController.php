@@ -31,7 +31,11 @@ class CategoryController extends BaseController
         $category->banner = $banner;
         $category->banner_text = $banner_text;
         $category->delivery_time = $delivery_time;
-        $category->margin = $margin;
+        if($margin == ''){
+            $category->margin = 1;
+        }else{
+            $category->margin = $margin;
+        }
         if($platform !=''){
             $category->platform = implode('|',$platform);
         }
@@ -99,7 +103,13 @@ class CategoryController extends BaseController
         $category->banner = $banner;
         $category->banner_text = $banner_text;
         $category->delivery_time = $delivery_time;
-        $category->margin = $margin;
+        if($margin == ''){
+            $category->margin = 1;
+        }else{
+            $category->margin = $margin;
+        }
+
+
         if($platform !=''){
             $category->platform = implode('|',$platform);
         }

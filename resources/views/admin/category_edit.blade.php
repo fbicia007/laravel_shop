@@ -11,6 +11,7 @@
                     <input type="text" class="input-text" value="{{$category->name}}" name="name">
                 </div>
             </div>
+            @if($category->parent_id == null)
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
                     <span class="c-red">*</span>
@@ -29,7 +30,6 @@
                     </div>
                 </div>
             </div>
-            @if($category->parent_id == null)
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">Banner </br>(图片分辨率比例1200x300)：</label>
                 <div class="formControls col-xs-8 col-sm-9">
