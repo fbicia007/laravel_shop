@@ -106,9 +106,9 @@
             $.ajax({
                 url: '/service/delete/cart',
                 dataType: 'json',
-                type: "GET",
+                type: "POST",
                 cache: true,
-                data: {cartItem_id, cartItem_id},
+                data: {cartItem_id:cartItem_id,_token:"{{csrf_token()}}"},
                 success: function (data) {
                     if(data == null){
                         $('#errorMessage').modal('show');

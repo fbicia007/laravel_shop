@@ -23,7 +23,6 @@ class CheckoutController extends BaseController
         $order = Order::where('member_id',$member->id)->latest('updated_at')->first();
         $cart_items = OrderItem::where('order_id',$order->id)->get();
 
-        $categories = Category::whereNull('parent_id')->get();
 
         //cart
         $cartCount = $this->cartCount($request);
@@ -34,7 +33,6 @@ class CheckoutController extends BaseController
 
 
         return view('checkout')
-            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
             ->with('total_price', $order->total_price)
@@ -48,9 +46,6 @@ class CheckoutController extends BaseController
 
     public function toOrderSuccess(Request $request,$order_id)
     {
-
-        //return $request;
-        $categories = Category::whereNull('parent_id')->get();
 
         //cart
         $cartCount = null;
@@ -83,7 +78,6 @@ class CheckoutController extends BaseController
         });
 
         return view('show_order')
-            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('products', $products)
             ->with('order', $order)

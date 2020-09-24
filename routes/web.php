@@ -56,7 +56,7 @@ Route::group(['prefix' => 'service'], function (){
     Route::post('add/cart/{product_id}', 'Service\CartController@addCart');
     Route::post('dash/cart/{product_id}', 'Service\CartController@dashCart');
     Route::post('cart/checkout', 'Service\CartController@checkout');
-    Route::get('delete/cart', 'Service\CartController@deleteCart');
+    Route::post('delete/cart', 'Service\CartController@deleteCart');
     Route::post('upload/{type}', 'Service\UploadController@uploadFile');
 
 });

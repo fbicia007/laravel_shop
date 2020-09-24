@@ -42,7 +42,7 @@ class CartController extends BaseController
             }
         }
 
-        $categories = Category::whereNull('parent_id')->get();
+
 
         //cart
         $cartCount = $this->cartCount($request);
@@ -59,7 +59,6 @@ class CartController extends BaseController
             end offline cart */
 
             return view('cart')
-                ->with('categories', $categories)
                 ->with('cartCount', $cartCount)
                 ->with('cart_items', $cart_items)
                 ->with('member', $member);
@@ -67,7 +66,6 @@ class CartController extends BaseController
         }
 
         return view('cart')
-            ->with('categories', $categories)
             ->with('cartCount', $cartCount)
             ->with('cart_items', $cart_items)
             ->with('member', $member);
