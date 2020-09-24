@@ -30,7 +30,9 @@ Route::get('/change_pw', 'View\MemberController@toChange_pw');
 
 Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
+Route::get('/search','View\HomeController@toSearch');
 Route::get('/cart','View\CartController@toCart');
+
 
 Route::middleware('check.login')->group(function (){
 

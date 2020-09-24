@@ -25,6 +25,25 @@ class HomeController extends BaseController
             ->with('member', $member);
     }
 
+    public function toSearch(Request $request){
+
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+
+        $member = $request->session()->get('member','');
+
+        $keyWord = $request->search;
+        //$products = Product::where('name','LIKE',"%{$keyWord}%")->get();
+        $products = Product::where('product.name','LIKE',"%{$keyWord}%")->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+
+        return view('search')
+            ->with('cartCount', $cartCount)
+            ->with('products', $products)
+            ->with('member', $member);
+    }
+
     private function cartCount(Request $request){
 
         //cart
