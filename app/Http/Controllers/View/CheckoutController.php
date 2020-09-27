@@ -105,7 +105,7 @@ class CheckoutController extends BaseController
         //end cart
     }
 
-    public function afterPay(Request $request)
+    public function orderInfo(Request $request)
     {
 
         //email
@@ -116,7 +116,6 @@ class CheckoutController extends BaseController
 
         $order = Order::find($order_id);
 
-        $order->status = 1;//pay success
         $order->special_info = json_encode($input);
         $order->save();
 

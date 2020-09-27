@@ -140,5 +140,30 @@ class HomeController extends BaseController
 
     }
 
+    public function toTerms(Request $request){
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+
+        return view('terms')->with('cartCount',$cartCount);
+    }
+
+    public function toPolicy(Request $request){
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+        return view('policy')->with('cartCount',$cartCount);
+    }
+
+    public function toContactUs(Request $request){
+        //cart
+        $cartCount = $this->cartCount($request);
+
+        //end cart
+        return view('contact_us')->with('cartCount',$cartCount);
+    }
+
 
 }

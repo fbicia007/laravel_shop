@@ -44,7 +44,7 @@
                     </li>
                     -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">FAQ</a>
+                        <a class="nav-link" href="/contact_us">Contact Us</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" method="get" action="/search">
@@ -115,8 +115,8 @@
             <div class="col col-md">
                 <h5>ABOUT</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">News</a></li>
-                    <li><a class="text-muted" href="#">About Us</a></li>
+                    <li><a class="text-muted" href="/terms_conditions">Terms and Conditions</a></li>
+                    <li><a class="text-muted" href="/privacy_policy">Privacy Policy</a></li>
                     <!--<li><a class="text-muted" href="#">Sell to Us</a></li>-->
                 </ul>
             </div>

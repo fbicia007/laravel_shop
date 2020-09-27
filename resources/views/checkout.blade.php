@@ -27,9 +27,8 @@
                     <div class="col-sm text-secondary"><h6>3 COMPLETE PAYMENT</h6></div>
                 </div>
 
-                <form id="pay-form" action="/pay" method="post" class="needs-validation" >
+                <form id="pay-form" action="/orderInfo" method="get" class="needs-validation" >
 
-                    {{csrf_field()}}
                 <div class="row">
                     <div class="card col-sm-8">
                         <div class="card-header">
@@ -50,7 +49,7 @@
                             @endforeach
 
 
-                            <input type="text" name="order_id" value="{{$order_id}}" hidden>
+                            <input type="text" name="order_id" id="order_id" value="{{$order_id}}" hidden>
                             <div id="paypal-button-container"></div>
                         </div>
                     </div>
@@ -147,7 +146,46 @@
                 return actions.order.capture().then(function(details) {
                     // This function shows a transaction success message to your buyer.
                     alert('Transaction completed by ' + details.payer.name.given_name);
-                    document.getElementById("afterPay").removeAttribute("disabled");
+                    var order_id = $( "#order_id" ).val();
+                    $.ajax({
+                        url: '/service/afterPay',
+                        dataType: 'json',
+                        type: "POST",
+                        cache: true,
+                        data: {order_id:order_id,_token:"{{csrf_token()}}"},
+                        success: function (data) {
+                            if(data == null){
+                                $('#errorMessage').modal('show');
+                                $('.modal-body span').html('Server error!');
+                                setTimeout(function () {
+                                    $('#errorMessage').modal('toggle');
+                                }, 2000);
+                                return;
+                            }
+                            if(data.status != 0){
+                                $('#errorMessage').modal('show');
+                                $('.modal-body span').html(data.message);
+                                setTimeout(function () {
+                                    $('#errorMessage').modal('toggle');
+                                }, 2000);
+                                return;
+                            }
+
+                            $('#errorMessage').modal('show');
+                            $('.modal-body span').html(data.message);
+                            setTimeout(function () {
+                                $('#errorMessage').modal('toggle');
+                            }, 1000);
+
+                            document.getElementById("afterPay").removeAttribute("disabled");
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    });
                 });
             }
         }).render('#paypal-button-container');

@@ -32,6 +32,9 @@ Route::get('/category/{category_id}','View\HomeController@toCategory');
 Route::get('/product/{product_id}','View\HomeController@toProduct');
 Route::get('/search','View\HomeController@toSearch');
 Route::get('/cart','View\CartController@toCart');
+Route::get('/terms_conditions','View\HomeController@toTerms');
+Route::get('/privacy_policy','View\HomeController@toPolicy');
+Route::get('/contact_us','View\HomeController@toContactUs');
 
 
 Route::middleware('check.login')->group(function (){
@@ -39,7 +42,7 @@ Route::middleware('check.login')->group(function (){
     Route::get('/checkout', 'View\CheckoutController@checkout');
     Route::get('/overview', 'View\OverviewController@overview');
     Route::get('/order/success/{order_id}', 'View\CheckoutController@toOrderSuccess');
-    Route::post('/pay', 'View\CheckoutController@afterPay');
+    Route::get('/orderInfo', 'View\CheckoutController@orderInfo');
 });
 
 /*services*/
@@ -60,6 +63,8 @@ Route::group(['prefix' => 'service'], function (){
     Route::post('cart/checkout', 'Service\CartController@checkout');
     Route::post('delete/cart', 'Service\CartController@deleteCart');
     Route::post('upload/{type}', 'Service\UploadController@uploadFile');
+    Route::post('afterPay', 'Service\CheckoutController@afterPay');
+    Route::post('contact', 'Service\ContactController@contactRequest');
 
 });
 

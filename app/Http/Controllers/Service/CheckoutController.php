@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Service;
 
+use App\Entity\Order;
 use App\Http\Controllers\Controller;
 use App\Models\MessageResult;
 use Illuminate\Http\Request;
@@ -100,6 +101,31 @@ class CheckoutController extends Controller
         $message->message = 'Item deletet.';
 
         return response($message->toJson())->withCookie('cart', implode(',',$cart_array));
+    }
+    public function afterPay(Request $request)
+    {
+
+        //email
+        //显示订单信息
+
+        $order_id = $request->order_id;
+
+        $order = Order::find($order_id);
+
+        $order->status = 1;//pay success must after pay
+
+        $order->save();
+
+        $message = new MessageResult();
+        $message->status = 0;
+        $message->message = 'Transaction completed!.';
+
+
+        //return $order;
+
+        return response($message->toJson());
+
+
     }
 
 
