@@ -29,7 +29,7 @@ class ProductsController extends Controller
             }
 
             //with parent category
-            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
 
             $message_result = new MessageResult();
             $message_result->status = 0;
@@ -39,7 +39,7 @@ class ProductsController extends Controller
         } else if(Product::where('category_id',$category_id)->exists()){
 
             //with out parent category
-            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
             $message_result = new MessageResult();
             $message_result->status = 0;
             $message_result->message = 'Result ready.';
@@ -54,9 +54,8 @@ class ProductsController extends Controller
 
     }
 
-    public function getCategoryByCategoryIdAndPlatfomId($category_id,$platform_id)
+    public function getCategoryByCategoryIdAndPlatformId($category_id,$platform_id)
     {
-
         $unCategorys = Category::where('parent_id',$category_id)->get();
 
         if(Category::where('parent_id',$category_id)->exists()){
@@ -71,7 +70,7 @@ class ProductsController extends Controller
             }
 
             //with parent category
-            $products = Product::whereIn('category_id',$ids)->where('platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+            $products = Product::whereIn('category_id',$ids)->where('product.platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
 
             $message_result = new MessageResult();
             $message_result->status = 0;
@@ -81,7 +80,7 @@ class ProductsController extends Controller
         } else {
 
             //with out parent category
-            $products = Product::where('category_id',$category_id)->where('platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+            $products = Product::where('category_id',$category_id)->where('product.platform',$platform_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
             $message_result = new MessageResult();
             $message_result->status = 0;
             $message_result->message = 'Result ready.';

@@ -2,18 +2,6 @@
 
 @section('title','category')
 
-@section('categoryMenu')
-    @foreach($categories as $category)
-        <a class="dropdown-item" href="{{$category->id}}">{{$category->name}}</a>
-    @endforeach
-@endsection
-
-@section('footerList')
-    @foreach($categories as $category)
-        <li><a class="text-muted" href="{{$category->id}}">{{$category->name}}</a></li>
-    @endforeach
-@endsection
-
 @section('content')
 
     <main role="main">
@@ -58,7 +46,7 @@
                             @endif
                         @endforeach
                     @else
-                        <li class="nav-item-content" value="0">
+                    <!--    <li class="nav-item-content" value="0">
                             <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">
                                 <button type="button" class="btn btn-light float-left" style="height: 120px; width:120px;">
                                     <i class="fas fa-check-double"></i>
@@ -66,6 +54,7 @@
                                 </button>
                             </a>
                         </li>
+                        -->
                     @endif
                 </ul>
 
@@ -81,7 +70,7 @@
                     </div>
                 @endif
 
-                <div class="tab-content border-top" id="pills-tabContent">
+                <div class="tab-content border-top border-bottom" id="pills-tabContent">
 
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
 
@@ -104,9 +93,10 @@
                                 <div class="col-sm-2 product-list" style="margin-bottom: 40px">
                                 <!--<a href="/product/{{$product->id}}" style="color: black">-->
                                     <img src="{{$product->preview}}" style="width: 100px">
-                                    <div>{{$product->name}}</div>
+                                    <div class="font-weight-bold">{{$product->name}}</div>
                                     <div>{{$product->summary}}</div>
-                                    <div>EUR € {{$product->price * $product->margin}}</div>
+                                    <div class="text-danger">EUR € {{$product->price * $product->margin}}</div>
+                                    <div class="font-weight-lighter">Delivery:{{$product->delivery_time}}</div>
 
                                     <!--</a>-->
                                     <button type="button" class="btn btn-outline-info" onclick="addCart({{$product->id}});">Buy now</button>
@@ -174,11 +164,13 @@
                         </ul>
                     </div>
                 </div>
+                <div class="tab-content">
+                    Game Info: {{$thisCategory->info}}
+                </div>
             </div>
         </div>
 
         <span id="platform_id" value="0"></span>
-
     </main>
 
 @endsection
@@ -250,7 +242,8 @@
                             '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
+                            '<div class="text-danger">EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
+                            '<div class="font-weight-lighter">Delivery:'+ data.products[i].delivery_time+'</div>'+
                             //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +')">Buy now</button>'+
                             '</div>';
@@ -330,7 +323,8 @@
                             '<img src="'+data.products[i].preview+'" style="width: 100px">'+
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
-                            '<div>EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
+                            '<div class="text-danger">EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
+                            '<div class="font-weight-lighter">Delivery:'+ data.products[i].delivery_time+'</div>'+
                             //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart(\''+ data.products[i].id +'\');">Buy now</button></div>';
                         //$('.list-group').append(node);

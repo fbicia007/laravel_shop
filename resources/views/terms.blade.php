@@ -2,17 +2,6 @@
 
 @section('title','category')
 
-@section('categoryMenu')
-    @foreach($categories as $category)
-        <a class="dropdown-item" href="{{$category->id}}">{{$category->name}}</a>
-    @endforeach
-@endsection
-
-@section('footerList')
-    @foreach($categories as $category)
-        <li><a class="text-muted" href="{{$category->id}}">{{$category->name}}</a></li>
-    @endforeach
-@endsection
 
 @section('content')
 
@@ -21,20 +10,20 @@
             <span><a href="/" class="text-dark">Home</a> / Terms and Conditions</span>
         </div>
         <div class="album py-5 bg-light">
-            <div class="container" style="margin-top: -48px;">
+            <div class="container">
 
                 <div class=WordSection1 style='layout-grid:15.6pt'>
 
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><a
                             name="OLE_LINK3"></a><a name="OLE_LINK4"><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
-0pt'>Terms and Conditions<o:p></o:p></span></span></a></p>
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
+0pt' class="font-weight-bold">Terms and Conditions<o:p></o:p></span></span></a></p>
 
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Privacy<br>
 By using Mmozone, you acknowledge that you have read this Privacy Policy and
@@ -44,13 +33,13 @@ collection, use and disclosure of any personal information provided by you to Mm
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><o:p>&nbsp;</o:p></span></span></span></p>
 
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'>License And Site Access<br>
 Mmozone grants you a limited license to access Mmozone and to purchase the
 products and use the services offered through Mmozone for personal use only.
@@ -68,7 +57,7 @@ commercial purpose.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Your Account<br>
 If you use Mmozone, you are responsible for maintaining the confidentiality of
@@ -82,7 +71,7 @@ sole discretion.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Fraudulent Activity<br>
 You agree to cooperate fully with Mmozone in any investigation by Mmozone or
@@ -93,7 +82,7 @@ claims regarding non-receipt of products.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Third-Party Sites<br>
 Mmozone may also include links and pointers to Internet sites maintained by
@@ -111,7 +100,7 @@ Lucasfilm Entertainment Company Ltd., and Square Enix CO., LTD.<o:p></o:p></span
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Restricted Users<br>
 No person, employee, agent or entity affiliated with any game publisher or
@@ -125,7 +114,7 @@ utilize the services provided herein.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Reviews, Comments And Other Content<br>
 Visitors to Mmozone may post reviews, comments, and other content, so long as
@@ -154,7 +143,7 @@ you or any third party.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Disclaimer Of Warranties And Limitation Of Liability<br>
 Mmozone, Its Contents, And All Products And Services Available Through Mmozone,
@@ -172,7 +161,7 @@ Consequential Damages.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Indemnification<br>
 You agree to indemnify and hold Mmozone and its officers, directors, agents,
@@ -184,7 +173,7 @@ rights of a third party.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Governing Law And Jurisdiction<br>
 These Terms and Conditions and your agreement to be governed by the laws of the
@@ -197,7 +186,7 @@ relief granted by the court.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Notices<br>
 You consent to receive notices from us by e-mail, by mail at the addresses
@@ -211,7 +200,7 @@ days after mailing.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Waiver<br>
 The failure of Mmozone to enforce any provision of these Terms and Conditions
@@ -222,7 +211,7 @@ these Terms and Conditions.<o:p></o:p></span></span></span></p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Remedies<br>
 You acknowledge that violation of these Terms and could cause irreparable harm
@@ -234,7 +223,7 @@ Terms and Conditions without the filing or posting of any bond or surety.<o:p></
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Severability<br>
 If any term or provision of these Terms and Conditions is found to be invalid
@@ -247,7 +236,7 @@ enforceability of the remainder of these Terms and Conditions.<o:p></o:p></span>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'><br>
 Entire Agreement<br>
 These Terms and Conditions constitute the entire agreement between you and Mmozone
@@ -260,13 +249,13 @@ font-family:宋体;mso-bidi-font-family:宋体;mso-font-kerning:0pt'><o:p></o:p>
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'>Additional Conditions<o:p></o:p></span></span></span></p>
 
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'>You are responsible for any fees, taxes or other costs associated with the
 purchase and delivery of your items resulting from charges imposed by your
 relationship with payment services providers or the duties and taxes imposed by
@@ -275,14 +264,14 @@ your local customs officials or other regulatory body.<o:p></o:p></span></span><
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'>For customer service inquiries or disputes, You may contact us by email
 at&nbsp;support@mmozone.de<o:p></o:p></span></span></span></p>
 
                     <p class=MsoNormal align=left style='text-align:left;mso-pagination:widow-orphan'><span
                             style='mso-bookmark:OLE_LINK4'><span style='mso-bookmark:OLE_LINK3'><span
                                     lang=EN-US style='mso-bidi-font-size:10.5pt;font-family:Helvetica;mso-fareast-font-family:
-宋体;mso-bidi-font-family:Helvetica;color:#333333;background:white;mso-font-kerning:
+宋体;mso-bidi-font-family:Helvetica;color:#333333;;mso-font-kerning:
 0pt'>Where possible, we will work with You and/or any user selling on our
 website, to resolve any disputes arising from your purchase.<o:p></o:p></span></span></span></p>
 
@@ -290,7 +279,7 @@ website, to resolve any disputes arising from your purchase.<o:p></o:p></span></
 
                     <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:10.5pt;
 font-family:Helvetica;mso-fareast-font-family:宋体;mso-bidi-font-family:Helvetica;
-color:#333333;background:white;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+color:#333333;;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
                 </div>
 

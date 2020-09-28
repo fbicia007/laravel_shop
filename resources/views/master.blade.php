@@ -35,7 +35,9 @@
                             OnlineGames
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @yield('categoryMenu')
+                            @foreach($categories as $category)
+                                <a class="dropdown-item" href="/category/{{$category->id}}">{{$category->name}}</a>
+                            @endforeach
                         </div>
                     </li>
                     <!--
@@ -123,7 +125,9 @@
             <div class="col col-md">
                 <h5>PRODUCT</h5>
                 <ul class="list-unstyled text-small">
-                    @yield('footerList')
+                    @foreach($categories as $category)
+                        <li><a class="text-muted" href="/category/{{$category->id}}">{{$category->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col col-md">

@@ -36,7 +36,7 @@ class HomeController extends BaseController
 
         $keyWord = $request->search;
         //$products = Product::where('name','LIKE',"%{$keyWord}%")->get();
-        $products = Product::where('product.name','LIKE',"%{$keyWord}%")->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+        $products = Product::where('product.name','LIKE',"%{$keyWord}%")->orWhere('product.summary','LIKE',"%{$keyWord}%")->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
 
         return view('search')
             ->with('cartCount', $cartCount)
@@ -115,7 +115,7 @@ class HomeController extends BaseController
 
             }
 
-            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
+            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
 
             return view('category')
                 ->with('thisCategory', $thisCategory)

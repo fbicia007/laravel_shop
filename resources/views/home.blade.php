@@ -2,11 +2,6 @@
 
 @section('title','login')
 
-@section('categoryMenu')
-    @foreach($categories as $category)
-    <a class="dropdown-item" href="category/{{$category->id}}">{{$category->name}}</a>
-    @endforeach
-@endsection
 
 @section('content')
 
@@ -23,10 +18,12 @@
                 @if($category->banner != null)
             <div class="carousel-item @if($category->id == 1) active @endif" onclick="location.href='category/{{$category->id}}';">
                 <img src="{{$category->banner}}"  class="d-block w-100" >
+            <!--
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{$category->name}}</h5>
                     <p>{{$category->banner_text}}</p>
                 </div>
+                -->
             </div>
                 @endif
             @endforeach
@@ -51,12 +48,15 @@
                 @foreach($categories as $category)
                 <div class="col-sm text-center">
                     <div class="card shadow">
-                        <a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">
+                        <!--<a href="category/{{$category->id}}" data-toggle="tooltip" data-placement="right" title="{{$category->info}}">-->
+                        <a href="category/{{$category->id}}">
                             <img src="{{$category->preview}}" class="card-img-top">
                         </a>
+                    <!--
                         <div class="card-body">
                             <h4 class="card-title">{{$category->name}}</h4>
                         </div>
+                        -->
                     </div>
                 </div>
                 @endforeach
@@ -67,11 +67,6 @@
 </main>
 @endsection
 
-@section('footerList')
-    @foreach($categories as $category)
-    <li><a class="text-muted" href="category/{{$category->id}}">{{$category->name}}</a></li>
-    @endforeach
-@endsection
 @section('my-js')
 
 @endsection

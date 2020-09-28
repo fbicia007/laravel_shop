@@ -57,7 +57,7 @@ Route::group(['prefix' => 'service'], function (){
     Route::post('logout', 'Service\MemberController@logout');
     Route::post('forgot_password', 'Service\MemberController@forgot_password');
     Route::post('products/{category_id}', 'Service\ProductsController@getCategoryByCategoryId');
-    Route::post('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatfomId');
+    Route::post('products/{category_id}/platform/{platform_id}', 'Service\ProductsController@getCategoryByCategoryIdAndPlatformId');
     Route::post('add/cart/{product_id}', 'Service\CartController@addCart');
     Route::post('dash/cart/{product_id}', 'Service\CartController@dashCart');
     Route::post('cart/checkout', 'Service\CartController@checkout');
