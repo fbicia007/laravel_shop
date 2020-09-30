@@ -62,21 +62,30 @@
                     <div class="form-inline justify-content-start" style="margin-top: 20px; margin-bottom: 20px;">
                         <label class="col-2" for="unCategorySelect">Delivery Type</label>
                         <select class="form-control col-5" id="unCategorySelect">
-                            <option value="{{$thisCategory->id}}">Select All</option>
+                            <option value="" selected disabled hidden>please select</option>
                             @foreach($unCategorys as $unCategory)
                                 <option value="{{$unCategory->id}}">{{$unCategory->name}}</option>
                             @endforeach
                         </select>
-                    </div>
-                @endif
 
+                        <div id="delivery_time" class="col-5">
+
+                        </div>
+                    </div>
+                @else
+                    <span class="col-12">Delivery in: {{$thisCategory->delivery_time}}</span>
+                @endif
                 <div class="tab-content border-top border-bottom" id="pills-tabContent">
 
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
 
                         <div class="form-inline" style="margin-top: 20px; margin-bottom: 20px;">
 
-                            <label class="col-12" id="result">{{count($products)}} Results</label>
+                            <label class="col-12" id="result"></label>
+                            @if(!isset($unCategorys))
+                                <label class="col-12" id="result"> {{count($products)}} Results  </label>
+                            @endif
+
                             <!--<label class="col-6"></label>
                              <label class="col-2">Sort:</label>
                              <select id="inputState" class="form-control col-2">
@@ -89,6 +98,7 @@
 
 
                         <div class="form-inline text-center product-group">
+                            @if(!isset($unCategorys))
                             @foreach($products as $product)
                                 <div class="col-sm-2 product-list" style="margin-bottom: 40px">
                                 <!--<a href="/product/{{$product->id}}" style="color: black">-->
@@ -96,12 +106,12 @@
                                     <div class="font-weight-bold">{{$product->name}}</div>
                                     <div>{{$product->summary}}</div>
                                     <div class="text-danger">EUR € {{$product->price * $product->margin}}</div>
-                                    <div class="font-weight-lighter">Delivery:{{$product->delivery_time}}</div>
 
                                     <!--</a>-->
                                     <button type="button" class="btn btn-outline-info" onclick="addCart({{$product->id}});">Buy now</button>
                                 </div>
                             @endforeach
+                            @endif
 
                         </div>
 
@@ -226,6 +236,7 @@
                     }
                     //$('.list-group').html('');
                     $('.product-group').html('');
+                    $('#delivery_time').html('');
                     for(var i=0; i<data.products.length;i++){
                         /*list
                         var node = '<li class="list-group-item">'+
@@ -243,12 +254,12 @@
                             '<div>'+data.products[i].name+'</div>'+
                             '<div>'+ data.products[i].summary+'</div>'+
                             '<div class="text-danger">EUR € '+ data.products[i].price*data.products[i].margin+'</div>'+
-                            '<div class="font-weight-lighter">Delivery:'+ data.products[i].delivery_time+'</div>'+
                             //'</a>'+
                             '<button type="button" class="btn btn-outline-info" onclick="addCart('+ data.products[i].id +')">Buy now</button>'+
                             '</div>';
                         $('.product-group').append(node);
                     }
+                    $('#delivery_time').append('<label class="col-4">Delivery in: '+data.delivery_time+'</label>');
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr);

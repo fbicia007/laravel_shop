@@ -126,7 +126,7 @@ class HomeController extends BaseController
         } else {
             $thisCategory = Category::find($category_id);
 
-            $products = Product::where('category_id',$category_id)->get();
+            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
 
 
             return view('category')

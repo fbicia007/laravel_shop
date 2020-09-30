@@ -15,35 +15,17 @@ class ProductsController extends Controller
     public function getCategoryByCategoryId($category_id)
     {
 
-        if(Category::where('parent_id',$category_id)->exists()){
+        if(Product::where('category_id',$category_id)->exists()){
 
-            $unCategorys = Category::where('parent_id',$category_id)->get();
-
-            $ids = array();
-
-            foreach ($unCategorys as $unCategory)
-            {
-
-                array_push($ids, $unCategory->id);
-
-            }
-
-            //with parent category
-            $products = Product::whereIn('category_id',$ids)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
-
-            $message_result = new MessageResult();
-            $message_result->status = 0;
-            $message_result->message = 'Result ready.';
-            $message_result->products = $products;
-
-        } else if(Product::where('category_id',$category_id)->exists()){
+            $category = Category::find($category_id);
 
             //with out parent category
-            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin','category.delivery_time')->get();
+            $products = Product::where('category_id',$category_id)->rightJoin('category','product.category_id','=','category.id')->select('product.*','category.margin')->get();
             $message_result = new MessageResult();
             $message_result->status = 0;
             $message_result->message = 'Result ready.';
             $message_result->products = $products;
+            $message_result->delivery_time = $category->delivery_time;
         } else{
             $message_result = new MessageResult();
             $message_result->status = 1;
