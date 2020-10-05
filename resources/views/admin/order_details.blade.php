@@ -7,7 +7,7 @@
             <div class="pd-10">用户邮箱：<strong>{{$member->email}}</strong></div>
             <table class="table table-border table-bg table-bordered">
                 <thead>
-                <tr><th width="20%">商品</th><th>数量</th><th>单价</th></tr>
+                <tr><th width="20%">商品</th><th>数量</th><th>进货价格</th><th>利润率</th></tr>
                 </thead>
                 <tbody>
                 @foreach($order->order_items as $order_item)
@@ -18,6 +18,7 @@
                         </th>
                         <td>{{$order_item->count}}</td>
                         <td>€{{$order_item->product->price}}</td>
+                        <td>{{$order_item->product->margin}}</td>
                     </tr>
                 @endforeach
                 </tbody>

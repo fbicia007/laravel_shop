@@ -2,13 +2,19 @@
 @section('content')
     <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 财务统计 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
     <div class="page-container">
-        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> </span> <span class="r">总计金额：<strong>{{$priceSum}}</strong> €</span> </div>
+        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> </span>
+            <span class="r">成本合计：<strong>{{$totalIncomingPrice}}</strong> €</span>
+        </div>
+        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> </span>
+            <span class="r">总计金额：<strong>{{$priceSum}}</strong> €</span>
+        </div>
         <div class="mt-20">
             <table class="table table-border table-bordered table-hover table-bg table-sort">
                 <thead>
                 <tr class="text-c">
                     <th width="70">成交订单号</th>
                     <th width="130">创建时间</th>
+                    <th width="60">订单总成本</th>
                     <th width="60">订单总金额</th>
                     <th width="100">操作</th>
                 </tr>
@@ -18,6 +24,7 @@
                     <tr class="text-c">
                         <td>{{$order->order_no}}</td>
                         <td>{{$order->created_at}}</td>
+                        <td>{{$order->total_price}} €</td>
                         <td>{{$order->total_price}} €</td>
 
                         <td class="td-manage">
